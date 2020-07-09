@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+
+@media (max-width: 454px) {
+  .litecheckout .litecheckout__input--selectable--select:not(:placeholder-shown), 
+  .litecheckout .litecheckout__input--selectable--select:focus {
+    text-align-last: left;
+  }
+}
