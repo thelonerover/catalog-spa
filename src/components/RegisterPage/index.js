@@ -1,8 +1,21 @@
 
 import React from "react";
+import Breadcrumbs from "../Breadcrumbs";
+import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
     return (
-        <p>Register Page</p>
+        <div>
+            <Breadcrumbs />
+            <form method="post" action="/logIn">
+                <label>
+                    <input type="text" placeholder="Login" />
+                    <input type="text" placeholder="Password" />
+                    <input type="text" placeholder="Confirm password" />
+                    <input type="submit" value="Register" />
+                </label>
+            </form>
+            <Link to="/">Catalog</Link>
+        </div>
     );
 }

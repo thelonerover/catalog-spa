@@ -3,6 +3,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+
 import CatalogPage from "../CatalogPage";
 import RegisterPage from "../RegisterPage";
 import LoginPage from "../LoginPage";
