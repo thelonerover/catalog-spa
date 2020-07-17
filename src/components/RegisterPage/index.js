@@ -9,7 +9,7 @@ export default function RegisterPage() {
             <Breadcrumbs />
             <form method="post" action="/logIn">
                 <label>
-                    <input type="text" placeholder="Login" />
+                    <input type="email" placeholder="E-mail" />
                     <input type="text" placeholder="Password" />
                     <input type="text" placeholder="Confirm password" />
                     <input type="submit" value="Register" />
