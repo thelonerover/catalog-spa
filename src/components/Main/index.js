@@ -1,25 +1,29 @@
 import React from "react";
-import React from "react";
 import {
     Switch,
     Route
 } from "react-router-dom";
+import CatalogPage from "../CatalogPage";
+import RegisterPage from "../RegisterPage";
+import LoginPage from "../LoginPage";
+import NoMatch from "../NoMatch";
 
 export default function Main() {
     return (
-        <Main>
-            <Switch>
-                <Route path="/">
-                    <Catalog />
-                </Route>
-                <Route path="/register">
-                    <Register />
-                </Route>
-                <Route path="/log-in">
-                    <LogIn />
-                </Route>
-            </Switch>
-        </Main>
+        <Switch>
+            <Route exact path="/">
+                <CatalogPage />
+            </Route>
+            <Route path="/register">
+                <RegisterPage />
+            </Route>
+            <Route path="/login">
+                <LoginPage />
+            </Route>
+            <Route>
+                <NoMatch />
+            </Route>
+        </Switch>
     );
 }
 
