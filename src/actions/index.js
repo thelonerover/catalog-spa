@@ -1,17 +1,11 @@
-const actionTypes = {
-    logIn = "LOG_IN",
-    setUserRole = "CHANGE_ROLE"
+import { adminActions } from "./adminActions";
+import { allertActions } from "./allertActions";
+import { authActions } from "./authActions";
+import { userActions } from "./userActions";
+
+export default {
+    adminActions,
+    allertActions,
+    authActions,
+    userActions
 }
-
-export const isAuthorized = (loggedIn) => ({
-    type: actionTypes.logIn,
-    loggedIn
-});
-
-export const setUserRole = (user, newRole) => ({
-    type: actionTypes.setUserRole,
-    user, 
-    newRole
-});
-
- 
