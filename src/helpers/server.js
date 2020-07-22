@@ -8,9 +8,28 @@ export default function () {
       {
         id: 1,
         name: "Ivan",
-        surname: "Ivanov"
+        surname: "Ivanov",
+      },
+      {
+        id: 2,
+        name: "Pavel",
+        surname: "Pavlov"
+      },
+      {
+        id: 3,
+        name: "Slava",
+        surname: "SLAV"
       }
-    ],
+    ]
+  });
+
+  server.post("/users", {
+    user: {
+      id: 1,
+      name: "Ivan",
+      surname: "Ivanov",
+    },
+    jwt: "aaaaaaa.bbbbbbbb.ccccccc"
   });
 }
 

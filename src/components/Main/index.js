@@ -12,6 +12,13 @@ import NoMatch from "../../pages/NoMatchPage";
 
 createServer();
 
+//server testing
+// fetch("/users")
+// .then(res => res.json())
+// .then(users => {
+//     console.log(users)
+// });
+
 export default function Main() {
     return (
         <Switch>

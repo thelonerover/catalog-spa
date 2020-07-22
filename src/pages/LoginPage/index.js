@@ -1,11 +1,6 @@
 import React, { useState }  from "react";
 import { Link } from "react-router-dom";
 
-const user = {
-    email: "admin.gmail.com",
-    password: "123123"
-}
-
 export default function LoginPage() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
@@ -13,20 +8,21 @@ export default function LoginPage() {
     const handleInput = (e, value, setter) => { 
         e.preventDefault(); 
         setter(value);
-     };
+    };
+
     const handleSubmit = e => { 
         e.preventDefault();
-        fakeAuthRequest({login, password});
-     };
 
-     const fakeAuthRequest = data => {
-        //  setTimeout(() => {
-            if (data.login === login && data.password === password) {
-                return true;
+        fetch("/users", { method: "POST" } )
+        .then(res => res.json())
+        .then(res => {
+            if (res.user.login === login && res.user.password === password) {
+                console.log("Auth succeed");
+            } else {
+                console.log("Auth failed");
             }
-            return false;
-        //  }, 1000);
-    }
+        });
+    };
 
     return (
         <div>
