@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import createServer from "./helpers/server";
 
 import * as serviceWorker from './serviceWorker';
+
+createServer();
 
 ReactDOM.render(
   <React.StrictMode>

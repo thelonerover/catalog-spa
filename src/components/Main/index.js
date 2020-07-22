@@ -3,11 +3,14 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import createServer from "../../helpers/server";
 
-import CatalogPage from "../CatalogPage";
-import RegisterPage from "../RegisterPage";
-import LoginPage from "../LoginPage";
-import NoMatch from "../NoMatch";
+import CatalogPage from "../../pages/CatalogPage";
+import RegisterPage from "../../pages/RegisterPage";
+import LoginPage from "../../pages/LoginPage";
+import NoMatch from "../../pages/NoMatchPage";
+
+createServer();
 
 export default function Main() {
     return (
