@@ -1,18 +1,18 @@
 import React from "react";
 import Main from "../Main";
-// import { Provider } from 'react-redux';
-// import store from './store';
+import { Provider } from 'react-redux';
+import store from "../../helpers/store";
 import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
       <Router>
         <div className="App">
           <Main />
         </div>
       </Router>
-    // </Provider>
+    </Provider>
   );
 }
 

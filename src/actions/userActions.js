@@ -1,26 +1,22 @@
-export const userAuth = user => {
+import actionTypes from "../constants/userActionTypes";
+
+export const loginRequest = (login, password) => {
     return dispatch => {
-        return fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-        },
-        body: JSON.stringify({user})
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.message) {
-            //Тут прописываем логику
+        return async function() {
+            const request = await fetch("http://localhost:3000/api/v1/users", { method: "POST" });
+
+            if (request.status.ok) {
+                const response = await request.json();
+                console.log(response);
+                dispatch({
+                    type: actionTypes.loginRequest,
+                    login,
+                    password
+                });
             } else {
-            localStorage.setItem("token", data.jwt)
-            dispatch(loginUser(data.user))
+                throw new Error("Oops, something went retardly wrong!: " + request.status);
             }
-        })
+        }
     }
 }
 
-const loginUser = userObj => ({
-    type: 'LOGIN_USER',
-    payload: userObj
-})

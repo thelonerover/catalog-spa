@@ -12,7 +12,7 @@
 //     shoppingCart: object|array,
 // }
 
-export const userConstants = {
+export default {
     registerRequest: "USER_REGISTER_REQUEST",
     registerSuccess: "USER_REGISTER_SUCCESS",
     registerFailure: "USER_REGISTER_FAILURE",
