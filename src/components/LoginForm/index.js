@@ -12,7 +12,7 @@ export default function LoginPage({ handleSubmit }) {
 
     return (
         <div>
-            <form method="post" action="/logIn">
+            <form method="post" action="/users">
                 <label>
                     <input type="text" name="name" onChange={e => { handleInput(e, e.target.value, setLogin) }} value={login} placeholder="Login" />
                     <input type="text" name="password" onChange={e => { handleInput(e, e.target.value, setPassword) }} value={password} placeholder="Password" />

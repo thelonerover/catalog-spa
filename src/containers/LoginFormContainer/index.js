@@ -5,8 +5,7 @@ import { loginRequest } from "../../actions/userActions";
 const mapDispatchToProps = dispatch => {
     return {
         handleSubmit: (login, password) => {
-            console.log(login, password);
-            dispatch(loginRequest(login,password));
+            dispatch(loginRequest(login, password));
         }
     }
 }

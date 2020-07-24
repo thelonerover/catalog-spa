@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
     switch(action.type) {
         case actionTypes.loginRequest:
             return {
-                ...state, 
+                ...state,
                 login: action.login,
                 password: action.password
             };
