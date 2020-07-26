@@ -12,9 +12,12 @@ export default function(state = initialState, action) {
         case actionTypes.loginSuccess: 
             localStorage.setItem("login", action.login);
             localStorage.setItem("password", action.password);
-            break;
+            return {...state, isLoggedIn: true};
 
         case actionTypes.loginFailure: 
+            return state;
+
+        case actionTypes.logout: 
             return {...state, isLoggedIn: false};
 
         default: 

@@ -2,18 +2,22 @@ import actionTypes from "../constants/userActionTypes";
 
 export const loginRequest = (login, password) => {
     return dispatch => {
+        dispatch({ type: actionTypes.loginRequest });
         return fetch("http://localhost:3000/users", { method: "POST" })
-        .then(response => response.json()
-        .then(dispatch({
-            type: actionTypes.loginRequest
-        })));
+            .then(response => response.json())
+            .then(response => {
+                if (response.user.login === login && response.user.password === password) {
+                    dispatch(loginSuccess());
+                } else {
+                    dispatch(loginFailure("Wrong username or password."));
+                }
+            });
     }
 }
 
-export const loginSuccess = loggedIn => {
+export const loginSuccess = () => {
     return {
         type: actionTypes.loginSuccess,
-        loggedIn
     }
 }
 
@@ -24,4 +28,8 @@ export const loginFailure = errorMessage => {
     }
 }
 
-
+export const logout = () => {
+    return {
+        type: actionTypes.logout
+    }
+}

@@ -28,6 +28,8 @@ export default function () {
       id: 1,
       name: "Ivan",
       surname: "Ivanov",
+      login: "admin1",
+      password: "admin2",
     },
     jwt: "aaaaaaa.bbbbbbbb.ccccccc"
   });
