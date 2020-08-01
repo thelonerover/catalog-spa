@@ -6,7 +6,7 @@ export const loginRequest = (login, password) => {
         return fetch("http://localhost:3000/users", { method: "POST" })
             .then(response => response.json())
             .then(response => {
-                if (response.user.login === login && response.user.password === password) {
+                if (response.login === login && response.password === password) {
                     dispatch(loginSuccess());
                 } else {
                     dispatch(loginFailure("Wrong username or password."));
