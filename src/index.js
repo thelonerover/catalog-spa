@@ -6,6 +6,7 @@ import createServer from "./helpers/server";
 import * as serviceWorker from './serviceWorker';
 
 const server = createServer();
+console.log(server.db.dump());
 
 ReactDOM.render(
   <React.StrictMode>

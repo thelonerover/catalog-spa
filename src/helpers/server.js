@@ -1,19 +1,48 @@
-import { Server, Model } from "miragejs";
-import products from "../data/products";
-import users from "../data/users";
+import { Server, Model, Factory } from "miragejs";
 
 export default function() {  
   return new Server({
     models: {
-      product: Model,
-      user: Model
+      products: Model,
+      users: Model
+    },
+
+    factories: {
+      product: Factory.extend({
+        name(i) {
+          return `Product ${i}`;
+        },
+        description(i) {
+          return `A product number ${i}`;
+        },
+        price(i) {
+          return `${i}00`;
+        }
+      }),
+
+      user: Factory.extend({
+        name(i) {
+          return `Name ${i}`;
+        },
+        surname(i) {
+          return `Surname ${i}`;
+        },
+        login(i) {
+          return `login${i}`
+        },
+        password(i) { 
+          return `password${i}`
+        },
+      })
     },
 
     routes() {
-      this.get("/users", users);
-      this.post("/users", users[0]);
+      this.get("/users");
+      this.post("/users", schema => { 
+        return schema.users.find(1).attrs;
+      });
 
-      this.get("/products", products);
+      this.get("/products");
       this.get("/products/:id");
       this.post("/products");
       this.patch("/products/:id");
@@ -21,8 +50,10 @@ export default function() {
     },
 
     seeds(server) {
-      products.map(product, () => { server.create("product", product)});
-      products.map(users, () => { server.create("user", users)});
+      for (let i = 0; i < 50; i++) {
+        server.create("product");
+        server.create("user");
+      }
     },
   });
 }
