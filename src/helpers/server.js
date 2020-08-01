@@ -14,24 +14,10 @@ export default function() {
       this.post("/users", users[0]);
 
       this.get("/products", products);
-      this.get("/products/:id", (schema, request) => {
-        let id = request.params.id;
-        return schema.product.find(id);
-      });
-      this.post("/products", (schema, request) => {
-        let attrs = JSON.parse(request.requestBody);
-        return schema.product.create(attrs);
-      });
-      this.update("/products/:id", (schema, request) => {
-        let newAttrs = JSON.parse(request.requestBody);
-        let id = request.params.id;
-        let product = schema.product.find(id);
-        return product.update(newAttrs);
-      });
-      this.delete("/products/:id", (schema, request) => {
-        let id = request.params.id;
-        return schema.product.find(id).destroy();
-      });
+      this.get("/products/:id");
+      this.post("/products");
+      this.patch("/products/:id");
+      this.del("/products/:id");
     },
 
     seeds(server) {
