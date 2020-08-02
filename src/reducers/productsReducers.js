@@ -1,8 +1,6 @@
 import actionTypes from "../constants/productActionTypes";
 
-const initialState = {
-    products: [],
-};
+const initialState = [];
 
 export default function(state = initialState, action) {
     switch(action.type) {

@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
         case actionTypes.loginRequest:
             return {
                 ...state, 
-                status: loginStatuses.loggingIn
+                loggingStatus: loginStatuses.loggingIn
             };
 
         case actionTypes.loginSuccess: 
@@ -26,20 +26,20 @@ export default function(state = initialState, action) {
             return {
                 ...state, 
                 isLoggedIn: true,
-                status: loginStatuses.loggedIn
+                loggingStatus: loginStatuses.loggedIn
             };
 
         case actionTypes.loginFailure: 
             return {
                 ...state,
-                status: loginStatuses.loginFailed
+                loggingStatus: loginStatuses.loginFailed
             };
 
         case actionTypes.logout: 
             return {
                 ...state,
                  isLoggedIn: false,
-                 status: loginStatuses.notLoggedIn
+                 loggingStatus: loginStatuses.notLoggedIn
             };
 
         default: 

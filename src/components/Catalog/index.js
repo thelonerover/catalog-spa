@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function({ products }) {
-    returtn (
+export default function Catalog({ products, getProducts }) {
+
+    useEffect(() => { 
+        getProducts();
+     }, []);
+
+    return (
         <div className="catalog">
             {products.map(product => (
                 <div className="card" key={product.id}>
