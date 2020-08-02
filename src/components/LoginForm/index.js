@@ -2,7 +2,7 @@ import React, { useState }  from "react";
 import { Link } from "react-router-dom";
 
 export default function LoginPage({ handleSubmit }) {
-    const [login, setLogin] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleInput = (e, value, setter) => { 
@@ -14,11 +14,11 @@ export default function LoginPage({ handleSubmit }) {
         <div>
             <form method="post" action="/users">
                 <label>
-                    <input type="text" name="name" onChange={e => { handleInput(e, e.target.value, setLogin) }} value={login} placeholder="Login" />
+                    <input type="text" name="name" onChange={e => { handleInput(e, e.target.value, setEmail) }} value={email} placeholder="Login" />
                     <input type="text" name="password" onChange={e => { handleInput(e, e.target.value, setPassword) }} value={password} placeholder="Password" />
                     <input type="submit" name="loginSubmit" onClick={e => { 
                         e.preventDefault();
-                        handleSubmit(login, password);
+                        handleSubmit(email, password);
                     }} value="Log In" />
                 </label>
             </form>

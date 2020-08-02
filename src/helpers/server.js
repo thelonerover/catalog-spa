@@ -27,8 +27,8 @@ export default function() {
         surname(i) {
           return `Surname ${i}`;
         },
-        login(i) {
-          return `login${i}`
+        email(i) {
+          return `email${i}@gmail.com`
         },
         password(i) { 
           return `password${i}`
@@ -38,9 +38,7 @@ export default function() {
 
     routes() {
       this.get("/users");
-      this.post("/users", schema => { 
-        return schema.users.find(1).attrs;
-      });
+      this.post("/users", schema => schema.users.find(1).attrs);
 
       this.get("/products");
       this.get("/products/:id");
@@ -57,5 +55,3 @@ export default function() {
     },
   });
 }
-
-  // server.get("/products/:id", (schema, ) => {});
