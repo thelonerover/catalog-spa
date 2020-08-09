@@ -10,6 +10,10 @@ export default function Catalog({ products, pagesNumber, getProductsPage, getPro
         getProductPagesNumber();
     }, []);
 
+    const handlePaginationChange = (e, { activePage }) => {
+        getProductsPage(activePage);
+    };
+
     return (
         <Container className="catalog">
             <Grid columns={4} relaxed>
@@ -26,7 +30,7 @@ export default function Catalog({ products, pagesNumber, getProductsPage, getPro
                     </Grid.Column>
                 ))}
             </Grid>
-            <Pagination defaultActivePage={page} totalPages={pagesNumber || 1} />
+            <Pagination defaultActivePage={page} totalPages={pagesNumber || 1} onPageChange={handlePaginationChange} />
         </Container>
     );
 }
