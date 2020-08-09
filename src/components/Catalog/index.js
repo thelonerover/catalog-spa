@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Grid, Card, Image, Pagination } from "semantic-ui-react";
 
 export default function Catalog({ products, pagesNumber, getProductsPage, getProductPagesNumber }) {
-    const [page, setPage] = useState(1); //temporary
-    const [pages, setPages] = useState(pagesNumber);
-
     useEffect(() => { 
         getProductsPage(page);
         getProductPagesNumber();
