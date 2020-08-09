@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Catalog({ products, getProducts }) {
+export default function Catalog({ products, getProductsPage }) {
+    const [page, setPage] = useState(1);
 
     useEffect(() => { 
-        getProducts();
+        getProductsPage(page);
      }, []);
 
     return (

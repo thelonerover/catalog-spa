@@ -10,6 +10,15 @@ export const getProducts = () => {
     }
 }
 
+export const getProductsPage = page => {
+    return dispatch => {
+        dispatch({ type: actionTypes.getProductsPage });
+        return fetch(`http://localhost:3000/products/page/${page}`)
+        .then(response => response.json())
+        .then(response => { dispatch(setProductsList(response.products)) });
+    }
+}
+
 export const setProductsList = products => {
     return {
         type: actionTypes.setProductsList,
