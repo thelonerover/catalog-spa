@@ -8,6 +8,14 @@ import * as serviceWorker from './serviceWorker';
 const server = createServer();
 // console.log(server.db.dump());
 
+// fetch("http://localhost:3000/products/12")
+// .then(res => res.json())
+// .then(res => { console.log(res); });
+
+// fetch("http://localhost:3000/products/page/5")
+// .then(res => res.json())
+// .then(res => { console.log(res); });
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
