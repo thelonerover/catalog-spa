@@ -38,7 +38,13 @@ export default function() {
 
     routes() {
       this.get("/users");
-      this.post("/users", schema => schema.users.find(1).attrs);
+      this.get("/users/:id");
+      this.post("/users");
+      this.patch("/users/:id");
+      this.del("/users/:id");
+      
+      this.post("/login", schema => schema.users.find(1).attrs);
+
       
       this.get("/products");
       this.get("/products/:id");

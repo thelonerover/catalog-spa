@@ -2,19 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import createServer from "./helpers/server";
-
 import * as serviceWorker from './serviceWorker';
+import "semantic-ui-css/semantic.min.css";
+
 
 const server = createServer();
-// console.log(server.db.dump());
-
-// fetch("http://localhost:3000/products/12")
-// .then(res => res.json())
-// .then(res => { console.log(res); });
-
-// fetch("http://localhost:3000/products/page/5")
-// .then(res => res.json())
-// .then(res => { console.log(res); });
 
 ReactDOM.render(
   <React.StrictMode>

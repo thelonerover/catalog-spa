@@ -9,7 +9,7 @@ export const loginRequest = (email, password) => {
             }
         })());
 
-        return fetch("http://localhost:3000/users", { method: "POST" })
+        return fetch("http://localhost:3000/users/login", { method: "POST" })
             .then(response => response.json())
             .then(response => {
                 if (response.email === email && response.password === password) {
