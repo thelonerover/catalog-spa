@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
 import Catalog from "../../components/Catalog";
-import { getProducts, getProductsPage, getProductPagesNumber } from "../../actions/productsActions";
+import { getProductsPage, getProductPagesNumber } from "../../actions/productsActions";
 
-const mapStateToProps = state => ({
-    products: state.items,
-    pagesNumber: state.pagesNumber,
-    pageOffset: state.pageOffset
-});
+const mapStateToProps = state => {
+    return {
+        products: state.products.items,
+        pagesNumber: state.products.pagesNumber,
+}};
 
 const mapDispatchToProps = dispatch => {
     return {

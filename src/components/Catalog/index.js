@@ -3,19 +3,17 @@ import { Container, Grid, Card, Image, Pagination } from "semantic-ui-react";
 
 export default function Catalog({ products, pagesNumber, getProductsPage, getProductPagesNumber }) {
     const [page, setPage] = useState(1); //temporary
-    const [pages, setPages] = useState(1);
+    const [pages, setPages] = useState(pagesNumber);
 
     useEffect(() => { 
         getProductsPage(page);
         getProductPagesNumber();
     }, []);
 
-    console.log(products);
-
     return (
         <Container className="catalog">
             <Grid columns={4} relaxed>
-                {/* {products.map(product => (
+                {products.map(product => (
                     <Grid.Column key={product.id}>
                         <Card className="card">
                             <Image></Image>
@@ -26,9 +24,9 @@ export default function Catalog({ products, pagesNumber, getProductsPage, getPro
                             </Card.Content>
                         </Card>
                     </Grid.Column>
-                ))} */}
+                ))}
             </Grid>
-            <Pagination defaultActivePage={page} totalPages={pages} />
+            <Pagination defaultActivePage={page} totalPages={pagesNumber || 1} />
         </Container>
     );
 }
