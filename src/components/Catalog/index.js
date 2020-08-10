@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, Card, Image, Pagination } from "semantic-ui-react";
 
-export default function Catalog({ products, pagesNumber, getProductsPage, getProductPagesNumber }) {
+export default function Catalog({ products, pagesNumber, page, getProductsPage, getProductPagesNumber, setProductsPage }) {
     useEffect(() => { 
         getProductsPage(page);
-        getProductPagesNumber();
+        getProductPagesNumber(12);
     }, []);
 
     const handlePaginationChange = (e, { activePage }) => {
         getProductsPage(activePage);
+        setProductsPage(activePage);
     };
 
     return (
@@ -27,7 +28,7 @@ export default function Catalog({ products, pagesNumber, getProductsPage, getPro
                     </Grid.Column>
                 ))}
             </Grid>
-            <Pagination defaultActivePage={page} totalPages={pagesNumber || 1} onPageChange={handlePaginationChange} />
+            <Pagination defaultActivePage={page} totalPages={pagesNumber} onPageChange={handlePaginationChange} />
         </Container>
     );
 }

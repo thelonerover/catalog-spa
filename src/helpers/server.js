@@ -53,14 +53,14 @@ export default function() {
       this.del("/products/:id");
 
       this.get("/products/page/:number", (schema, request) => {
-        let offset = 10;
+        let offset = 12;
         let pageNumber = request.params.number;
         return schema.products.all().slice((pageNumber - 1) * offset, pageNumber * offset);
       });
     },
 
     seeds(server) {
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 96; i++) {
         server.create("product");
         server.create("user");  
       }

@@ -19,7 +19,7 @@ export const getProductsPage = page => {
     }
 }
 
-export const getProductPagesNumber = (offset = 10) => {
+export const getProductPagesNumber = offset => {
     return dispatch => {
         dispatch({ type: actionTypes.getProductPagesNumber });
 

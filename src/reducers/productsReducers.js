@@ -2,8 +2,8 @@ import actionTypes from "../constants/productActionTypes";
 
 const initialState = {
     items: [],
+    pagesNumber: 1,
     page: 1,
-    pagesNumber: 1
 };
 
 export default function(state = initialState, action) {
@@ -18,6 +18,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 pagesNumber: action.pagesNumber,
+            };
+
+        case actionTypes.setProductsPage:
+            return {
+                ...state,
+                page: action.page,
             };
 
         case actionTypes.setProductsList:

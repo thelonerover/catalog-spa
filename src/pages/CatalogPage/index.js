@@ -1,15 +1,12 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Container } from "semantic-ui-react";
 import Catalog from "../../containers/CatalogContainer";
 
 export default function CatalogPage() {
     return (
-        <div>
+        <Container>
             <Catalog />
-            <Link to="login">Login</Link>&nbsp;/&nbsp;<Link to="register">Register</Link>
-            <br/>
-            <Link to="/">Catalog</Link>
-        </div>
+        </Container>
     );
 }

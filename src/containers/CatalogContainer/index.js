@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 import Catalog from "../../components/Catalog";
-import { getProductsPage, getProductPagesNumber } from "../../actions/productsActions";
+import { getProductsPage, getProductPagesNumber, setProductsPage } from "../../actions/productsActions";
 
 const mapStateToProps = state => {
     return {
         products: state.products.items,
         pagesNumber: state.products.pagesNumber,
+        page: state.products.page
 }};
 
 const mapDispatchToProps = dispatch => {
@@ -17,6 +18,10 @@ const mapDispatchToProps = dispatch => {
         getProductPagesNumber: offset => {
             dispatch(getProductPagesNumber(offset));
         }, 
+
+        setProductsPage: page => {
+            dispatch(setProductsPage(page));
+        }
     }
 }
 
