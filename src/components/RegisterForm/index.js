@@ -1,7 +1,6 @@
 import React, { useState }  from "react";
-import { Link } from "react-router-dom";
 
-export default function LoginPage({ handleSubmit }) {
+export default function RegisterPage({ handleSubmit }) {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");

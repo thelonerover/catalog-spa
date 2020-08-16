@@ -39,7 +39,6 @@ export default function(state = initialState, action) {
         case actionTypes.registerSuccess: 
             return {
                 ...state, 
-                isLoggedIn: true,
                 curentStatus: userStatuses.registerSuccess
             };
 

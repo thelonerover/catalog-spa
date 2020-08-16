@@ -1,19 +1,17 @@
 import actionTypes from "../constants/userActionTypes";
 
 export const login = (url, email, password) => {
-    return dispatch => {
+    return async function(dispatch) {
         dispatch(loginRequest(email, password));
 
-        return fetch(url, { method: "POST" })
-            .then(response => response.json())
-            .then(response => {
-                if (response.email === email && response.password === password) {
-                    dispatch(loginSuccess());
-                } else {
-                    dispatch(loginFailure("Wrong username or password."));
-                }
-            })
-            .catch(e => { console.log(e); });
+        let request = await fetch(url, { method: "POST" });
+        let response = await request.json();
+
+        if (response.email === email && response.password === password) {
+            dispatch(loginSuccess());
+        } else {
+            dispatch(loginFailure("Wrong username or password."));
+        }
     }
 }
 
@@ -37,23 +35,38 @@ export const loginFailure = ()=> {
     }
 }
 
-export const registerRequest = (email, password) => {
+export const registration = (url, email, password) => {
+    return async function(dispatch) {
+        dispatch(registrationRequest(email, password));
+
+        let request = await fetch(url, { method: "POST" });
+        let response = await request.json();
+
+        if (response.userExist) {
+            dispatch(registrationFailure("This email is unavailable!"));
+        } else {
+            dispatch(registrationSuccess());
+        }
+    }
+}
+
+export const registrationRequest = (email, password) => {
     return {
-        type: actionTypes.registerRequest,
+        type: actionTypes.registrationRequest,
         email,
         password
     }
 }
 
-export const registerSuccess = () => {
+export const registrationSuccess = () => {
     return {
-        type: actionTypes.registerSuccess
+        type: actionTypes.registrationSuccess
     }
 }
 
-export const registerFailure = ()=> {
+export const registrationFailure = ()=> {
     return {
-        type: actionTypes.registerFailure
+        type: actionTypes.registrationFailure
     }
 }
 
