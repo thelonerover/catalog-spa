@@ -3,7 +3,7 @@ import actionTypes from "../constants/userActionTypes";
 export const login = (url, email, password) => {
     return dispatch => {
         dispatch(loginRequest(email, password));
-        
+
         return fetch(url, { method: "POST" })
             .then(response => response.json())
             .then(response => {
@@ -12,37 +12,53 @@ export const login = (url, email, password) => {
                 } else {
                     dispatch(loginFailure("Wrong username or password."));
                 }
-            });
+            })
+            .catch(e => { console.log(e); });
     }
 }
 
-export const loginRequest = (loginStatus, email, password) => {
+export const loginRequest = (email, password) => {
     return {
         type: actionTypes.loginRequest,
-        loginStatus,
         email,
         password
     }
 }
 
-export const loginSuccess = loginStatus => {
+export const loginSuccess = () => {
     return {
-        type: actionTypes.loginSuccess,
-        loginStatus
+        type: actionTypes.loginSuccess
     }
 }
 
-export const loginFailure = (loginStatus, errorMessage) => {
+export const loginFailure = ()=> {
     return {
-        type: actionTypes.loginFailure,
-        errorMessage,
-        loginStatus
+        type: actionTypes.loginFailure
     }
 }
 
-export const logout = loginStatus => {
+export const registerRequest = (email, password) => {
     return {
-        type: actionTypes.logout,
-        loginStatus
+        type: actionTypes.registerRequest,
+        email,
+        password
+    }
+}
+
+export const registerSuccess = () => {
+    return {
+        type: actionTypes.registerSuccess
+    }
+}
+
+export const registerFailure = ()=> {
+    return {
+        type: actionTypes.registerFailure
+    }
+}
+
+export const logout = () => {
+    return {
+        type: actionTypes.logout
     }
 }

@@ -1,11 +1,9 @@
 import actionTypes from "../constants/userActionTypes";
-import loginStatuses from "../constants/loginStatuses";
+import userStatuses from "../constants/userStatuses";
 
 const initialState = {
     isLoggedIn: false,
-    email: "",
-    password: "",
-    loggingStatus: loginStatuses.notLoggedIn
+    curentStatus: userStatuses.notLoggedIn
 };
 
 export default function(state = initialState, action) {
@@ -13,9 +11,7 @@ export default function(state = initialState, action) {
         case actionTypes.loginRequest:
             return {
                 ...state, 
-                loggingStatus: action.loggedIn,
-                email: action.email,
-                password: action.password
+                curentStatus: userStatuses.loggingIn
             };
 
         case actionTypes.loginSuccess: 
@@ -25,20 +21,39 @@ export default function(state = initialState, action) {
             return {
                 ...state, 
                 isLoggedIn: true,
-                loggingStatus: action.loggedIn
+                curentStatus: userStatuses.loggedIn
             };
 
         case actionTypes.loginFailure: 
             return {
                 ...state,
-                loggingStatus: action.loginFailed
+                curentStatus: userStatuses.loginFailed
+            };
+
+        case actionTypes.registerRequest:
+            return {
+                ...state,
+                curentStatus: userStatuses.registerRequest
+            };
+
+        case actionTypes.registerSuccess: 
+            return {
+                ...state, 
+                isLoggedIn: true,
+                curentStatus: userStatuses.registerSuccess
+            };
+
+        case actionTypes.registerFailure: 
+            return {
+                ...state,
+                curentStatus: userStatuses.registerFailed
             };
 
         case actionTypes.logout: 
             return {
                 ...state,
-                 isLoggedIn: false,
-                 loggingStatus: action.notLoggedIn
+                isLoggedIn: false,
+                curentStatus: userStatuses.notLoggedIn
             };
 
         default: 
