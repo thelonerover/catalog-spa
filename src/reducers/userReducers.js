@@ -1,14 +1,10 @@
 import actionTypes from "../constants/userActionTypes";
-
-const loginStatuses = {
-    loggingIn: "Logging in",
-    loggedIn: "Logged in",
-    notLoggedIn: "Not logged in",
-    loginFailed: "Login attempt failed!"
-}
+import loginStatuses from "../constants/loginStatuses";
 
 const initialState = {
     isLoggedIn: false,
+    email: "",
+    password: "",
     loggingStatus: loginStatuses.notLoggedIn
 };
 
@@ -17,29 +13,32 @@ export default function(state = initialState, action) {
         case actionTypes.loginRequest:
             return {
                 ...state, 
-                loggingStatus: loginStatuses.loggingIn
+                loggingStatus: action.loggedIn,
+                email: action.email,
+                password: action.password
             };
 
         case actionTypes.loginSuccess: 
             localStorage.setItem("email", action.email);
             localStorage.setItem("password", action.password);
+
             return {
                 ...state, 
                 isLoggedIn: true,
-                loggingStatus: loginStatuses.loggedIn
+                loggingStatus: action.loggedIn
             };
 
         case actionTypes.loginFailure: 
             return {
                 ...state,
-                loggingStatus: loginStatuses.loginFailed
+                loggingStatus: action.loginFailed
             };
 
         case actionTypes.logout: 
             return {
                 ...state,
                  isLoggedIn: false,
-                 loggingStatus: loginStatuses.notLoggedIn
+                 loggingStatus: action.notLoggedIn
             };
 
         default: 

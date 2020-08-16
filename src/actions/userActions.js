@@ -1,15 +1,10 @@
 import actionTypes from "../constants/userActionTypes";
 
-export const loginRequest = (email, password) => {
+export const login = (url, email, password) => {
     return dispatch => {
-        dispatch((loginStatus => {
-            return {
-                type: actionTypes.loginRequest,
-                loginStatus
-            }
-        })());
-
-        return fetch("http://localhost:3000/users/login", { method: "POST" })
+        dispatch(loginRequest(email, password));
+        
+        return fetch(url, { method: "POST" })
             .then(response => response.json())
             .then(response => {
                 if (response.email === email && response.password === password) {
@@ -21,6 +16,15 @@ export const loginRequest = (email, password) => {
     }
 }
 
+export const loginRequest = (loginStatus, email, password) => {
+    return {
+        type: actionTypes.loginRequest,
+        loginStatus,
+        email,
+        password
+    }
+}
+
 export const loginSuccess = loginStatus => {
     return {
         type: actionTypes.loginSuccess,
@@ -28,7 +32,7 @@ export const loginSuccess = loginStatus => {
     }
 }
 
-export const loginFailure = (errorMessage, loginStatus) => {
+export const loginFailure = (loginStatus, errorMessage) => {
     return {
         type: actionTypes.loginFailure,
         errorMessage,
