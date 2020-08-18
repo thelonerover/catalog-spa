@@ -4,10 +4,17 @@ export const login = (url, email, password) => {
     return async function(dispatch) {
         dispatch(loginRequest(email, password));
 
-        let request = await fetch(url, { method: "POST" });
+        let request = await fetch(url, { 
+            method: "POST",
+            headers: {  "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                email,
+                password
+            })
+        });
         let response = await request.json();
 
-        if (response.email === email && response.password === password) {
+        if (response.isLogged) {
             dispatch(loginSuccess());
         } else {
             dispatch(loginFailure("Wrong username or password."));
@@ -39,7 +46,6 @@ export const registration = (url, email, password) => {
     return async function(dispatch) {
         dispatch(registrationRequest(email, password));
 
-        console.log(email, password);
         const requestOptions = {
             method: "POST",
             headers: {  "Content-Type": "application/json" },
@@ -52,7 +58,7 @@ export const registration = (url, email, password) => {
         let request = await fetch(url, requestOptions);
         let response = await request.json();
 
-        if (response.userExist) {
+        if (response.errorCode === 1) {
             dispatch(registrationFailure("This email is unavailable!"));
         } else {
             dispatch(registrationSuccess());
