@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const loginUrl = "http://localhost:3000/login";
 
-export default function LoginPage({ handleSubmit }) {
+export default function LoginForm({ handleSubmit }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleInput = (e, value, setter) => { 
+    const handleInput = (e, value, setter) => {  
         e.preventDefault(); 
         setter(value);
     };

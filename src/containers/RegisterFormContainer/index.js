@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
-import LoginForm from "../../components/LoginForm";
+import RegisterForm from "../../components/RegisterForm";
 import { registration } from "../../actions/userActions";
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleSubmit: (email, password) => {
-            dispatch(registration(email, password));
+        handleSubmit: (url, email, password) => {
+            dispatch(registration(url, email, password));
         }
     }
 }
 
-const RegisterFormContainer = connect(null, mapDispatchToProps)(LoginForm);
+const RegisterFormContainer = connect(null, mapDispatchToProps)(RegisterForm);
 
 export default RegisterFormContainer;

@@ -39,7 +39,17 @@ export const registration = (url, email, password) => {
     return async function(dispatch) {
         dispatch(registrationRequest(email, password));
 
-        let request = await fetch(url, { method: "POST" });
+        console.log(email, password);
+        const requestOptions = {
+            method: "POST",
+            headers: {  "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                email,
+                password
+            }),
+        }
+
+        let request = await fetch(url, requestOptions);
         let response = await request.json();
 
         if (response.userExist) {

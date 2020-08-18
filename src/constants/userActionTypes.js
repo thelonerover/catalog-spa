@@ -13,9 +13,9 @@
 // }
 
 export default {
-    registerRequest: "USER_REGISTER_REQUEST",
-    registerSuccess: "USER_REGISTER_SUCCESS",
-    registerFailure: "USER_REGISTER_FAILURE",
+    registrationRequest: "USER_registration_REQUEST",
+    registrationSuccess: "USER_registration_SUCCESS",
+    registrationFailure: "USER_registration_FAILURE",
 
     loginRequest: "USER_LOGIN_REQUEST",
     loginSuccess: "USER_LOGIN_SUCCESS",

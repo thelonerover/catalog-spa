@@ -39,13 +39,18 @@ export default function() {
     routes() {
       this.get("/users");
       this.get("/users/:id");
-      this.post("/users");
+      this.post("/users", (schema, reguest) => {
+        // let attrs = this.normalizedRequestAttrs();
+        let attrs;
+        console.log(reguest);
+        // if()
+        return schema.users.create(attrs)
+      });
       this.patch("/users/:id");
       this.del("/users/:id");
       
       this.post("/login", schema => schema.users.find(1).attrs);
 
-      
       this.get("/products");
       this.get("/products/:id");
       this.post("/products");

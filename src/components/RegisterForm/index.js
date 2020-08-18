@@ -1,7 +1,9 @@
 import React, { useState }  from "react";
 
-export default function RegisterPage({ handleSubmit }) {
-    const [login, setLogin] = useState("");
+const usersUrl = "http://localhost:3000/users";
+
+export default function RegisterForm({ handleSubmit }) {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
@@ -11,15 +13,19 @@ export default function RegisterPage({ handleSubmit }) {
     };
 
     return (
-        <form method="post" action="/register">
+        <form method="post" action="/users">
             <label>
-                <input type="email" onChange={e => { handleInput(e, e.target.value, setLogin) }} value={login} placeholder="E-mail" />
+                <input type="email" onChange={e => { handleInput(e, e.target.value, setEmail) }} value={email} placeholder="E-mail" />
                 <input type="text" onChange={e => { handleInput(e, e.target.value, setPassword) }} value={password} placeholder="Password" />
                 <input type="text" onChange={e => { handleInput(e, e.target.value, setPasswordConfirmation) }} value={passwordConfirmation} placeholder="Confirm password" />
                 <input type="submit" name="registerSubmit" onClick={e => { 
                     e.preventDefault();
-                    handleSubmit(login, password, passwordConfirmation);
-                }} value="Rrgister" />
+                    if (password === passwordConfirmation) {
+                        handleSubmit(usersUrl, email, password);
+                    } else {
+                        throw("Passwords do not match");
+                    }
+                }} value="Register" />
             </label>
         </form>
     );
