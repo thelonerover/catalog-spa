@@ -1,31 +1,26 @@
 import actionTypes from "../constants/productActionTypes";
 
-export const getProducts = () => {
-    return dispatch => {
+export const getProducts = url => {
+    return async function(dispatch) {
         dispatch({ type: actionTypes.getProducts });
         
-        return fetch("http://localhost:3000/products")
-            .then(response => response.json())
-            .then(response => { dispatch(setProductsList(response.products)) });
+        let request = await fetch(url);
+        let response = await request.json();
+
+        console.log(response);
+
+        dispatch(setProductsList(response.products));
     }
 }
 
-export const getProductsPage = page => {
-    return dispatch => {
-        dispatch({ type: actionTypes.getProductsPage });
-        return fetch(`http://localhost:3000/products/page/${page}`)
-            .then(response => response.json())
-            .then(response => { dispatch(setProductsList(response.products)) });
-    }
-}
-
-export const getProductPagesNumber = offset => {
-    return dispatch => {
+export const getProductPagesNumber = (url, offset) => {
+    return async function(dispatch) {
         dispatch({ type: actionTypes.getProductPagesNumber });
 
-        return fetch("http://localhost:3000/products")
-            .then(response => response.json())
-            .then(response => {dispatch(setProductPagesNumber(Math.floor(response.products.length / offset)))});
+        let request = await fetch(url);
+        let response = await request.json();
+
+        dispatch(setProductPagesNumber(Math.floor(response.products.length / offset)));
     }
 }
 

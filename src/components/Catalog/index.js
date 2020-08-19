@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container, Grid, Card, Image, Pagination } from "semantic-ui-react";
 
-export default function Catalog({ products, pagesNumber, page, getProductsPage, getProductPagesNumber, setProductsPage }) {
+const productsUrl = "http://localhost:3000/products/";
+const productsPageUrl = "http://localhost:3000/products/page/";
+
+export default function Catalog({ products, pagesNumber, page, getProducts, getProductPagesNumber, setProductsPage }) {
     useEffect(() => { 
-        getProductsPage(page);
-        getProductPagesNumber(12);
+        getProducts(productsPageUrl + page);
+        getProductPagesNumber(productsUrl, 12);
     }, []);
 
     const handlePaginationChange = (e, { activePage }) => {
-        getProductsPage(activePage);
+        getProducts(productsPageUrl + activePage);
         setProductsPage(activePage);
     };
 

@@ -57,8 +57,6 @@ export default function() {
       });
       this.patch("/users/:id");
       this.del("/users/:id");
-      
-      // this.post("/login", schema => schema.users.find(1).attrs);
 
       this.post("/login", (schema, reguest) => {
         let attrs = JSON.parse(reguest.requestBody);
@@ -101,6 +99,7 @@ export default function() {
       this.get("/products/page/:number", (schema, request) => {
         let offset = 12;
         let pageNumber = request.params.number;
+
         return schema.products.all().slice((pageNumber - 1) * offset, pageNumber * offset);
       });
     },

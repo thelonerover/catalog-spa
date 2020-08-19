@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Catalog from "../../components/Catalog";
-import { getProductsPage, getProductPagesNumber, setProductsPage } from "../../actions/productsActions";
+import { getProducts, getProductPagesNumber, setProductsPage } from "../../actions/productsActions";
 
 const mapStateToProps = state => {
     return {
@@ -11,12 +11,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getProductsPage: page => {
-            dispatch(getProductsPage(page));
+        getProducts: url => {
+            dispatch(getProducts(url));
         },
 
-        getProductPagesNumber: offset => {
-            dispatch(getProductPagesNumber(offset));
+        getProductPagesNumber: (url, offset) => {
+            dispatch(getProductPagesNumber(url, offset));
         }, 
 
         setProductsPage: page => {
