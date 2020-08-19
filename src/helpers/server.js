@@ -33,6 +33,7 @@ export default function() {
         password(i) { 
           return `password${i}`
         },
+        type: "C"
       })
     },
 
@@ -61,9 +62,9 @@ export default function() {
       this.post("/login", (schema, reguest) => {
         let attrs = JSON.parse(reguest.requestBody);
 
-        let existingUser = schema.users.findBy({ email: attrs.email });
+        let user = schema.users.findBy({ email: attrs.email });
 
-        if (!existingUser) {
+        if (!user) {
           return new Response(401, {}, { 
               error: "No such user!",
               errorCode: 2
@@ -71,10 +72,11 @@ export default function() {
           );
         }
 
-        if(existingUser.email === attrs.email && existingUser.password === attrs.password) {
+        if(user.email === attrs.email && user.password === attrs.password) {
           return new Response( 201, {}, { 
               //temporary stuff
-              isLogged: true
+              isLogged: true,
+              userType: user.type
             }
           );
         }
@@ -84,7 +86,7 @@ export default function() {
           {},
           { 
             error: "Wrong username or password!",
-            errorCode: 2
+            errorCode: 3
           }
         );
       });
@@ -105,6 +107,12 @@ export default function() {
     },
 
     seeds(server) {
+      server.create("user", {
+        email: "admin@mail.com",
+        password: "123123",
+        type: "A"
+      });
+
       for (let i = 0; i < 96; i++) {
         server.create("product");
         server.create("user");  

@@ -7,8 +7,6 @@ export const getProducts = url => {
         let request = await fetch(url);
         let response = await request.json();
 
-        console.log(response);
-
         dispatch(setProductsList(response.products));
     }
 }
