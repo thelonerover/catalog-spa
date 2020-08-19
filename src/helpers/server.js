@@ -74,7 +74,7 @@ export default function() {
 
         if(user.email === attrs.email && user.password === attrs.password) {
           return new Response( 201, {}, { 
-              //temporary stuff
+              ok: true,
               isLogged: true,
               userType: user.type
             }

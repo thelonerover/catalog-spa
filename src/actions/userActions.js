@@ -4,18 +4,20 @@ export const login = (url, email, password) => {
     return async function(dispatch) {
         dispatch(loginRequest(email, password));
 
-        let request = await fetch(url, { 
+        const requestOptions = { 
             method: "POST",
             headers: {  "Content-Type": "application/json" },
             body: JSON.stringify({ 
                 email,
                 password
             })
-        });
+        }
+
+        let request = await fetch(url, requestOptions);
         let response = await request.json();
 
-        if (response.isLogged) {
-            dispatch(loginSuccess());
+        if (response.ok) {
+            dispatch(loginSuccess(response.userType));
         } else {
             dispatch(loginFailure("Wrong username or password."));
         }
@@ -30,9 +32,10 @@ export const loginRequest = (email, password) => {
     }
 }
 
-export const loginSuccess = () => {
+export const loginSuccess = userType => {
     return {
-        type: actionTypes.loginSuccess
+        type: actionTypes.loginSuccess,
+        userType
     }
 }
 

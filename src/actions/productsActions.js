@@ -42,3 +42,36 @@ export const setProductsPage = page => {
         page
     }
 }
+
+export const addProduct = (url, product) => {
+    return async function(dispatch) {
+        dispatch({ type: actionTypes.createProduct });
+
+        const requestOptions = { 
+            method: "POST",
+            headers: {  "Content-Type": "application/json" },
+            body: JSON.stringify(product)
+        };
+
+        let request = await fetch(url, requestOptions);
+        let response = await request.json();
+
+        if (response.ok) {
+            dispatch(addProductSuccess());
+        } else {
+            dispatch(addProductFailure("Wrong username or password."));
+        }
+    }
+}
+
+export const addProductSuccess = () => {
+    return {
+        type: actionTypes.addProductSuccess
+    }
+}
+
+export const addProductFailure = () => {
+    return {
+        type: actionTypes.addProductFailure
+    }
+}

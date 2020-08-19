@@ -3,7 +3,8 @@ import userStatuses from "../constants/userStatuses";
 
 const initialState = {
     isLoggedIn: false,
-    curentStatus: userStatuses.notLoggedIn
+    curentStatus: userStatuses.notLoggedIn,
+    userType: ""
 };
 
 export default function(state = initialState, action) {
@@ -21,7 +22,8 @@ export default function(state = initialState, action) {
             return {
                 ...state, 
                 isLoggedIn: true,
-                curentStatus: userStatuses.loggedIn
+                curentStatus: userStatuses.loggedIn,
+                userType: action.userType
             };
 
         case actionTypes.loginFailure: 
@@ -49,11 +51,7 @@ export default function(state = initialState, action) {
             };
 
         case actionTypes.logout: 
-            return {
-                ...state,
-                isLoggedIn: false,
-                curentStatus: userStatuses.notLoggedIn
-            };
+            return initialState;
 
         default: 
             return state;
