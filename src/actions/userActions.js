@@ -1,15 +1,15 @@
 import actionTypes from "../constants/userActionTypes";
 
-export const login = (email, password) => {
+export const login = credentials => {
     return async function(dispatch) {
-        dispatch(loginRequest(email, password));
+        dispatch(loginRequest(credentials));
 
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                email,
-                password
+                email: credentials.email,
+                password: credentials.password
             })
         }
 
@@ -39,22 +39,19 @@ export const loginSuccess = userType => {
     }
 }
 
-export const loginFailure = ()=> {
-    return {
-        type: actionTypes.loginFailure
-    }
-}
+export const loginFailure = ()=> ({ type: actionTypes.loginFailure });
 
-export const registration = (email, password) => {
+export const registration = credentials => {
     return async function(dispatch) {
-        dispatch(registrationRequest(email, password));
+        dispatch(registrationRequest(credentials));
 
         const requestOptions = {
             method: "POST",
             headers: {  "Content-Type": "application/json" },
             body: JSON.stringify({ 
-                email,
-                password
+                email: credentials.email,
+                password: credentials.password,
+                type: "C"
             }),
         }
 
@@ -69,24 +66,16 @@ export const registration = (email, password) => {
     }
 }
 
-export const registrationRequest = (email, password) => {
+export const registrationRequest = credentials => {
     return {
         type: actionTypes.registrationRequest,
-        email,
-        password
+        email: credentials.email,
+        password: credentials.password
     }
 }
 
 export const registrationSuccess = () => ({ type: actionTypes.registrationSuccess });
 
-export const registrationFailure = ()=> {
-    return {
-        type: actionTypes.registrationFailure
-    }
-}
+export const registrationFailure = ()=> ({ type: actionTypes.registrationFailure });
 
-export const logout = () => {
-    return {
-        type: actionTypes.logout
-    }
-}
+export const logout = () => ({ type: actionTypes.logout });

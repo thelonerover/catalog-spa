@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Grid, Card, Image, Pagination } from "semantic-ui-react";
+import { Container, Grid, Card, Pagination } from "semantic-ui-react";
 import { getProducts, getProductPagesNumber, setProductsPage } from "../../actions/productsActions";
 
 export default function Catalog() {
@@ -13,20 +13,18 @@ export default function Catalog() {
     }, []);
 
 
-    const handlePaginationChange = (e, state) => {
-        dispatch(getProducts(products.activePage));
-        dispatch(setProductsPage(products.activePage));
+    const handlePaginationChange = (e, { activePage }) => {
+        console.log(activePage);
+        dispatch(getProducts(activePage));
+        dispatch(setProductsPage(activePage));
     };
     
-    console.log(products);
-
     return (
         <Container> 
             <Grid columns={4} relaxed>
                 {products.items.map(product => (
                     <Grid.Column key={product.id}>
                         <Card>
-                            <Image></Image>
                             <Card.Content>
                                 <Card.Header>{product.name}</Card.Header>
                                 <Card.Description>{product.description}</Card.Description>

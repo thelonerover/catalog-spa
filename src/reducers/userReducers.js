@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
     switch(action.type) {
         case actionTypes.loginRequest:
             return {
-                ...state, 
+                ...state,
                 curentStatus: userStatuses.loggingIn
             };
 
@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
             localStorage.setItem("password", action.password);
 
             return {
-                ...state, 
+                ...state,
                 isLoggedIn: true,
                 curentStatus: userStatuses.loggedIn,
                 userType: action.userType
@@ -38,9 +38,9 @@ export default function(state = initialState, action) {
                 curentStatus: userStatuses.registerRequest
             };
 
-        case actionTypes.registerSuccess: 
+        case actionTypes.registerSuccess:
             return {
-                ...state, 
+                ...state,
                 curentStatus: userStatuses.registerSuccess
             };
 
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
                 curentStatus: userStatuses.registerFailed
             };
 
-        case actionTypes.logout: 
+        case actionTypes.logout:
             return initialState;
 
         default: 

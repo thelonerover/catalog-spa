@@ -1,10 +1,12 @@
 import actionTypes from "../constants/productActionTypes";
 
-export const getProducts = () => {
+export const getProducts = page => {
     return async function(dispatch) {
         dispatch({ type: actionTypes.getProducts });
-        
-        let request = await fetch("http://localhost:3000/products");
+
+        const url = page ? `http://localhost:3000/products/page/${page}` : "http://localhost:3000/products";
+
+        let request = await fetch(url);
         let response = await request.json();
 
         dispatch(setProductsList(response.products));
