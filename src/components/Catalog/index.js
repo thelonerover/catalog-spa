@@ -16,7 +16,7 @@ export default function Catalog({ products, pagesNumber, page, getProducts, getP
     };
 
     return (
-        <Container className="catalog">
+        <Container className="catalog"> 
             <Grid columns={4} relaxed>
                 {products.map(product => (
                     <Grid.Column key={product.id}>
@@ -31,6 +31,7 @@ export default function Catalog({ products, pagesNumber, page, getProducts, getP
                     </Grid.Column>
                 ))}
             </Grid>
+           
             <Pagination defaultActivePage={page} totalPages={pagesNumber} onPageChange={handlePaginationChange} />
         </Container>
     );

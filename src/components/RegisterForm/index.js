@@ -1,4 +1,5 @@
 import React, { useState }  from "react";
+import { Input, Label, Form } from "semantic-ui-react";
 
 const usersUrl = "http://localhost:3000/users";
 
@@ -13,12 +14,12 @@ export default function RegisterForm({ handleSubmit }) {
     };
 
     return (
-        <form method="post" action="/users">
+        <Form method="post" action="/users">
             <label>
-                <input type="email" onChange={e => { handleInput(e, e.target.value, setEmail) }} value={email} placeholder="E-mail" />
-                <input type="text" onChange={e => { handleInput(e, e.target.value, setPassword) }} value={password} placeholder="Password" />
-                <input type="text" onChange={e => { handleInput(e, e.target.value, setPasswordConfirmation) }} value={passwordConfirmation} placeholder="Confirm password" />
-                <input type="submit" name="registerSubmit" onClick={e => { 
+                <Input type="email" onChange={e => { handleInput(e, e.target.value, setEmail) }} value={email} placeholder="E-mail" />
+                <Input type="text" onChange={e => { handleInput(e, e.target.value, setPassword) }} value={password} placeholder="Password" />
+                <Input type="text" onChange={e => { handleInput(e, e.target.value, setPasswordConfirmation) }} value={passwordConfirmation} placeholder="Confirm password" />
+                <Input type="submit" name="registerSubmit" onClick={e => { 
                     e.preventDefault();
                     if (password === passwordConfirmation) {
                         handleSubmit(usersUrl, email, password);
@@ -27,6 +28,6 @@ export default function RegisterForm({ handleSubmit }) {
                     }
                 }} value="Register" />
             </label>
-        </form>
+        </Form>
     );
 }

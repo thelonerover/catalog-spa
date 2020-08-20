@@ -28,7 +28,6 @@ export default function Main() {
                         <Link to="register">Register</Link>
                     </Menu.Item>
                 </Menu>
-            </Container>
             <Switch>
                 <Route exact path="/">
                     <CatalogPage />
@@ -43,6 +42,7 @@ export default function Main() {
                     <NoMatch />
                 </Route>
             </Switch>
+            </Container>
         </div>
     );
 }
