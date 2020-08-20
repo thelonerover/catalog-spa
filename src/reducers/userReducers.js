@@ -16,8 +16,8 @@ export default function(state = initialState, action) {
             };
 
         case actionTypes.loginSuccess: 
-            localStorage.setItem("email", action.email);
-            localStorage.setItem("password", action.password);
+            // localStorage.setItem("email", action.email);
+            // localStorage.setItem("password", action.password);
 
             return {
                 ...state,
