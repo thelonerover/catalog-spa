@@ -4,8 +4,8 @@ import { registration } from "../../actions/userActions";
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleSubmit: (url, email, password) => {
-            dispatch(registration(url, email, password));
+        onSubmit: (credentials) => {
+            dispatch(registration(credentials));
         }
     }
 }

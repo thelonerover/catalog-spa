@@ -9,41 +9,39 @@ import NoMatch from "../../pages/NoMatchPage";
 
 export default function Main() {
     return (
-        <div className="main">
-            <Container>
-                <Menu>
-                    <Menu.Item
-                        name="catalog"
-                    >
-                        <Link to="/">Catalog</Link>
-                    </Menu.Item>
-                    <Menu.Item
-                        name="login"
-                    >
-                        <Link to="login">Login</Link>
-                    </Menu.Item>
-                    <Menu.Item
-                        name="register"
-                    >
-                        <Link to="register">Register</Link>
-                    </Menu.Item>
-                </Menu>
-            <Switch>
-                <Route exact path="/">
-                    <CatalogPage />
-                </Route>
-                <Route path="/register">
-                    <RegisterPage />
-                </Route>
-                <Route path="/login">
-                    <LoginPage />
-                </Route>
-                <Route>
-                    <NoMatch />
-                </Route>
-            </Switch>
-            </Container>
-        </div>
+        <Container>
+            <Menu>
+                <Menu.Item
+                    name="catalog"
+                >
+                    <Link to="/">Catalog</Link>
+                </Menu.Item>
+                <Menu.Item
+                    name="login"
+                >
+                    <Link to="login">Login</Link>
+                </Menu.Item>
+                <Menu.Item
+                    name="register"
+                >
+                    <Link to="register">Register</Link>
+                </Menu.Item>
+            </Menu>
+        <Switch>
+            <Route exact path="/">
+                <CatalogPage />
+            </Route>
+            <Route path="/register">
+                <RegisterPage />
+            </Route>
+            <Route path="/login">
+                <LoginPage />
+            </Route>
+            <Route>
+                <NoMatch />
+            </Route>
+        </Switch>
+        </Container>
     );
 }
 

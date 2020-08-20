@@ -1,38 +1,43 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid, Card, Image, Pagination } from "semantic-ui-react";
+import { getProducts, getProductPagesNumber, setProductsPage } from "../../actions/productsActions";
 
-const productsUrl = "http://localhost:3000/products/";
-const productsPageUrl = "http://localhost:3000/products/page/";
+export default function Catalog() {
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.products);
 
-export default function Catalog({ products, pagesNumber, page, getProducts, getProductPagesNumber, setProductsPage }) {
     useEffect(() => { 
-        getProducts(productsPageUrl + page);
-        getProductPagesNumber(productsUrl, 12);
+        dispatch(getProducts(products.page));
+        dispatch(getProductPagesNumber(12));
     }, []);
 
-    const handlePaginationChange = (e, { activePage }) => {
-        getProducts(productsPageUrl + activePage);
-        setProductsPage(activePage);
+
+    const handlePaginationChange = (e, state) => {
+        dispatch(getProducts(products.activePage));
+        dispatch(setProductsPage(products.activePage));
     };
+    
+    console.log(products);
 
     return (
-        <Container className="catalog"> 
+        <Container> 
             <Grid columns={4} relaxed>
-                {products.map(product => (
+                {products.items.map(product => (
                     <Grid.Column key={product.id}>
-                        <Card className="card">
+                        <Card>
                             <Image></Image>
                             <Card.Content>
                                 <Card.Header>{product.name}</Card.Header>
                                 <Card.Description>{product.description}</Card.Description>
-                                <span className="price">{product.price}</span>
+                                <span>{product.price}</span>
                             </Card.Content>
                         </Card>
                     </Grid.Column>
                 ))}
             </Grid>
            
-            <Pagination defaultActivePage={page} totalPages={pagesNumber} onPageChange={handlePaginationChange} />
+            <Pagination defaultActivePage={products.page} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
         </Container>
     );
 }

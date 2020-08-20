@@ -1,19 +1,19 @@
 import actionTypes from "../constants/userActionTypes";
 
-export const login = (url, email, password) => {
+export const login = (email, password) => {
     return async function(dispatch) {
         dispatch(loginRequest(email, password));
 
-        const requestOptions = { 
+        const requestOptions = {
             method: "POST",
-            headers: {  "Content-Type": "application/json" },
-            body: JSON.stringify({ 
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
                 email,
                 password
             })
         }
 
-        let request = await fetch(url, requestOptions);
+        let request = await fetch("http://localhost:3000/login", requestOptions);
         let response = await request.json();
 
         if (response.ok) {
@@ -45,7 +45,7 @@ export const loginFailure = ()=> {
     }
 }
 
-export const registration = (url, email, password) => {
+export const registration = (email, password) => {
     return async function(dispatch) {
         dispatch(registrationRequest(email, password));
 
@@ -58,7 +58,7 @@ export const registration = (url, email, password) => {
             }),
         }
 
-        let request = await fetch(url, requestOptions);
+        let request = await fetch("http://localhost:3000/users", requestOptions);
         let response = await request.json();
 
         if (response.errorCode === 1) {
@@ -77,11 +77,7 @@ export const registrationRequest = (email, password) => {
     }
 }
 
-export const registrationSuccess = () => {
-    return {
-        type: actionTypes.registrationSuccess
-    }
-}
+export const registrationSuccess = () => ({ type: actionTypes.registrationSuccess });
 
 export const registrationFailure = ()=> {
     return {

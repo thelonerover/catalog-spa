@@ -1,21 +1,21 @@
 import actionTypes from "../constants/productActionTypes";
 
-export const getProducts = url => {
+export const getProducts = () => {
     return async function(dispatch) {
         dispatch({ type: actionTypes.getProducts });
         
-        let request = await fetch(url);
+        let request = await fetch("http://localhost:3000/products");
         let response = await request.json();
 
         dispatch(setProductsList(response.products));
     }
 }
 
-export const getProductPagesNumber = (url, offset) => {
+export const getProductPagesNumber = offset => {
     return async function(dispatch) {
         dispatch({ type: actionTypes.getProductPagesNumber });
 
-        let request = await fetch(url);
+        let request = await fetch("http://localhost:3000/products");
         let response = await request.json();
 
         dispatch(setProductPagesNumber(Math.floor(response.products.length / offset)));
@@ -43,7 +43,7 @@ export const setProductsPage = page => {
     }
 }
 
-export const addProduct = (url, product) => {
+export const addProduct = product => {
     return async function(dispatch) {
         dispatch({ type: actionTypes.createProduct });
 
@@ -53,13 +53,13 @@ export const addProduct = (url, product) => {
             body: JSON.stringify(product)
         };
 
-        let request = await fetch(url, requestOptions);
+        let request = await fetch("http://localhost:3000/products", requestOptions);
         let response = await request.json();
 
         if (response.ok) {
             dispatch(addProductSuccess());
         } else {
-            dispatch(addProductFailure("Wrong username or password."));
+            dispatch(addProductFailure());
         }
     }
 }
