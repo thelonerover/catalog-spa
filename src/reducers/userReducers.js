@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
                 curentStatus: userStatuses.loggingIn
             };
 
-        case actionTypes.loginSuccess: 
+        case actionTypes.loginSuccess:
             // localStorage.setItem("email", action.email);
             // localStorage.setItem("password", action.password);
 
@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
                 userType: action.userType
             };
 
-        case actionTypes.loginFailure: 
+        case actionTypes.loginFailure:
             return {
                 ...state,
                 curentStatus: userStatuses.loginFailed
@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
                 curentStatus: userStatuses.registerSuccess
             };
 
-        case actionTypes.registerFailure: 
+        case actionTypes.registerFailure:
             return {
                 ...state,
                 curentStatus: userStatuses.registerFailed
@@ -53,7 +53,7 @@ export default function(state = initialState, action) {
         case actionTypes.logout:
             return initialState;
 
-        default: 
+        default:
             return state;
     }
 }
