@@ -24,7 +24,7 @@ export default function LoginForm() {
                 <label>
                     <Input type="text" name="name" onChange={handleChangeCredentials("email")} value={credentials.email} placeholder="Login" />
                     <Input type="text" name="password" onChange={handleChangeCredentials("password")} value={credentials.password} placeholder="Password" />
-                    <Input type="submit" name="loginSubmit" onClick={handleSubmit} value="Log In" />
+                    <Input type="submit" name="submit" onClick={handleSubmit} value="Log In" />
                 </label>
             </Form>
             <Link to="/register" >Don't have an account?</Link>

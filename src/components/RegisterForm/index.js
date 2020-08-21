@@ -28,7 +28,7 @@ export default function RegisterForm() {
                 <Input type="email" onChange={handleChangeCredentials("email")} value={credentials.email} placeholder="E-mail" />
                 <Input type="text" onChange={handleChangeCredentials("password")} value={credentials.password} placeholder="Password" />
                 <Input type="text" onChange={handleChangeCredentials("passwordConfirmation")} value={credentials.passwordConfirmation} placeholder="Confirm password" />
-                <Input type="submit" name="registerSubmit" onClick={handleSubmit} value="Register" />
+                <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
             </label>
         </Form>
     );

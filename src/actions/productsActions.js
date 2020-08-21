@@ -47,7 +47,7 @@ export const setProductsPage = page => {
 
 export const addProduct = product => {
     return async function(dispatch) {
-        dispatch({ type: actionTypes.createProduct });
+        dispatch({ type: actionTypes.addProduct });
 
         const requestOptions = { 
             method: "POST",
