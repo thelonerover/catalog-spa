@@ -1,7 +1,7 @@
 import React, { useState }  from "react";
 import { Input, Form } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-import { registration } from "../../actions/userActions";
+import { registration } from "../../store/actions/userActions";
 
 export default function RegisterForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });

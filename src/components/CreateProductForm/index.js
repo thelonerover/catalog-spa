@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Input, Form } from "semantic-ui-react";
-import { addProduct } from "../../actions/productsActions";
+import { addProduct } from "../../store/actions/productsActions";
 
 export default function CreateProductForm() {
     const [productProperties, setProductProperties] = useState({ 

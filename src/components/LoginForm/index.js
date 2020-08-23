@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Input, Form } from "semantic-ui-react";
-import { login } from "../../actions/userActions";
+import { login } from "../../store/actions/userActions";
 
 export default function LoginForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
 
     const handleChangeCredentials = fieldName => e => {
         e.preventDefault();
