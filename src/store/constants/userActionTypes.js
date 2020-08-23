@@ -1,7 +1,7 @@
 export default {
-    registrationRequest: "USER_registration_REQUEST",
-    registrationSuccess: "USER_registration_SUCCESS",
-    registrationFailure: "USER_registration_FAILURE",
+    registrationRequest: "USER_REGISTRATION_REQUEST",
+    registrationSuccess: "USER_REGISTRATION_SUCCESS",
+    registrationFailure: "USER_REGISTRATION_FAILURE",
     loginRequest: "USER_LOGIN_REQUEST",
     loginSuccess: "USER_LOGIN_SUCCESS",
     loginFailure: "USER_LOGIN_FAILURE",

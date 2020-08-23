@@ -1,10 +1,11 @@
 import React, { useState }  from "react";
-import { Input, Form } from "semantic-ui-react";
-import { useDispatch } from "react-redux";
+import { Input, Form, Message } from "semantic-ui-react";
+import { useSelector, useDispatch } from "react-redux";
 import { registration } from "../../store/actions/userActions";
 
 export default function RegisterForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });
+    const message = useSelector(store => store.user.message)
     const dispatch = useDispatch();
 
     const handleChangeCredentials = fieldName => e => {
@@ -14,22 +15,43 @@ export default function RegisterForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        //temporary
         if (credentials.password === credentials.passwordConfirmation) {
             dispatch(registration(credentials));
-        } else {
-            throw("Passwords do not match");
         }
     }
 
     return (
         <Form method="post" action="/users" onSubmit={e => {e.preventDefault()}}>
-            <label>
-                <Input type="email" onChange={handleChangeCredentials("email")} value={credentials.email} placeholder="E-mail" />
-                <Input type="text" onChange={handleChangeCredentials("password")} value={credentials.password} placeholder="Password" />
-                <Input type="text" onChange={handleChangeCredentials("passwordConfirmation")} value={credentials.passwordConfirmation} placeholder="Confirm password" />
-                <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
-            </label>
+            <Form.Field
+                type="email"
+                control={Input}
+                label="E-mail"
+                placeholder="E-mail"
+                onChange={handleChangeCredentials("email")}
+                value={credentials.email}
+            />
+            <Form.Field
+                type="password"
+                control={Input}
+                label="Password"
+                placeholder="Password"
+                onChange={handleChangeCredentials("password")}
+                value={credentials.password}
+            />
+            <Form.Field
+                type="password"
+                control={Input}
+                label="Confirm password"
+                placeholder="Confirm password"
+                onChange={handleChangeCredentials("passwordConfirmation")}
+                value={credentials.passwordConfirmation}
+            />
+            <Message
+                error
+                header="Registration failed"
+                content={message}
+            />
+            <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
         </Form>
     );
 }

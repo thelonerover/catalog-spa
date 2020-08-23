@@ -6,10 +6,14 @@ export const getProducts = page => {
 
         const url = page ? `http://localhost:3000/products/page/${page}` : "http://localhost:3000/products";
 
-        let request = await fetch(url);
-        let response = await request.json();
+        let request;
+        try {
+            request = await fetch(url);
+        } catch (error) {
+            let response = await request.json();
 
-        dispatch(setProductsList(response.products));
+            dispatch(setProductsList(response.products));
+        }
     }
 }
 
@@ -17,10 +21,14 @@ export const getProductPagesNumber = offset => {
     return async function(dispatch) {
         dispatch({ type: actionTypes.getProductPagesNumber });
 
-        let request = await fetch("http://localhost:3000/products");
-        let response = await request.json();
+        let request;
+        try {
+            request = await fetch("http://localhost:3000/products");
+        } catch (error) {
+            let response = await request.json();
 
-        dispatch(setProductPagesNumber(Math.ceil(response.products.length / offset)));
+            dispatch(setProductPagesNumber(Math.ceil(response.products.length / offset)));
+        }
     }
 }
 
@@ -55,13 +63,17 @@ export const addProduct = product => {
             body: JSON.stringify(product)
         };
 
-        let request = await fetch("http://localhost:3000/products", requestOptions);
-        let response = await request.json();
+        let request;
+        try {
+            request = await fetch("http://localhost:3000/products", requestOptions);
+        } catch (error) {
+            let response = await request.json();
 
-        if (response.ok) {
-            dispatch(addProductSuccess());
-        } else {
-            dispatch(addProductFailure());
+            if (response.ok) {
+                dispatch(addProductSuccess());
+            } else {
+                dispatch(addProductFailure());
+            }
         }
     }
 }

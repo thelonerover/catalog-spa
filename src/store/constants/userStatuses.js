@@ -5,5 +5,5 @@ export default {
     loginFailed: "Login attempt failed!",
     registrationRequest: "Registration",
     registrationSuccess: "Registration completed",
-    registrationFailed: "Registration failed",
+    registrationFailure: "Registration failed",
 }

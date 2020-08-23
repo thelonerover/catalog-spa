@@ -4,7 +4,6 @@ import userStatuses from "../constants/userStatuses";
 const initialState = {
     isLoggedIn: false,
     curentStatus: userStatuses.notLoggedIn,
-    userType: ""
 };
 
 export default function(state = initialState, action) {
@@ -20,7 +19,7 @@ export default function(state = initialState, action) {
                 ...state,
                 isLoggedIn: true,
                 curentStatus: userStatuses.loggedIn,
-                userType: action.userType
+                email: action.email
             };
 
         case actionTypes.loginFailure:
@@ -29,22 +28,23 @@ export default function(state = initialState, action) {
                 curentStatus: userStatuses.notLoggedIn,
             };
 
-        case actionTypes.registerRequest:
+        case actionTypes.registrationRequest:
             return {
                 ...state,
-                curentStatus: userStatuses.registerRequest
+                curentStatus: userStatuses.registrationRequest
             };
 
-        case actionTypes.registerSuccess:
+        case actionTypes.registrationSuccess:
             return {
                 ...state,
-                curentStatus: userStatuses.registerSuccess
+                curentStatus: userStatuses.registrationSuccess
             };
 
-        case actionTypes.registerFailure:
+        case actionTypes.registrationFailure:
             return {
                 ...state,
-                curentStatus: userStatuses.registerFailed
+                curentStatus: userStatuses.registrationFailure,
+                error: action.error 
             };
 
         case actionTypes.logout:

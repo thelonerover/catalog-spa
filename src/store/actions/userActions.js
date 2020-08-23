@@ -13,12 +13,17 @@ export const login = credentials => {
             })
         }
 
-        let request = await fetch("http://localhost:3000/login", requestOptions);
+        let request;
+        try {
+            request = await fetch("http://localhost:3000/login", requestOptions);
 
-        if (request.ok) {
-            dispatch(loginSuccess());
-        } else {
-            dispatch(loginFailure());
+            if (request.ok) {
+                dispatch(loginSuccess(credentials.email));
+            } else {
+                dispatch(loginFailure());
+            }
+        } catch(error) {
+            console.log(error);
         }
     }
 }
@@ -31,7 +36,10 @@ export const loginRequest = (email, password) => {
     }
 }
 
-export const loginSuccess = () => ({type: actionTypes.loginSuccess});
+export const loginSuccess = email => ({
+    type: actionTypes.loginSuccess,
+    email
+});
 
 export const loginFailure = ()=> ({ type: actionTypes.loginFailure });
 
@@ -49,13 +57,18 @@ export const registration = credentials => {
             }),
         }
 
-        let request = await fetch("http://localhost:3000/users", requestOptions);
-        let response = await request.json();
+        let request;
+        try {
+            request = await fetch("http://localhost:3000/users", requestOptions);
+            let response = await request.json();
 
-        if (response.errorCode === 1) {
-            dispatch(registrationFailure("This email is unavailable!"));
-        } else {
-            dispatch(registrationSuccess());
+            if (response.errorCode === 1) {
+                dispatch(registrationFailure(response.error));
+            } else {
+                dispatch(registrationSuccess());
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 }
@@ -70,6 +83,9 @@ export const registrationRequest = credentials => {
 
 export const registrationSuccess = () => ({ type: actionTypes.registrationSuccess });
 
-export const registrationFailure = ()=> ({ type: actionTypes.registrationFailure });
+export const registrationFailure = error=> ({ 
+    type: actionTypes.registrationFailure,
+    error
+});
 
 export const logout = () => ({ type: actionTypes.logout });
