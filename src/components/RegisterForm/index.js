@@ -1,11 +1,13 @@
 import React, { useState }  from "react";
 import { Input, Form, Message } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
-import { registration } from "../../store/actions/userActions";
+import { registration, setErrorMessage } from "../../store/actions/userActions";
 
 export default function RegisterForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });
-    const message = useSelector(store => store.user.message)
+    const [formState, setFormState] = useState({});
+
+    const errorMessage = useSelector(store => store.user.error)
     const dispatch = useDispatch();
 
     const handleChangeCredentials = fieldName => e => {
@@ -17,11 +19,15 @@ export default function RegisterForm() {
         e.preventDefault();
         if (credentials.password === credentials.passwordConfirmation) {
             dispatch(registration(credentials));
+            setFormState({loading: true});
+        } else {
+            setFormState({error: true});
+            dispatch(setErrorMessage("Passwords do not match"));
         }
     }
 
     return (
-        <Form method="post" action="/users" onSubmit={e => {e.preventDefault()}}>
+        <Form method="post" error={formState.error} action="/users" onSubmit={e => {e.preventDefault()}}>
             <Form.Field
                 type="email"
                 control={Input}
@@ -47,9 +53,8 @@ export default function RegisterForm() {
                 value={credentials.passwordConfirmation}
             />
             <Message
-                error
-                header="Registration failed"
-                content={message}
+                error={formState.error}
+                header={errorMessage}
             />
             <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
         </Form>

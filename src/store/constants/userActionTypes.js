@@ -1,4 +1,5 @@
 export default {
+    setErrorMessage: "SET_ERROR_MESSAGE",
     registrationRequest: "USER_REGISTRATION_REQUEST",
     registrationSuccess: "USER_REGISTRATION_SUCCESS",
     registrationFailure: "USER_REGISTRATION_FAILURE",

@@ -89,3 +89,10 @@ export const registrationFailure = error=> ({
 });
 
 export const logout = () => ({ type: actionTypes.logout });
+
+export const setErrorMessage = error => {
+    return {
+        type: actionTypes.setErrorMessage,
+        error
+    }
+}

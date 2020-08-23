@@ -4,10 +4,17 @@ import userStatuses from "../constants/userStatuses";
 const initialState = {
     isLoggedIn: false,
     curentStatus: userStatuses.notLoggedIn,
+    error: ""
 };
 
 export default function(state = initialState, action) {
     switch(action.type) {
+        case actionTypes.setErrorMessage:
+            return {
+                ...state,
+                error: action.error
+            };
+
         case actionTypes.loginRequest:
             return {
                 ...state,
@@ -37,7 +44,8 @@ export default function(state = initialState, action) {
         case actionTypes.registrationSuccess:
             return {
                 ...state,
-                curentStatus: userStatuses.registrationSuccess
+                curentStatus: userStatuses.registrationSuccess,
+                error: ""
             };
 
         case actionTypes.registrationFailure:
