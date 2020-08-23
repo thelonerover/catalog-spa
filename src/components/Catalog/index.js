@@ -14,7 +14,6 @@ export default function Catalog() {
 
 
     const handlePaginationChange = (e, { activePage }) => {
-        console.log(activePage);
         dispatch(getProducts(activePage));
         dispatch(setProductsPage(activePage));
     };

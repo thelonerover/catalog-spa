@@ -1,6 +1,8 @@
 import { Server, Model, Factory, Response } from "miragejs";
 
 export default function() {  
+  let session = {};
+
   return new Server({
     models: {
       products: Model,
@@ -63,7 +65,8 @@ export default function() {
         let attrs = JSON.parse(reguest.requestBody);
 
         let user = schema.users.findBy({ email: attrs.email });
-
+        const sid = Math.round(Math.random() * 10e6);
+        
         if (!user) {
           return new Response(401, {}, { 
               error: "No such user!",
@@ -73,12 +76,15 @@ export default function() {
         }
 
         if(user.email === attrs.email && user.password === attrs.password) {
-          return new Response( 201, {}, { 
-              ok: true,
-              isLogged: true,
-              userType: user.type
-            }
-          );
+          session[sid] = user;
+
+          console.log(session);
+
+          let now = new Date();
+          let cookieExpiration = new Date(now.getTime() + 24 * 3600 * 1000)
+          document.cookie = `session=${sid}; domain=localhost; path=/; expires=${cookieExpiration.toUTCString()};`
+
+          return new Response(201, {ok: true});
         }
 
         return new Response(
@@ -94,7 +100,10 @@ export default function() {
 
       this.get("/products");
       this.get("/products/:id");
-      this.post("/products");
+      this.post("/products", (schema, reguest) => {
+        let attrs = JSON.parse(reguest.requestBody);
+        return schema.products.create(attrs);
+      });
       this.patch("/products/:id");
       this.del("/products/:id");
 

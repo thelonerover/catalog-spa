@@ -14,12 +14,11 @@ export const login = credentials => {
         }
 
         let request = await fetch("http://localhost:3000/login", requestOptions);
-        let response = await request.json();
 
-        if (response.ok) {
-            dispatch(loginSuccess(response.userType));
+        if (request.ok) {
+            dispatch(loginSuccess());
         } else {
-            dispatch(loginFailure("Wrong username or password."));
+            dispatch(loginFailure());
         }
     }
 }
@@ -32,12 +31,7 @@ export const loginRequest = (email, password) => {
     }
 }
 
-export const loginSuccess = userType => {
-    return {
-        type: actionTypes.loginSuccess,
-        userType
-    }
-}
+export const loginSuccess = () => ({type: actionTypes.loginSuccess});
 
 export const loginFailure = ()=> ({ type: actionTypes.loginFailure });
 

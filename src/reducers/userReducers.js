@@ -16,9 +16,6 @@ export default function(state = initialState, action) {
             };
 
         case actionTypes.loginSuccess:
-            // localStorage.setItem("email", action.email);
-            // localStorage.setItem("password", action.password);
-
             return {
                 ...state,
                 isLoggedIn: true,
@@ -29,7 +26,7 @@ export default function(state = initialState, action) {
         case actionTypes.loginFailure:
             return {
                 ...state,
-                curentStatus: userStatuses.loginFailed
+                curentStatus: userStatuses.notLoggedIn,
             };
 
         case actionTypes.registerRequest:

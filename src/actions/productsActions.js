@@ -20,7 +20,7 @@ export const getProductPagesNumber = offset => {
         let request = await fetch("http://localhost:3000/products");
         let response = await request.json();
 
-        dispatch(setProductPagesNumber(Math.floor(response.products.length / offset)));
+        dispatch(setProductPagesNumber(Math.ceil(response.products.length / offset)));
     }
 }
 
