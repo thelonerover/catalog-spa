@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState, useEffect }  from "react";
 import { Input, Form, Message } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { registration, setErrorMessage } from "../../store/actions/userActions";
@@ -6,9 +6,14 @@ import { registration, setErrorMessage } from "../../store/actions/userActions";
 export default function RegisterForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });
     const [formState, setFormState] = useState({});
-
-    const errorMessage = useSelector(store => store.user.error)
+    const user = useSelector(store => store.user)
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(user.isLoggedIn) {
+            setFormState({success: true});
+        }
+    }, [user.isLoggedIn]);
 
     const handleChangeCredentials = fieldName => e => {
         e.preventDefault();
@@ -17,9 +22,11 @@ export default function RegisterForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
+        
+        console.log(formState);
         if (credentials.password === credentials.passwordConfirmation) {
             dispatch(registration(credentials));
-            setFormState({loading: true});
+            // setFormState({loading: true});
         } else {
             setFormState({error: true});
             dispatch(setErrorMessage("Passwords do not match"));
@@ -27,7 +34,7 @@ export default function RegisterForm() {
     }
 
     return (
-        <Form method="post" error={formState.error} action="/users" onSubmit={e => {e.preventDefault()}}>
+        <Form method="post" {...formState} action="/users" onSubmit={e => {e.preventDefault()}}>
             <Form.Field
                 type="email"
                 control={Input}
@@ -52,11 +59,12 @@ export default function RegisterForm() {
                 onChange={handleChangeCredentials("passwordConfirmation")}
                 value={credentials.passwordConfirmation}
             />
-            <Message
-                error={formState.error}
-                header={errorMessage}
-            />
             <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
+            {user.error && 
+            <Message
+                {...formState}
+                header={user.error}
+            />}
         </Form>
     );
 }
