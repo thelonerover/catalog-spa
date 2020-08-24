@@ -1,8 +1,8 @@
 export default {
-    loggingIn: "Logging in",
-    loggedIn: "Logged in",
+    loginRequest: "Logging in",
+    loginSuccess: "Logged in",
+    loginFailure: "Login attempt failed!",
     notLoggedIn: "Not logged in",
-    loginFailed: "Login attempt failed!",
     registrationRequest: "Registration",
     registrationSuccess: "Registration completed",
     registrationFailure: "Registration failed",

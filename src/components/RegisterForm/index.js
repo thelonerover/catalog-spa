@@ -11,7 +11,6 @@ export default function RegisterForm() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(formState);
         switch(user.currentStatus) {
             case userStatuses.registrationRequest:
                 setFormState({loading: true});

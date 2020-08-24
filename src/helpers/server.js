@@ -78,8 +78,6 @@ export default function() {
         if(user.email === attrs.email && user.password === attrs.password) {
           session[sid] = user;
 
-          console.log(session);
-
           let now = new Date();
           let cookieExpiration = new Date(now.getTime() + 24 * 3600 * 1000)
           document.cookie = `session=${sid}; domain=localhost; path=/; expires=${cookieExpiration.toUTCString()};`

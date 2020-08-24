@@ -16,14 +16,15 @@ export const login = credentials => {
         let request;
         try {
             request = await fetch("http://localhost:3000/login", requestOptions);
-
+            let response = await request.json();
+            
             if (request.ok) {
                 dispatch(loginSuccess(credentials.email));
             } else {
-                dispatch(loginFailure());
+                dispatch(loginFailure(response.error));
             }
         } catch(error) {
-            console.log(error);
+            console.error(error);
         }
     }
 }
@@ -41,7 +42,10 @@ export const loginSuccess = email => ({
     email
 });
 
-export const loginFailure = ()=> ({ type: actionTypes.loginFailure });
+export const loginFailure = error => ({ 
+    type: actionTypes.loginFailure,
+    error
+});
 
 export const registration = credentials => {
     return async function(dispatch) {

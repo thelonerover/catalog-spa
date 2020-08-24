@@ -18,21 +18,22 @@ export default function(state = initialState, action) {
         case actionTypes.loginRequest:
             return {
                 ...state,
-                currentStatus: userStatuses.loggingIn
+                currentStatus: userStatuses.loginRequest
             };
 
         case actionTypes.loginSuccess:
             return {
                 ...state,
                 isLoggedIn: true,
-                currentStatus: userStatuses.loggedIn,
+                currentStatus: userStatuses.loginSuccess,
                 email: action.email
             };
 
         case actionTypes.loginFailure:
             return {
                 ...state,
-                currentStatus: userStatuses.notLoggedIn,
+                currentStatus: userStatuses.loginFailure,
+                error: action.error
             };
 
         case actionTypes.registrationRequest:
