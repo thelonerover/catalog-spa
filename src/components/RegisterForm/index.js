@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from "react";
 import { Input, Form, Message } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { registration, setErrorMessage } from "../../store/actions/userActions";
+import userStatuses from "../../store/constants/userStatuses";
 
 export default function RegisterForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });
@@ -10,10 +11,21 @@ export default function RegisterForm() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(user.isLoggedIn) {
-            setFormState({success: true});
+        console.log(formState);
+        switch(user.currentStatus) {
+            case userStatuses.registrationRequest:
+                setFormState({loading: true});
+                break;
+            case userStatuses.registrationFailure:
+                setFormState({error: true});
+                break;
+            case userStatuses.registrationSuccess:
+                setFormState({success: true});
+                break;
+            default:
+                break;
         }
-    }, [user.isLoggedIn]);
+    }, [user.currentStatus]);
 
     const handleChangeCredentials = fieldName => e => {
         e.preventDefault();
@@ -23,10 +35,8 @@ export default function RegisterForm() {
     const handleSubmit = e => {
         e.preventDefault();
         
-        console.log(formState);
         if (credentials.password === credentials.passwordConfirmation) {
             dispatch(registration(credentials));
-            // setFormState({loading: true});
         } else {
             setFormState({error: true});
             dispatch(setErrorMessage("Passwords do not match"));
@@ -60,10 +70,15 @@ export default function RegisterForm() {
                 value={credentials.passwordConfirmation}
             />
             <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
-            {user.error && 
+            {formState.error && 
             <Message
                 {...formState}
                 header={user.error}
+            />}
+            {formState.success  && 
+            <Message
+                {...formState}
+                header={user.currentStatus}
             />}
         </Form>
     );
