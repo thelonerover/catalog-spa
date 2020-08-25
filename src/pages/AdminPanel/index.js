@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function NoMatch() {
-    return (
-        <p>404 WTF</p>
-    );
-}
+// export default function AdminPanel() {
+//     return (
+
+//     );
+// }

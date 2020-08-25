@@ -18,7 +18,8 @@ export default function(state = initialState, action) {
         case actionTypes.loginRequest:
             return {
                 ...state,
-                currentStatus: userStatuses.loginRequest
+                currentStatus: userStatuses.loginRequest,
+                error: ""
             };
 
         case actionTypes.loginSuccess:
@@ -26,7 +27,8 @@ export default function(state = initialState, action) {
                 ...state,
                 isLoggedIn: true,
                 currentStatus: userStatuses.loginSuccess,
-                email: action.email
+                email: action.email,
+                error: ""
             };
 
         case actionTypes.loginFailure:
@@ -39,7 +41,8 @@ export default function(state = initialState, action) {
         case actionTypes.registrationRequest:
             return {
                 ...state,
-                currentStatus: userStatuses.registrationRequest
+                currentStatus: userStatuses.registrationRequestm,
+                error: ""
             };
 
         case actionTypes.registrationSuccess:

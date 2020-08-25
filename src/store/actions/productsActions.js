@@ -1,50 +1,57 @@
 import actionTypes from "../constants/productActionTypes";
 
-export const getProducts = page => {
+export const getProductsRequest = page => {
     return async function(dispatch) {
-        dispatch({ type: actionTypes.getProducts });
-
         const url = page ? `http://localhost:3000/products/page/${page}` : "http://localhost:3000/products";
+        dispatch({ type: actionTypes.getProductsRequest });
 
-        let request;
+        let response;
         try {
-            request = await fetch(url);
-        } catch (error) {
-            let response = await request.json();
+            response = await fetch(url);
+            let body = await response.json();
 
-            dispatch(setProductsList(response.products));
+            if (response.ok) {
+                dispatch(getProductSuccess());
+                dispatch(setProductsList(body.products));
+            } else {
+                getProductFailure();
+            }
+        } catch (error) {
+            console.error(error)
         }
     }
 }
+
+export const getProductSuccess = () => ({type: actionTypes.getProductSuccess});
+
+export const getProductFailure = () => ({type: actionTypes.getProductFailure});
 
 export const getProductPagesNumber = offset => {
     return async function(dispatch) {
         dispatch({ type: actionTypes.getProductPagesNumber });
 
-        let request;
+        let response;
         try {
-            request = await fetch("http://localhost:3000/products");
+            response = await fetch("http://localhost:3000/products");
+            let body = await response.json();
+            if (response.ok) {
+                dispatch(setProductPagesNumber(Math.ceil(body.products.length / offset)));
+            }
         } catch (error) {
-            let response = await request.json();
-
-            dispatch(setProductPagesNumber(Math.ceil(response.products.length / offset)));
+            console.error(error);
         }
     }
 }
 
-export const setProductPagesNumber = pagesNumber => {
-    return {
-        type: actionTypes.setProductPagesNumber,
-        pagesNumber
-    }
-}
+export const setProductPagesNumber = pagesNumber => ({
+    type: actionTypes.setProductPagesNumber,
+    pagesNumber
+});
 
-export const setProductsList = items => {
-    return {
-        type: actionTypes.setProductsList,
-        items
-    }
-}
+export const setProductsList = items => ({
+    type: actionTypes.setProductsList,
+    items
+});
 
 export const setProductsPage = page => {
     return {
@@ -63,29 +70,21 @@ export const addProduct = product => {
             body: JSON.stringify(product)
         };
 
-        let request;
+        let response;
         try {
-            request = await fetch("http://localhost:3000/products", requestOptions);
-        } catch (error) {
-            let response = await request.json();
+            response = await fetch("http://localhost:3000/products", requestOptions);
 
             if (response.ok) {
                 dispatch(addProductSuccess());
             } else {
                 dispatch(addProductFailure());
             }
+        } catch (error) {
+            console.error(error);
         }
     }
 }
 
-export const addProductSuccess = () => {
-    return {
-        type: actionTypes.addProductSuccess
-    }
-}
+export const addProductSuccess = () => ({type: actionTypes.addProductSuccess});
 
-export const addProductFailure = () => {
-    return {
-        type: actionTypes.addProductFailure
-    }
-}
+export const addProductFailure = () => ({type: actionTypes.addProductFailure});

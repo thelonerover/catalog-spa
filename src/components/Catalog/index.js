@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid, Card, Pagination } from "semantic-ui-react";
-import { getProducts, getProductPagesNumber, setProductsPage } from "../../store/actions/productsActions";
+import { getProductsRequest, getProductPagesNumber, setProductsPage } from "../../store/actions/productsActions";
 
 export default function Catalog() {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
 
     useEffect(() => { 
-        dispatch(getProducts(products.page));
+        dispatch(getProductsRequest(products.page));
         dispatch(getProductPagesNumber(12));
     }, []);
 
 
     const handlePaginationChange = (e, { activePage }) => {
-        dispatch(getProducts(activePage));
+        dispatch(getProductsRequest(activePage));
         dispatch(setProductsPage(activePage));
     };
     

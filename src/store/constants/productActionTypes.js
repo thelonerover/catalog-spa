@@ -1,5 +1,7 @@
 export default {
-    getProducts: "GET_PRODUCTS",
+    getProductsRequest: "GET_PRODUCTS_REQUEST",
+    getProductSuccess: "GET_PRODUCTS_SUCCESS",
+    getProductFailure: "GET_PRODUCTS_FAILURE",
     getProductPagesNumber: "GET_PRODUCT_PAGES_NUMBER",
     setProductPagesNumber: "SET_PRODUCT_PAGES_NUMBER",
     setProductsList: "SET_PRODUCTS_LIST",

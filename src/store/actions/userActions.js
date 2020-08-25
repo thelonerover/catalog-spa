@@ -13,15 +13,15 @@ export const login = credentials => {
             })
         }
 
-        let request;
+        let response;
         try {
-            request = await fetch("http://localhost:3000/login", requestOptions);
-            let response = await request.json();
+            response = await fetch("http://localhost:3000/login", requestOptions);
+            let body = await response.json();
             
-            if (request.ok) {
+            if (response.ok) {
                 dispatch(loginSuccess(credentials.email));
             } else {
-                dispatch(loginFailure(response.error));
+                dispatch(loginFailure(body.error));
             }
         } catch(error) {
             console.error(error);
@@ -61,13 +61,13 @@ export const registration = credentials => {
             }),
         }
 
-        let request;
+        let response;
         try {
-            request = await fetch("http://localhost:3000/users", requestOptions);
-            let response = await request.json();
+            response = await fetch("http://localhost:3000/users", requestOptions);
+            let body = await response.json();
 
-            if (response.errorCode === 1) {
-                dispatch(registrationFailure(response.error));
+            if (body.errorCode === 1) {
+                dispatch(registrationFailure(body.error));
             } else {
                 dispatch(registrationSuccess());
             }
