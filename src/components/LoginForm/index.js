@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { Input, Form, Message } from "semantic-ui-react";
 import { login, logout, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
 import userStatuses from "../../store/constants/userStatuses";
@@ -68,7 +67,6 @@ export default function LoginForm() {
         dispatch(setCurrentStatus(""));
     }
     
-    console.log(formState);
     return (
         user.isLoggedIn ?
         <div>
@@ -102,7 +100,6 @@ export default function LoginForm() {
                 />
                 <Input type="submit" name="submit" onClick={handleLogin} value="Log In" />
             </Form>
-            <Link to="/register" >Don't have an account?</Link>
             {formState.error && 
             <Message
                 {...formState}
