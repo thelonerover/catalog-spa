@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Input, Form, Message } from "semantic-ui-react";
-import { login, logout } from "../../store/actions/userActions";
+import { login, logout, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
 import userStatuses from "../../store/constants/userStatuses";
 
 export default function LoginForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
     const user = useSelector(state => state.user);
     const [formState, setFormState] = useState({});
     const dispatch = useDispatch();
+
+    useEffect(() => () => {
+        resetErrors();
+    }, []);
 
     useEffect(() => {
         switch(user.currentStatus) {
@@ -34,7 +40,19 @@ export default function LoginForm() {
 
     const handleLogin = e => {
         e.preventDefault();
-        dispatch(login(credentials));
+        dispatch(setErrorMessage(""));
+        setFormState({});
+
+        if(!credentials.email) {
+            setEmailError({ content: "Please enter a valid email address!", pointing: "below" });
+        }
+        if(!credentials.password) {
+            setPasswordError({ content: "Please enter a valid password!", pointing: "below" });
+        }
+        if(credentials.email && credentials.password) {
+            resetErrors();
+            dispatch(login(credentials));
+        }
     }
     
     const handleLogout = e => {
@@ -42,6 +60,15 @@ export default function LoginForm() {
         dispatch(logout());
     }
 
+    const resetErrors = () => {
+        setEmailError(false);
+        setPasswordError(false);
+        setFormState({});
+        dispatch(setErrorMessage(""));
+        dispatch(setCurrentStatus(""));
+    }
+    
+    console.log(formState);
     return (
         user.isLoggedIn ?
         <div>
@@ -62,6 +89,7 @@ export default function LoginForm() {
                     placeholder="E-mail"
                     onChange={handleChangeCredentials("email")}
                     value={credentials.email}
+                    error={emailError}
                 />
                 <Form.Field
                     type="password"
@@ -70,6 +98,7 @@ export default function LoginForm() {
                     placeholder="Password"
                     onChange={handleChangeCredentials("password")}
                     value={credentials.password}
+                    error={passwordError}
                 />
                 <Input type="submit" name="submit" onClick={handleLogin} value="Log In" />
             </Form>

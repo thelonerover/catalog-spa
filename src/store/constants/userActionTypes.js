@@ -1,5 +1,6 @@
 export default {
     setErrorMessage: "SET_ERROR_MESSAGE",
+    setCurrentStatus: "SET_CURRENT_STATUS",
     registrationRequest: "USER_REGISTRATION_REQUEST",
     registrationSuccess: "USER_REGISTRATION_SUCCESS",
     registrationFailure: "USER_REGISTRATION_FAILURE",

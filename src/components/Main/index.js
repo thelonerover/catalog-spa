@@ -18,12 +18,6 @@ export default function Main() {
                 <Menu.Item name="catalog">
                     <Link to="/">Catalog</Link>
                 </Menu.Item>
-                <Menu.Item name="login" >
-                    <Link to="login">Login</Link>
-                </Menu.Item>
-                <Menu.Item name="register">
-                    <Link to="register">Register</Link>
-                </Menu.Item>
                 <Menu.Item name="add-product">
                     <Link to="add-product">Add product</Link>
                 </Menu.Item>

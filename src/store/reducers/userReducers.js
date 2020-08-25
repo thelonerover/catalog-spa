@@ -59,6 +59,13 @@ export default function(state = initialState, action) {
                 error: action.error 
             };
 
+        case actionTypes.setCurrentStatus:
+            return {
+                ...state,
+                currentStatus: userStatuses.setCurrentStatus,
+                status: action.status 
+            };
+
         case actionTypes.logout:
             return initialState;
 
