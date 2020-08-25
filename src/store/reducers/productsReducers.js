@@ -4,6 +4,7 @@ const initialState = {
     items: [],
     pagesNumber: 1,
     page: 1,
+    currentStatus: ""
 };
 
 export default function(state = initialState, action) {

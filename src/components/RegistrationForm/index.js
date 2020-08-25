@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { registration, setErrorMessage } from "../../store/actions/userActions";
 import userStatuses from "../../store/constants/userStatuses";
 
-export default function RegisterForm() {
+export default function RegistrationForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });
     const [formState, setFormState] = useState({});
     const user = useSelector(store => store.user)

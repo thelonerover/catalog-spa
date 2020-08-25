@@ -46,10 +46,9 @@ export default function LoginForm() {
         user.isLoggedIn ?
         <div>
             <Form action="logout" {...formState} onSubmit={e => {e.preventDefault()}}>
-                {formState.success  && 
+                {user.isLoggedIn  && 
                 <Message
-                    {...formState}
-                    header={`${user.currentStatus} as ${user.email}`}
+                    header={`Logged in as ${user.email}`}
                 />}
                 <Input type="submit" onClick={handleLogout} value="Log out" />
             </Form>
