@@ -6,8 +6,8 @@ import userStatuses from "../../store/constants/userStatuses";
 
 export default function LoginForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
+    const initialFormErrors = {email: false, password: false};
+    const [formErrors, setFormErrors] = useState({...initialFormErrors});
     const user = useSelector(state => state.user);
     const [formState, setFormState] = useState({});
     const dispatch = useDispatch();
@@ -42,12 +42,14 @@ export default function LoginForm() {
         dispatch(setErrorMessage(""));
         setFormState({});
 
+        let errors = {...initialFormErrors};
         if(!credentials.email) {
-            setEmailError({ content: "Please enter a valid email address!", pointing: "below" });
+            errors.email = { content: "Please enter a valid email address!", pointing: "below" };
         }
         if(!credentials.password) {
-            setPasswordError({ content: "Please enter a valid password!", pointing: "below" });
+            errors.password = { content: "Please enter a valid password!", pointing: "below" };
         }
+        setFormErrors(errors);
         if(credentials.email && credentials.password) {
             resetErrors();
             dispatch(login(credentials));
@@ -60,9 +62,8 @@ export default function LoginForm() {
     }
 
     const resetErrors = () => {
-        setEmailError(false);
-        setPasswordError(false);
         setFormState({});
+        setFormErrors({...initialFormErrors});
         dispatch(setErrorMessage(""));
         dispatch(setCurrentStatus(""));
     }
@@ -87,7 +88,7 @@ export default function LoginForm() {
                     placeholder="E-mail"
                     onChange={handleChangeCredentials("email")}
                     value={credentials.email}
-                    error={emailError}
+                    error={formErrors.email}
                 />
                 <Form.Field
                     type="password"
@@ -96,7 +97,7 @@ export default function LoginForm() {
                     placeholder="Password"
                     onChange={handleChangeCredentials("password")}
                     value={credentials.password}
-                    error={passwordError}
+                    error={formErrors.password}
                 />
                 <Input type="submit" name="submit" onClick={handleLogin} value="Log In" />
             </Form>

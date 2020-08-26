@@ -1,14 +1,20 @@
 import React, { useState, useEffect }  from "react";
 import { Input, Form, Message } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
-import { registration, setErrorMessage } from "../../store/actions/userActions";
+import { registration, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
 import userStatuses from "../../store/constants/userStatuses";
 
 export default function RegistrationForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });
     const [formState, setFormState] = useState({});
+    const initialFormErrors = {email: false, password: false, passwordConfirmation: false}
+    const [formErrors, setFormErrors] = useState({...initialFormErrors});
     const user = useSelector(store => store.user)
     const dispatch = useDispatch();
+
+    useEffect(() => () => {
+        resetErrors();
+    }, []);
 
     useEffect(() => {
         switch(user.currentStatus) {
@@ -33,13 +39,36 @@ export default function RegistrationForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        let errors = {...initialFormErrors};
+        if(!credentials.email) {
+            errors.email = { content: "Please enter a valid email address!", pointing: "below" };
+        }
+        if(!credentials.password) {
+            errors.password = { content: "Please enter a valid password!", pointing: "below" };
+        }
+        if(!credentials.passwordConfirmation) {
+            errors.passwordConfirmation = { content: "Please enter a valid password confirmation!", pointing: "below" };
+        }
+        setFormErrors(errors);
         
-        if (credentials.password === credentials.passwordConfirmation) {
-            dispatch(registration(credentials));
+        if (credentials.email && 
+            credentials.password && 
+            credentials.passwordConfirmation && 
+            credentials.password === credentials.passwordConfirmation) {
+                resetErrors();
+                dispatch(registration(credentials));
         } else {
             setFormState({error: true});
             dispatch(setErrorMessage("Passwords do not match"));
         }
+    }
+
+    const resetErrors = () => {
+        setFormState({});
+        setFormErrors({...initialFormErrors});
+        dispatch(setErrorMessage(""));
+        dispatch(setCurrentStatus(""));
     }
 
     return (
@@ -51,6 +80,7 @@ export default function RegistrationForm() {
                 placeholder="E-mail"
                 onChange={handleChangeCredentials("email")}
                 value={credentials.email}
+                error={formErrors.email}
             />
             <Form.Field
                 type="password"
@@ -59,6 +89,7 @@ export default function RegistrationForm() {
                 placeholder="Password"
                 onChange={handleChangeCredentials("password")}
                 value={credentials.password}
+                error={formErrors.password}
             />
             <Form.Field
                 type="password"
@@ -67,6 +98,7 @@ export default function RegistrationForm() {
                 placeholder="Confirm password"
                 onChange={handleChangeCredentials("passwordConfirmation")}
                 value={credentials.passwordConfirmation}
+                error={formErrors.passwordConfirmation}
             />
             <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
             {formState.error && 
