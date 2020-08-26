@@ -17,9 +17,9 @@ export const login = credentials => {
         try {
             response = await fetch("http://localhost:3000/login", requestOptions);
             let body = await response.json();
-            
+
             if (response.ok) {
-                dispatch(loginSuccess(credentials.email));
+                dispatch(loginSuccess(body.email, body.type));
             } else {
                 dispatch(loginFailure(body.error));
             }
@@ -37,9 +37,10 @@ export const loginRequest = (email, password) => {
     }
 }
 
-export const loginSuccess = email => ({
+export const loginSuccess = (email, userType) => ({
     type: actionTypes.loginSuccess,
-    email
+    email,
+    userType
 });
 
 export const loginFailure = error => ({ 

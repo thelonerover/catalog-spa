@@ -68,7 +68,7 @@ export default function() {
           let cookieExpiration = new Date(now.getTime() + 24 * 3600 * 1000);
           document.cookie = `session=${sid}; domain=localhost; path=/; expires=${cookieExpiration.toUTCString()};`
 
-          return new Response(201, {email: user.email});
+          return new Response(201, {}, {email: user.attrs.email, type: user.attrs.type});
         }
 
         return new Response(
