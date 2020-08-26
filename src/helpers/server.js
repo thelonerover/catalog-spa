@@ -11,30 +11,16 @@ export default function() {
 
     factories: {
       product: Factory.extend({
-        name(i) {
-          return `Product ${i}`;
-        },
-        description(i) {
-          return `A product number ${i}`;
-        },
-        price(i) {
-          return `${i}00`;
-        }
+        name(i) { return `Product ${i}`; },
+        description(i) { return `A product number ${i}`; },
+        price(i) { return `${i}00`; }
       }),
 
       user: Factory.extend({
-        name(i) {
-          return `Name ${i}`;
-        },
-        surname(i) {
-          return `Surname ${i}`;
-        },
-        email(i) {
-          return `email${i}@gmail.com`
-        },
-        password(i) { 
-          return `password${i}`
-        },
+        name(i) { return `Name ${i}`; },
+        surname(i) { return `Surname ${i}`;},
+        email(i) { return `email${i}@gmail.com`},
+        password(i) { return `password${i}`},
         type: "C"
       })
     },
@@ -75,8 +61,8 @@ export default function() {
           );
         }
 
-        if(user.email === attrs.email && user.password === attrs.password) {
-          session[sid] = user;
+        if(user.attrs.email === attrs.email && user.attrs.password === attrs.password) {
+          session[sid] = {...user.attrs};
 
           let now = new Date();
           let cookieExpiration = new Date(now.getTime() + 24 * 3600 * 1000);
@@ -100,7 +86,14 @@ export default function() {
       this.get("/products/:id");
       this.post("/products", (schema, reguest) => {
         let attrs = JSON.parse(reguest.requestBody);
-        return schema.products.create(attrs);
+        const clientSid = +document.cookie.split("=")[1];
+        
+        //super temporary 
+        if(session[clientSid].type === "A") {
+          return schema.products.create(attrs);
+        } else {
+          return new Response(403, {}, { error: "Forbidden!" });
+        }
       });
       this.patch("/products/:id");
       this.del("/products/:id");
@@ -115,8 +108,8 @@ export default function() {
 
     seeds(server) {
       server.create("user", {
-        email: "admin@mail.com",
-        password: "123123",
+        email: "admin@example.com",
+        password: "123",
         type: "A"
       });
 
