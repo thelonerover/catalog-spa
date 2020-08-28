@@ -6,6 +6,7 @@ import Catalog from "../../components/Catalog";
 export default function CatalogPage() {
     return (
         <Container>
+            <h1>Catalog</h1>
             <Catalog />
         </Container>
     );

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Form, Message } from "semantic-ui-react";
 import { login, logout, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
-import userStatuses from "../../store/constants/userStatuses";
+import userStatuses from "../../constants/userStatuses";
 
 export default function LoginForm() {
-    const [credentials, setCredentials] = useState({ email: "", password: "" });
+    const [credentials, setCredentials] = useState({ email: "admin@example.com", password: "123" });
     const initialFormErrors = {email: false, password: false};
     const [formErrors, setFormErrors] = useState({...initialFormErrors});
     const user = useSelector(state => state.user);
@@ -87,6 +87,7 @@ export default function LoginForm() {
                     label="E-mail"
                     placeholder="E-mail"
                     onChange={handleChangeCredentials("email")}
+                    label={{ icon: "asterisk" }}
                     value={credentials.email}
                     error={formErrors.email}
                 />
@@ -96,6 +97,7 @@ export default function LoginForm() {
                     label="Password"
                     placeholder="Password"
                     onChange={handleChangeCredentials("password")}
+                    label={{ icon: "asterisk" }}
                     value={credentials.password}
                     error={formErrors.password}
                 />
@@ -103,6 +105,7 @@ export default function LoginForm() {
             </Form>
             {formState.error && 
             <Message
+                compact
                 {...formState}
                 header={user.error}
             />}

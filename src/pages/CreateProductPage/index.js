@@ -6,6 +6,9 @@ export default function LoginPage() {
     const user = useSelector(state => state.user);
 
     return (
-        <CreateProductForm />
+        <div>
+            <h1>Create product</h1>
+            <CreateProductForm />
+        </div>
     );
 }

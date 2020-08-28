@@ -2,7 +2,7 @@ import React, { useState, useEffect }  from "react";
 import { Input, Form, Message } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { registration, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
-import userStatuses from "../../store/constants/userStatuses";
+import userStatuses from "../../constants/userStatuses";
 
 export default function RegistrationForm() {
     const [credentials, setCredentials] = useState({ email: "", password: "", passwordConfirmation: "" });

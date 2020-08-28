@@ -1,16 +1,37 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Input, Form } from "semantic-ui-react";
+import { Input, Form, TextArea } from "semantic-ui-react";
 import { addProduct } from "../../store/actions/productsActions";
 
 export default function CreateProductForm() {
     const [formState, setFormState] = useState({});
+    // const initialFormErrors = {name: false};
     const [productProperties, setProductProperties] = useState({ 
         name: "",
         description: "",
         price: 0
      });
     const dispatch = useDispatch();
+
+    // useEffect(() => () => {
+    //     resetErrors();
+    // }, []);
+
+    // useEffect(() => {
+    //     switch(user.currentStatus) {
+    //         case productStatuses.getRequest:
+    //             setFormState({loading: true});
+    //             break;
+    //         case productStatuses.getSuccess:
+    //             setFormState({success: true});
+    //             break;
+    //         case productStatuses.getFailure:
+    //             setFormState({error: true});
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }, [user.currentStatus]);
 
     const handleChangeProductProperties = fieldName => e => {
         e.preventDefault();
@@ -35,8 +56,7 @@ export default function CreateProductForm() {
                     value={productProperties.name}
                 />
                 <Form.Field
-                    type="text"
-                    control={Input}
+                    control={TextArea}
                     name="description"
                     label="Description"
                     placeholder="Description"

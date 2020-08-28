@@ -1,4 +1,4 @@
-import actionTypes from "../constants/userActionTypes";
+import actionTypes from "../actionTypes/userActionTypes";
 
 export const login = credentials => {
     return async function(dispatch) {

@@ -1,5 +1,5 @@
-import actionTypes from "../constants/userActionTypes";
-import userStatuses from "../constants/userStatuses";
+import actionTypes from "../actionTypes/userActionTypes";
+import userStatuses from "../../constants/userStatuses";
 
 const initialState = {
     isLoggedIn: false,

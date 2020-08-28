@@ -1,4 +1,4 @@
-import actionTypes from "../constants/productActionTypes";
+import actionTypes from "../actionTypes/productActionTypes";
 
 export const getProductsRequest = page => {
     return async function(dispatch) {

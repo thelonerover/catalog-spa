@@ -20,7 +20,7 @@ export default function Catalog() {
     
     return (
         <Container> 
-            <Grid columns={4} relaxed>
+            <Grid columns={4} relaxed padded="vertically">
                 {products.items.map(product => (
                     <Grid.Column key={product.id}>
                         <Card>
