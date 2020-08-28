@@ -27,6 +27,9 @@ export default function(state = initialState, action) {
                 items: action.items
             };
 
+        case actionTypes.resetProducts: 
+            return initialState;
+
         default: 
             return state;
     }

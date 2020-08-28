@@ -88,3 +88,5 @@ export const addProduct = product => {
 export const addProductSuccess = () => ({type: actionTypes.addProductSuccess});
 
 export const addProductFailure = () => ({type: actionTypes.addProductFailure});
+
+export const resetProducts = () => ({type: actionTypes.resetProducts});

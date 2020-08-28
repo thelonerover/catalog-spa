@@ -9,4 +9,5 @@ export default {
     addProduct: "ADD_PRODUCT",
     addProductSuccess: "CREATE_PRODUCT_SUCCESS",
     addProductFailure: "CREATE_PRODUCT_FAILURE",
+    resetProducts: "RESET_PRODUCTS",
 }

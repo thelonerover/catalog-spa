@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Grid, Card, Pagination } from "semantic-ui-react";
-import { getProductsRequest, getProductPagesNumber, setProductsPage } from "../../store/actions/productsActions";
+import { Container, Grid, Pagination } from "semantic-ui-react";
+import { getProductsRequest, getProductPagesNumber, setProductsPage, resetProducts } from "../../store/actions/productsActions";
+import ProductCard from "../ProductCard";
 
-export default function Catalog() {
+export default() => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
 
-    useEffect(() => { 
-        dispatch(getProductsRequest(products.page));
+    useEffect(() => {
+        dispatch(getProductsRequest(1));
         dispatch(getProductPagesNumber(12));
+        return () => dispatch(resetProducts());
     }, []);
 
 
@@ -17,24 +19,17 @@ export default function Catalog() {
         dispatch(getProductsRequest(activePage));
         dispatch(setProductsPage(activePage));
     };
-    
+
     return (
         <Container> 
             <Grid columns={4} relaxed padded="vertically">
                 {products.items.map(product => (
                     <Grid.Column key={product.id}>
-                        <Card>
-                            <Card.Content>
-                                <Card.Header>{product.name}</Card.Header>
-                                <Card.Description>{product.description}</Card.Description>
-                                <span>{product.price}</span>
-                            </Card.Content>
-                        </Card>
+                        <ProductCard {...product} />
                     </Grid.Column>
                 ))}
             </Grid>
-           
-            <Pagination defaultActivePage={products.page} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
+            <Pagination defaultActivePage={1} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
         </Container>
     );
 }
