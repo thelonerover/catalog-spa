@@ -1,16 +1,26 @@
 import React from "react";
-import Main from "../Main";
 import { Provider } from 'react-redux';
 import store from "../../store";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AdminPanel from "../../pages/AdminPanel";
+import Main from "../Main";
+import NoMatch from "../../pages/NoMatchPage";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App">
-          <Main />
-        </div>
+        <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            <Route path="/admin-panel">
+                <AdminPanel />
+            </Route>
+            <Route>
+                <NoMatch />
+            </Route>
+        </Switch>
       </Router>
     </Provider>
   );
