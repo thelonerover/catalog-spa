@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductsRequest, getProductPagesNumber, setProductsPage, resetProducts } from "../../store/actions/productsActions";
 import ProductItem from "../ProductItem";
  
-export default function ManageProducts() {
+export default () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
 
     useEffect(() => { 
         dispatch(getProductsRequest(1));
-        dispatch(getProductPagesNumber(10));
+        dispatch(getProductPagesNumber(12));
         return () => dispatch(resetProducts());
     }, []);
 
@@ -21,13 +21,17 @@ export default function ManageProducts() {
     };
 
     return (
-        <div>
-            <Item.Group divided>
-                {products.items.map(product => (
-                    <ProductItem {...product} />
-                ))}
-            </Item.Group>
+        <Grid columns={1} relaxed padded="vertically">
+            <Grid.Row>
+                <Grid.Column>
+                    <Item.Group divided>
+                        {products.items.map(product => (
+                            <ProductItem key={product.id} {...product} />
+                        ))}
+                    </Item.Group>
+                </Grid.Column>
+            </Grid.Row>
             <Pagination defaultActivePage={1} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
-        </div>
+        </Grid>
     );
 }

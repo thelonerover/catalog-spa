@@ -10,4 +10,5 @@ export default {
     addProductSuccess: "CREATE_PRODUCT_SUCCESS",
     addProductFailure: "CREATE_PRODUCT_FAILURE",
     resetProducts: "RESET_PRODUCTS",
+    deleteProduct: "DELETE_PRODUCT",
 }

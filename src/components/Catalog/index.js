@@ -4,7 +4,7 @@ import { Container, Grid, Pagination } from "semantic-ui-react";
 import { getProductsRequest, getProductPagesNumber, setProductsPage, resetProducts } from "../../store/actions/productsActions";
 import ProductCard from "../ProductCard";
 
-export default() => {
+export default () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
 

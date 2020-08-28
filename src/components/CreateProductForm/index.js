@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Input, Form, TextArea } from "semantic-ui-react";
 import { addProduct } from "../../store/actions/productsActions";
 
-export default function CreateProductForm() {
+export default () => {
     const [formState, setFormState] = useState({});
     // const initialFormErrors = {name: false};
     const [productProperties, setProductProperties] = useState({ 

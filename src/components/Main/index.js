@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import MainMenu from "../MainMenu";
 import CatalogPage from "../../pages/CatalogPage";
 
-export default function Main() {
+export default () => {
     return (
         <Container>
             <MainMenu />

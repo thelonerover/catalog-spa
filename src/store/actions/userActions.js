@@ -1,41 +1,39 @@
 import actionTypes from "../actionTypes/userActionTypes";
 
-export const login = credentials => {
-    return async function(dispatch) {
-        dispatch(loginRequest(credentials));
+export const login = credentials => async (dispatch) => {
+    dispatch(loginRequest(credentials));
 
-        const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                email: credentials.email,
-                password: credentials.password
-            })
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            email: credentials.email,
+            password: credentials.password
+        })
+    }
+
+    let response;
+    try {
+        response = await fetch("http://localhost:3000/login", requestOptions);
+        let body = await response.json();
+
+        if (response.ok) {
+            dispatch(loginSuccess(body.email, body.type));
+        } else {
+            dispatch(loginFailure(body.error));
         }
-
-        let response;
-        try {
-            response = await fetch("http://localhost:3000/login", requestOptions);
-            let body = await response.json();
-
-            if (response.ok) {
-                dispatch(loginSuccess(body.email, body.type));
-            } else {
-                dispatch(loginFailure(body.error));
-            }
-        } catch(error) {
-            console.error(error);
-        }
+    } catch(error) {
+        console.error(error);
     }
 }
 
-export const loginRequest = (email, password) => {
-    return {
+
+export const loginRequest = (email, password) => ({
         type: actionTypes.loginRequest,
         email,
         password
-    }
-}
+});
+
 
 export const loginSuccess = (email, userType) => ({
     type: actionTypes.loginSuccess,
@@ -48,43 +46,41 @@ export const loginFailure = error => ({
     error
 });
 
-export const registration = credentials => {
-    return async function(dispatch) {
-        dispatch(registrationRequest(credentials));
+export const registration = credentials => async (dispatch) => {
+    dispatch(registrationRequest(credentials));
 
-        const requestOptions = {
-            method: "POST",
-            headers: {  "Content-Type": "application/json" },
-            body: JSON.stringify({
-                email: credentials.email,
-                password: credentials.password,
-                type: "C"
-            }),
+    const requestOptions = {
+        method: "POST",
+        headers: {  "Content-Type": "application/json" },
+        body: JSON.stringify({
+            email: credentials.email,
+            password: credentials.password,
+            type: "C"
+        }),
+    }
+
+    let response;
+    try {
+        response = await fetch("http://localhost:3000/users", requestOptions);
+        let body = await response.json();
+
+        if (body.errorCode === 1) {
+            dispatch(registrationFailure(body.error));
+        } else {
+            dispatch(registrationSuccess());
         }
-
-        let response;
-        try {
-            response = await fetch("http://localhost:3000/users", requestOptions);
-            let body = await response.json();
-
-            if (body.errorCode === 1) {
-                dispatch(registrationFailure(body.error));
-            } else {
-                dispatch(registrationSuccess());
-            }
-        } catch (error) {
-            console.log(error);
-        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
-export const registrationRequest = credentials => {
-    return {
+
+export const registrationRequest = credentials => ({
         type: actionTypes.registrationRequest,
         email: credentials.email,
         password: credentials.password
-    }
-}
+});
+
 
 export const registrationSuccess = () => ({ type: actionTypes.registrationSuccess });
 

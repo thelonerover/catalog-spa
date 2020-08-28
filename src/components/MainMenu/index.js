@@ -5,7 +5,7 @@ import {  Menu } from "semantic-ui-react";
 import LoginModal from "../LoginModal";
 import RegistrationModal from "../RegistrationModal";
 
-export default function MainMenu() {
+export default () => {
     const user = useSelector(state => state.user);
 
     return (

@@ -1,7 +1,12 @@
 import React from "react";
+import { Container } from "semantic-ui-react";
+import MainMenu from "../../components/MainMenu";
 
 export default function NoMatch() {
     return (
-        <p>404</p>
+        <Container>
+            <MainMenu />
+            <p>404</p>
+        </Container>
     );
 }

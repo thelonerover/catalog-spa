@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Grid } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import ManageProducts from "../../components/ManageProducts";
+import ProductManaging from "../../components/ProductManaging";
 import MainMenu from "../../components/MainMenu";
 import NoMatch from "../../pages/NoMatchPage";
 import AdminSidebar from "../../components/AdminSIdebar";
@@ -16,7 +16,7 @@ export default function AdminPanel() {
             <div>
                 <MainMenu />
                 <Grid divided='vertically'>
-                    <Grid.Row columns={12}>
+                    <Grid.Row columns={3}>
                         <Grid.Column width={3}>
                             <AdminSidebar />
                         </Grid.Column>
@@ -24,7 +24,7 @@ export default function AdminPanel() {
                         <Grid.Column width={8}>
                         <Switch>
                             <Route path="/admin-panel">
-                                <ManageProducts />
+                                <ProductManaging />
                             </Route>
                         </Switch> 
                         </Grid.Column>
