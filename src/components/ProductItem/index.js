@@ -1,5 +1,5 @@
 import React from "react";
-import { Item, Button } from "semantic-ui-react";
+import { Item, Button, Modal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsRequest, getProductPagesNumber, deleteProduct } from "../../store/actions/productsActions";
 import ProductEditingModal from "../ProductEditingModal";
@@ -33,3 +33,24 @@ export default ({ product }) => {
     </Item>
   );
 }
+
+{/* <Modal
+          onClose={() => setOpen(false)}
+          onOpen={() => setOpen(true)}
+          open={open}
+          trigger={<Button>Show Modal</Button>}
+        >
+          <Modal.Header>Are you sure?</Modal.Header>
+          <Modal.Actions>
+            <Button color='black' onClick={() => setOpen(false)}>
+              Nope
+            </Button>
+            <Button
+              content="Yep, that's me"
+              labelPosition='right'
+              icon='checkmark'
+              onClick={() => setOpen(false)}
+              positive
+            />
+          </Modal.Actions>
+        </Modal> */}
