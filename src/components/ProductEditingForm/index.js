@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Form, TextArea } from "semantic-ui-react";
+import { Input, Form, TextArea, Message } from "semantic-ui-react";
 import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest, getProductPagesNumber } from "../../store/actions/productsActions";
 import productStatuses from "../../constants/productStatuses";
 
@@ -39,9 +39,22 @@ export default ({ product }) => {
 
     const handleUpdate = e => {
         e.preventDefault();
-        dispatch(updateProduct(productProperties));
-        dispatch(getProductsRequest(products.page));
-        dispatch(getProductPagesNumber(12));
+        dispatch(setErrorMessage(""));
+        setFormState({});
+
+        let errors = {...initialFormErrors};
+        if(!productProperties.name) {
+            errors.name = { content: "Please enter a valid name!", pointing: "below" };
+        }
+        setFormErrors(errors);
+
+        if(productProperties.name) {
+            resetErrors();
+            dispatch(updateProduct(productProperties));
+            dispatch(getProductsRequest(products.page));
+            dispatch(getProductPagesNumber(12));
+        }
+
       }
 
     const resetErrors = () => {
@@ -62,6 +75,7 @@ export default ({ product }) => {
                 placeholder="Name"
                 onChange={handleChangeProductProperties("name")}
                 value={productProperties.name}
+                error={formErrors.name}
             />
             <Form.Field
                 control={TextArea}
@@ -80,7 +94,13 @@ export default ({ product }) => {
                 onChange={handleChangeProductProperties("price")}
                 value={productProperties.price}
             />
-            <Input type="submit" name="submit" onClick={handleUpdate} value="Add product" />
+            <Input type="submit" name="submit" onClick={handleUpdate} value="Save changes" />
+            {formState.error && 
+            <Message
+                compact
+                {...formState}
+                header={products.error}
+            />}
         </Form>
     );
 }
