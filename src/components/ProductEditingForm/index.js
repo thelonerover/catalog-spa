@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Form, TextArea, Message } from "semantic-ui-react";
-import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest, getProductPagesNumber } from "../../store/actions/productsActions";
+import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest } from "../../store/actions/productsActions";
 import productStatuses from "../../constants/productStatuses";
 
 export default ({ product }) => {
@@ -32,6 +32,13 @@ export default ({ product }) => {
         }
     }, [product.currentStatus]);
 
+    const resetErrors = () => {
+        setFormState({});
+        setFormErrors({...initialFormErrors});
+        dispatch(setErrorMessage(""));
+        dispatch(setCurrentStatus(""));
+    }
+
     const handleChangeProductProperties = fieldName => e => {
         e.preventDefault();
         setProductProperties({...productProperties, [fieldName]: e.target.value});
@@ -52,18 +59,8 @@ export default ({ product }) => {
             resetErrors();
             dispatch(updateProduct(productProperties));
             dispatch(getProductsRequest(products.page));
-            dispatch(getProductPagesNumber(12));
         }
-
       }
-
-    const resetErrors = () => {
-        setFormState({});
-        setFormErrors({...initialFormErrors});
-        dispatch(setErrorMessage(""));
-        dispatch(setCurrentStatus(""));
-    }
-    
     
     return (
         <Form method="post" action="/products" {...formState}>

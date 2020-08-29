@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from "react";
-import { Input, Form, Message } from "semantic-ui-react";
+import { Input, Form, Message, Button } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { registration, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
 import userStatuses from "../../constants/userStatuses";
@@ -71,7 +71,7 @@ export default function RegistrationForm() {
         dispatch(setCurrentStatus(""));
     }
 
-    return (
+    return (user.currentStatus !== userStatuses.registrationSuccess ?
         <Form method="post" {...formState} action="/users" onSubmit={e => {e.preventDefault()}}>
             <Form.Field
                 type="email"
@@ -100,17 +100,16 @@ export default function RegistrationForm() {
                 value={credentials.passwordConfirmation}
                 error={formErrors.passwordConfirmation}
             />
-            <Input type="submit" name="submit" onClick={handleSubmit} value="Register" />
+            <Button type="submit" name="submit" onClick={handleSubmit}>Register</Button>
             {formState.error && 
             <Message
                 {...formState}
                 header={user.error}
             />}
-            {formState.success  && 
-            <Message
-                {...formState}
-                header={user.currentStatus}
-            />}
-        </Form>
+        </Form> :
+        <Message
+            {...formState}
+            header={user.currentStatus}
+        />
     );
 }

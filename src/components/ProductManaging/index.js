@@ -10,7 +10,7 @@ export default () => {
 
     useEffect(() => { 
         dispatch(getProductsRequest(1));
-        dispatch(getProductPagesNumber(12));
+        dispatch(getProductPagesNumber(8));
         return () => dispatch(resetProducts());
     }, []);
 

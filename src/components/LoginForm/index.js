@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Form, Message } from "semantic-ui-react";
-import { login, logout, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
+import { Input, Form, Message, Button } from "semantic-ui-react";
+import { login, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
 import userStatuses from "../../constants/userStatuses";
 
 export default () => {
@@ -55,11 +55,6 @@ export default () => {
             dispatch(login(credentials));
         }
     }
-    
-    const handleLogout = e => {
-        e.preventDefault();
-        dispatch(logout());
-    }
 
     const resetErrors = () => {
         setFormState({});
@@ -69,16 +64,6 @@ export default () => {
     }
     
     return (
-        user.isLoggedIn ?
-        <div>
-            <Form action="logout" {...formState} onSubmit={e => {e.preventDefault()}}>
-                {user.isLoggedIn  && 
-                <Message
-                    header={`Logged in as ${user.email}`}
-                />}
-                <Input type="submit" onClick={handleLogout} value="Log out" />
-            </Form>
-        </div> : 
         <div>
             <Form method="post" action="/login" {...formState} onSubmit={e => {e.preventDefault()}}> 
                 <Form.Field
@@ -101,7 +86,7 @@ export default () => {
                     value={credentials.password}
                     error={formErrors.password}
                 />
-                <Input type="submit" name="submit" onClick={handleLogin} value="Log In" />
+                <Button type="submit" name="submit" onClick={handleLogin}>Log In</Button>
             </Form>
             {formState.error && 
             <Message

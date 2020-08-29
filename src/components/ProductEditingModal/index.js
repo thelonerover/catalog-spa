@@ -3,7 +3,7 @@ import { Modal, Button } from "semantic-ui-react";
 import ProductEditingForm from "../ProductEditingForm";
 
 export default ({ product }) => {
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = React.useState(false);
 
     return (
         <Modal

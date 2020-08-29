@@ -12,7 +12,7 @@ export default ({ product }) => {
   const handleDelete = id => e => {
     dispatch(deleteProduct(id));
     dispatch(getProductsRequest(products.page));
-    dispatch(getProductPagesNumber(12));
+    dispatch(getProductPagesNumber(8));
   }
 
   return (
