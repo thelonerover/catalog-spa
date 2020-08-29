@@ -13,7 +13,7 @@ export const getProductsRequest = page => async dispatch => {
             dispatch(getProductSuccess());
             dispatch(setProductsList(body.products));
         } else {
-            getProductFailure();
+            dispatch(getProductFailure());
         }
     } catch (error) {
         console.error(error)
@@ -24,6 +24,35 @@ export const getProductsRequest = page => async dispatch => {
 export const getProductSuccess = () => ({type: actionTypes.getProductSuccess});
 
 export const getProductFailure = () => ({type: actionTypes.getProductFailure});
+
+export const updateProduct = productData => async dispatch => {
+    const url = `http://localhost:3000/products/${productData.id}`;
+    dispatch({ type: actionTypes.updateProductRequest });
+
+    const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({...productData})
+    }
+
+    let response;
+    try {
+        response = await fetch(url, requestOptions);
+        
+        if (response.ok) {
+            dispatch(udpateProductSuccess());
+        } else {
+            dispatch(udpateProductFailure());
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+export const udpateProductSuccess = () => ({type: actionTypes.updateProductSuccess});
+
+export const udpateProductFailure = () => ({type: actionTypes.updateProductFailure});
 
 export const getProductPagesNumber = offset => async (dispatch) => {
     dispatch({ type: actionTypes.getProductPagesNumber });
@@ -95,3 +124,13 @@ export const deleteProduct = id => async dispatch => {
         console.log(error);
     }
 };
+
+export const setErrorMessage = error => ({
+    type: actionTypes.setErrorMessage,
+    error
+});
+
+export const setCurrentStatus = status => ({
+    type: actionTypes.setCurrentStatus,
+    status
+});

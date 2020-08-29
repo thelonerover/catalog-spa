@@ -10,12 +10,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case actionTypes.setErrorMessage:
-            return {
-                ...state,
-                error: action.error
-            };
-
         case actionTypes.loginRequest:
             return {
                 ...state,
@@ -59,6 +53,12 @@ export default function(state = initialState, action) {
                 ...state,
                 currentStatus: userStatuses.registrationFailure,
                 error: action.error 
+            };
+
+        case actionTypes.setErrorMessage:
+            return {
+                ...state,
+                error: action.error
             };
 
         case actionTypes.setCurrentStatus:

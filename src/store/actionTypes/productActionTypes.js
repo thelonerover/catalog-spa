@@ -2,6 +2,9 @@ export default {
     getProductsRequest: "GET_PRODUCTS_REQUEST",
     getProductSuccess: "GET_PRODUCTS_SUCCESS",
     getProductFailure: "GET_PRODUCTS_FAILURE",
+    updateProductRequest: "UPDATE_PRODUCT_REQUEST",
+    updateProductSuccess: "UPDATE_PRODUCT_SUCCESS",
+    updateProductFailure: "UPDATE_PRODUCT_FAILURE",
     getProductPagesNumber: "GET_PRODUCT_PAGES_NUMBER",
     setProductPagesNumber: "SET_PRODUCT_PAGES_NUMBER",
     setProductsList: "SET_PRODUCTS_LIST",
@@ -11,4 +14,6 @@ export default {
     addProductFailure: "CREATE_PRODUCT_FAILURE",
     resetProducts: "RESET_PRODUCTS",
     deleteProduct: "DELETE_PRODUCT",
+    setCurrentStatus: "SET_CURRENT_STATUS",
+    setErrorMessage: "SET_ERROR_MESSAGE",
 }

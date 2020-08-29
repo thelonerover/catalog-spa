@@ -1,10 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Modal, Button } from "semantic-ui-react";
 import RegistrationForm from "../RegistrationForm";
 
-export default function RegistrationModal() {
-    const user = useSelector(state => state.user);
+export default () => {
     const [open, setOpen] = React.useState(false)
 
     return (

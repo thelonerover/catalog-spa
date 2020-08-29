@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Form, Message } from "semantic-ui-react";
-import { login, logout, setErrorMessage, setCurrentStatus } from "../../store/actions/userActions";
-import userStatuses from "../../constants/userStatuses";
+import { Input, Form, TextArea } from "semantic-ui-react";
+import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest, getProductPagesNumber } from "../../store/actions/productsActions";
+import productStatuses from "../../constants/productStatuses";
 
-export default () => {
-    const [credentials, setCredentials] = useState({ email: "admin@example.com", password: "123" });
-    const initialFormErrors = {email: false, password: false};
-    const [formErrors, setFormErrors] = useState({...initialFormErrors});
-    const user = useSelector(state => state.user);
+export default ({ product }) => {
     const [formState, setFormState] = useState({});
+    const [productProperties, setProductProperties] = useState({id: product.id,  name: product.name, description: product.description, price: product.price });
+    const initialFormErrors = {name: false};
+    const [formErrors, setFormErrors] = useState({...initialFormErrors});
+    const products = useSelector(state => state.products);
     const dispatch = useDispatch();
 
     useEffect(() => () => {
@@ -17,49 +17,32 @@ export default () => {
     }, []);
 
     useEffect(() => {
-        switch(user.currentStatus) {
-            case userStatuses.loginRequest:
+        switch(products.currentStatus) {
+            case productStatuses.updateRequest:
                 setFormState({loading: true});
                 break;
-            case userStatuses.loginSuccess:
+            case productStatuses.updateSuccess:
                 setFormState({success: true});
                 break;
-            case userStatuses.loginFailure:
+            case productStatuses.updateFailure:
                 setFormState({error: true});
                 break;
             default:
                 break;
         }
-    }, [user.currentStatus]);
+    }, [product.currentStatus]);
 
-    const handleChangeCredentials = fieldName => e => {
+    const handleChangeProductProperties = fieldName => e => {
         e.preventDefault();
-        setCredentials({...credentials, [fieldName]: e.target.value});
+        setProductProperties({...productProperties, [fieldName]: e.target.value});
     }
 
-    const handleLogin = e => {
+    const handleUpdate = e => {
         e.preventDefault();
-        dispatch(setErrorMessage(""));
-        setFormState({});
-
-        let errors = {...initialFormErrors};
-        if(!credentials.email) {
-            errors.email = { content: "Please enter a valid email address!", pointing: "below" };
-        }
-        if(!credentials.password) {
-            errors.password = { content: "Please enter a valid password!", pointing: "below" };
-        }
-        setFormErrors(errors);
-        if(credentials.email && credentials.password) {
-            resetErrors();
-            dispatch(login(credentials));
-        }
-    }
-    
-    const handleLogout = e => {
-        e.preventDefault();
-        dispatch(logout());
-    }
+        dispatch(updateProduct(productProperties));
+        dispatch(getProductsRequest(products.page));
+        dispatch(getProductPagesNumber(12));
+      }
 
     const resetErrors = () => {
         setFormState({});
@@ -68,47 +51,36 @@ export default () => {
         dispatch(setCurrentStatus(""));
     }
     
+    
     return (
-        user.isLoggedIn ?
-        <div>
-            <Form action="logout" {...formState} onSubmit={e => {e.preventDefault()}}>
-                {user.isLoggedIn  && 
-                <Message
-                    header={`Logged in as ${user.email}`}
-                />}
-                <Input type="submit" onClick={handleLogout} value="Log out" />
-            </Form>
-        </div> : 
-        <div>
-            <Form method="post" action="/login" {...formState} onSubmit={e => {e.preventDefault()}}> 
-                <Form.Field
-                    type="email"
-                    control={Input}
-                    label="E-mail"
-                    placeholder="E-mail"
-                    onChange={handleChangeCredentials("email")}
-                    label={{ icon: "asterisk" }}
-                    value={credentials.email}
-                    error={formErrors.email}
-                />
-                <Form.Field
-                    type="password"
-                    control={Input}
-                    label="Password"
-                    placeholder="Password"
-                    onChange={handleChangeCredentials("password")}
-                    label={{ icon: "asterisk" }}
-                    value={credentials.password}
-                    error={formErrors.password}
-                />
-                <Input type="submit" name="submit" onClick={handleLogin} value="Log In" />
-            </Form>
-            {formState.error && 
-            <Message
-                compact
-                {...formState}
-                header={user.error}
-            />}
-        </div>
+        <Form method="post" action="/products" {...formState}>
+            <Form.Field
+                type="text"
+                control={Input}
+                name="name"
+                label="Name"
+                placeholder="Name"
+                onChange={handleChangeProductProperties("name")}
+                value={productProperties.name}
+            />
+            <Form.Field
+                control={TextArea}
+                name="description"
+                label="Description"
+                placeholder="Description"
+                onChange={handleChangeProductProperties("description")}
+                value={productProperties.description}
+            />
+            <Form.Field
+                type="number"
+                control={Input}
+                name="price"
+                label="Price"
+                placeholder="Price"
+                onChange={handleChangeProductProperties("price")}
+                value={productProperties.price}
+            />
+            <Input type="submit" name="submit" onClick={handleUpdate} value="Add product" />
+        </Form>
     );
 }

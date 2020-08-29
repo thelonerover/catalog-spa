@@ -64,10 +64,10 @@ export const registration = credentials => async (dispatch) => {
         response = await fetch("http://localhost:3000/users", requestOptions);
         let body = await response.json();
 
-        if (body.errorCode === 1) {
-            dispatch(registrationFailure(body.error));
-        } else {
+        if (response.ok) {
             dispatch(registrationSuccess());
+        } else {
+            dispatch(registrationFailure(body.error));
         }
     } catch (error) {
         console.log(error);

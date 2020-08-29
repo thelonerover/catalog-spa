@@ -1,10 +1,12 @@
 import actionTypes from "../actionTypes/productActionTypes";
+import productStatuses from "../../constants/productStatuses";
 
 const initialState = {
     items: [],
     pagesNumber: 1,
     page: 1,
-    currentStatus: ""
+    currentStatus: "",
+    error: ""
 };
 
 export default function(state = initialState, action) {
@@ -30,6 +32,40 @@ export default function(state = initialState, action) {
         case actionTypes.resetProducts: 
             return initialState;
 
+        case actionTypes.updateProductRequest:
+            return {
+                ...state,
+                page: action.page,
+                currentStatus: productStatuses.updateProductRequest,
+            };
+
+        case actionTypes.updateProductSuccess:
+            return {
+                ...state,
+                page: action.page,
+                currentStatus: productStatuses.updateProductSuccess,
+            };
+
+        case actionTypes.updateProductFailure:
+            return {
+                ...state,
+                page: action.page,
+                currentStatus: productStatuses.updateProductFailure,
+            };
+
+        case actionTypes.setErrorMessage:
+            return {
+                ...state,
+                error: action.error
+            };
+
+        case actionTypes.setCurrentStatus:
+            return {
+                ...state,
+                currentStatus: productStatuses.setCurrentStatus,
+                status: action.status 
+            };
+            
         default: 
             return state;
     }

@@ -35,14 +35,7 @@ export default function() {
           return schema.users.create(attrs);
         }
 
-        return new Response(
-          409,
-          {},
-          { 
-            error: "The user already exists!",
-            errorCode: 1
-          }
-        );
+        return new Response( 409, {}, { error: "The user already exists!" } );
       });
       this.patch("/users/:id");
       this.del("/users/:id");
@@ -54,11 +47,7 @@ export default function() {
         const sid = Math.round(Math.random() * 10e6);
         
         if (!user) {
-          return new Response(401, {}, { 
-              error: "No such user!",
-              errorCode: 2
-            }
-          );
+          return new Response(401, {}, { error: "No such user!" });
         }
 
         if(user.attrs.email === attrs.email && user.attrs.password === attrs.password) {
@@ -71,14 +60,7 @@ export default function() {
           return new Response(201, {}, {email: user.attrs.email, type: user.attrs.type});
         }
 
-        return new Response(
-          401,
-          {},
-          { 
-            error: "Wrong username or password!",
-            errorCode: 3
-          }
-        );
+        return new Response( 401, {}, { error: "Wrong username or password!" } );
       });
 
 
@@ -96,6 +78,14 @@ export default function() {
         }
       });
       this.patch("/products/:id");
+
+      this.patch("/products/:id", (schema, request) => {
+        const newAttrs = JSON.parse(request.requestBody);
+        const id = request.params.id;
+        let product = schema.products.find(id);
+
+        return product.update(newAttrs);
+      });
       this.del("/products/:id");
 
       this.get("/products/page/:number", (schema, request) => {
