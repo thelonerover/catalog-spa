@@ -16,4 +16,5 @@ export default {
     deleteProduct: "DELETE_PRODUCT",
     setCurrentStatus: "SET_CURRENT_STATUS",
     setErrorMessage: "SET_ERROR_MESSAGE",
+    setProductFilters: "SET_PRODUCT_FILTERS",
 }

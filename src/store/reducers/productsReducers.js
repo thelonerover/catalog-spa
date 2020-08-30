@@ -6,7 +6,8 @@ const initialState = {
     pagesNumber: 1,
     page: 1,
     currentStatus: "",
-    error: ""
+    error: "",
+    filters: {}
 };
 
 export default function(state = initialState, action) {
@@ -64,6 +65,13 @@ export default function(state = initialState, action) {
                 ...state,
                 currentStatus: productStatuses.setCurrentStatus,
                 status: action.status 
+            };
+
+        case actionTypes.setProductFilters:
+            return {
+                ...state,
+                currentStatus: productStatuses.setProductFilters,
+                filters: {...action.filters} 
             };
             
         default: 

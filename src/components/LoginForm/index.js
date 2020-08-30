@@ -37,7 +37,7 @@ export default () => {
         setCredentials({...credentials, [fieldName]: e.target.value});
     }
 
-    const handleLogin = e => {
+    const handleSubmit = e => {
         e.preventDefault();
         dispatch(setErrorMessage(""));
         setFormState({});
@@ -86,7 +86,7 @@ export default () => {
                     value={credentials.password}
                     error={formErrors.password}
                 />
-                <Button color="blue" name="login" onClick={handleLogin}>Log In</Button>
+                <Button color="blue" name="login" onClick={handleSubmit}>Log In</Button>
             </Form>
             {formState.error && 
             <Message

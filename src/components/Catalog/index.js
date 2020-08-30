@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid, Pagination } from "semantic-ui-react";
 import { getProductsRequest, getProductPagesNumber, setProductsPage, resetProducts } from "../../store/actions/productsActions";
 import ProductCard from "../ProductCard";
-import ProductFilters from "../PoductFilters";
+import ProductFilters from "../ProductFilters";
+import SortBy from "../SortBy";
 
 export default () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
 
     useEffect(() => {
-        dispatch(getProductsRequest(1));
+        dispatch(getProductsRequest({page: 1}));
         dispatch(getProductPagesNumber(8));
         return () => dispatch(resetProducts());
     }, []);
@@ -28,6 +29,7 @@ export default () => {
                     <ProductFilters />
                 </Grid.Column>
                 <Grid.Column width={12}>
+                    <SortBy />
                     <Grid relaxed>
                         {products.items.map(product => (
                             <Grid.Column width={4} key={product.id}>

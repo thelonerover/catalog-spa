@@ -134,3 +134,8 @@ export const setCurrentStatus = status => ({
     type: actionTypes.setCurrentStatus,
     status
 });
+
+export const setProductFilters = filters => ({
+    type: actionTypes.setProductFilters,
+    filters
+});

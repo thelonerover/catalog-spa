@@ -66,6 +66,7 @@ export default function() {
 
       this.get("/products");
       // this.get("/products", (schema, request) => {
+      //   const filter
       // });
 
       this.get("/products/:id");
