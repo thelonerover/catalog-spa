@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid, Pagination } from "semantic-ui-react";
 import { getProductsRequest, getProductPagesNumber, setProductsPage, resetProducts } from "../../store/actions/productsActions";
 import ProductCard from "../ProductCard";
+import ProductFilters from "../PoductFilters";
 
 export default () => {
     const dispatch = useDispatch();
@@ -22,14 +23,25 @@ export default () => {
 
     return (
         <Container> 
-            <Grid columns={4} relaxed padded="vertically">
-                {products.items.map(product => (
-                    <Grid.Column key={product.id}>
-                        <ProductCard {...product} />
-                    </Grid.Column>
-                ))}
+            <Grid columns={2}>
+                <Grid.Column width={4}>
+                    <ProductFilters />
+                </Grid.Column>
+                <Grid.Column width={12}>
+                    <Grid relaxed>
+                        {products.items.map(product => (
+                            <Grid.Column width={4} key={product.id}>
+                                <ProductCard {...product} />
+                            </Grid.Column>
+                        ))}
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Pagination defaultActivePage={1} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Grid.Column>
             </Grid>
-            <Pagination defaultActivePage={1} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
         </Container>
     );
 }

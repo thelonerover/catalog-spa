@@ -14,7 +14,7 @@ export default ({ product }) => {
             trigger={<Button color="blue" floated="right">Edit</Button>}
             >
             <Modal.Header>Edit product</Modal.Header>
-            <Modal.Content >
+            <Modal.Content>
                 <ProductEditingForm product={product} />
             </Modal.Content>
         </Modal>

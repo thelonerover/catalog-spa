@@ -100,7 +100,7 @@ export default function RegistrationForm() {
                 value={credentials.passwordConfirmation}
                 error={formErrors.passwordConfirmation}
             />
-            <Button type="submit" name="submit" onClick={handleSubmit}>Register</Button>
+            <Button color="blue" name="register" onClick={handleSubmit}>Register</Button>
             {formState.error && 
             <Message
                 {...formState}

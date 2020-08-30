@@ -17,7 +17,7 @@ export default ({ product }) => {
 
   return (
     <Item>
-      <Item.Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+      <Item.Image size="small" src="https://react.semantic-ui.com/images/wireframe/image.png" />
       <Item.Content> 
         <Item.Header as="a">{product.name}</Item.Header>
         <Item.Meta>Description</Item.Meta>
@@ -33,24 +33,3 @@ export default ({ product }) => {
     </Item>
   );
 }
-
-{/* <Modal
-          onClose={() => setOpen(false)}
-          onOpen={() => setOpen(true)}
-          open={open}
-          trigger={<Button>Show Modal</Button>}
-        >
-          <Modal.Header>Are you sure?</Modal.Header>
-          <Modal.Actions>
-            <Button color='black' onClick={() => setOpen(false)}>
-              Nope
-            </Button>
-            <Button
-              content="Yep, that's me"
-              labelPosition='right'
-              icon='checkmark'
-              onClick={() => setOpen(false)}
-              positive
-            />
-          </Modal.Actions>
-        </Modal> */}

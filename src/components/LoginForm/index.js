@@ -86,7 +86,7 @@ export default () => {
                     value={credentials.password}
                     error={formErrors.password}
                 />
-                <Button type="submit" name="submit" onClick={handleLogin}>Log In</Button>
+                <Button color="blue" name="login" onClick={handleLogin}>Log In</Button>
             </Form>
             {formState.error && 
             <Message

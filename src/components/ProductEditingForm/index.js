@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Form, TextArea, Message } from "semantic-ui-react";
+import { Input, Form, TextArea, Message, Button } from "semantic-ui-react";
 import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest } from "../../store/actions/productsActions";
 import productStatuses from "../../constants/productStatuses";
 
@@ -91,7 +91,7 @@ export default ({ product }) => {
                 onChange={handleChangeProductProperties("price")}
                 value={productProperties.price}
             />
-            <Input type="submit" name="submit" onClick={handleUpdate} value="Save changes" />
+            <Button color="blue" name="update" onClick={handleUpdate}>Save changes</Button>
             {formState.error && 
             <Message
                 compact

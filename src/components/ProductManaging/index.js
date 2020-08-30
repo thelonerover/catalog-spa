@@ -31,7 +31,11 @@ export default () => {
                     </Item.Group>
                 </Grid.Column>
             </Grid.Row>
-            <Pagination defaultActivePage={1} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
+            <Grid.Row>
+                <Grid.Column>
+                    <Pagination defaultActivePage={1} totalPages={products.pagesNumber} onPageChange={handlePaginationChange} />
+                </Grid.Column>
+            </Grid.Row>
         </Grid>
     );
 }

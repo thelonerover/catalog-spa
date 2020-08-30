@@ -65,6 +65,9 @@ export default function() {
 
 
       this.get("/products");
+      // this.get("/products", (schema, request) => {
+      // });
+
       this.get("/products/:id");
       this.post("/products", (schema, reguest) => {
         let attrs = JSON.parse(reguest.requestBody);
