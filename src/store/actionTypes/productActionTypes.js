@@ -16,5 +16,7 @@ export default {
     deleteProduct: "DELETE_PRODUCT",
     setCurrentStatus: "SET_CURRENT_STATUS",
     setErrorMessage: "SET_ERROR_MESSAGE",
-    setProductFilters: "SET_PRODUCT_FILTERS",
+    // setProductFilters: "SET_PRODUCT_FILTERS",
+    // setProductSortType: "SET_PRODUCT_SORT_TYPE",
+    setQueryParams: "SET_QUERY_PARAMS"
 }

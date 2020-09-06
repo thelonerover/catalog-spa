@@ -5,19 +5,18 @@ export const getProductsRequest = params => async dispatch => {
     if(params.page) {
         url += `/page/${params.page}`;
     }
-    if(params.filters) {
-        let filterParams = [];
-        for(let filter in params.filters) {
-            if(params.filters[filter] !== "") {
-                filterParams.push(`${filter}=${params.filters[filter]}`);
+    if(params.queryParams) {
+        let queryParams = [];
+        for(let param in params.queryParams) {
+            if(params.queryParams[param] !== "") {
+                queryParams.push(`${param}=${params.queryParams[param]}`);
             }
         }
-        filterParams = filterParams.join("&");
-        if (filterParams.length > 0) {
-            url += `/?${filterParams}`;
+        queryParams = queryParams.join("&");
+        if (queryParams.length > 0) {
+            url += `/?${queryParams}`;
         }
     }
-    console.log(url);
     dispatch({ type: actionTypes.getProductsRequest });
 
     let response;
@@ -151,7 +150,17 @@ export const setCurrentStatus = status => ({
     status
 });
 
-export const setProductFilters = filters => ({
-    type: actionTypes.setProductFilters,
-    filters
+// export const setProductFilters = filters => ({
+//     type: actionTypes.setProductFilters,
+//     filters
+// });
+
+// export const setProductSortType = sortType => ({
+//     type: actionTypes.setProductSortType,
+//     sortType
+// });
+
+export const setQueryParams = queryParams => ({
+    type: actionTypes.setQueryParams,
+    queryParams
 });

@@ -7,7 +7,7 @@ const initialState = {
     page: 1,
     currentStatus: "",
     error: "",
-    filters: {}
+    queryParams: {}
 };
 
 export default function(state = initialState, action) {
@@ -63,15 +63,25 @@ export default function(state = initialState, action) {
         case actionTypes.setCurrentStatus:
             return {
                 ...state,
-                currentStatus: productStatuses.setCurrentStatus,
                 status: action.status 
             };
 
-        case actionTypes.setProductFilters:
+        // case actionTypes.setProductFilters:
+        //     return {
+        //         ...state,
+        //         filters: {...action.filters} 
+        //     };
+
+        // case actionTypes.setProductSortType:
+        //     return {
+        //         ...state,
+        //         sortType: action.sortType
+        //     };
+
+        case actionTypes.setQueryParams:
             return {
                 ...state,
-                currentStatus: productStatuses.setProductFilters,
-                filters: {...action.filters} 
+                queryParams: {...state.queryParams, ...action.queryParams}
             };
             
         default: 
