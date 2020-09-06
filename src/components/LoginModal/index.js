@@ -18,7 +18,7 @@ export default () => {
     return (
         user.isLoggedIn ?
         <Form mathod="POST" action="logout" onSubmit={e => {e.preventDefault()}}>
-            <Button type="submit" onClick={handleLogout}>Log out</Button>
+            <Button onClick={handleLogout}>Log out</Button>
         </Form> : 
         <Modal
             size="mini"

@@ -4,14 +4,14 @@ import { Input, Form, Button, Header } from "semantic-ui-react";
 import { setProductFilters, getProductsRequest } from "../../store/actions/productsActions";
 
 export default () => {
-    const [filters, setFilters] = useState({ name: "", priceFrom: "", priceTo: "" });
+    const [filters, setFilters] = useState({name: "", priceFrom: "", priceTo: ""});
     const [formState, setFormState] = useState({});
     const products = useSelector(state => state.products);
     const dispatch = useDispatch();
 
-    useEffect(() => () => {
-        dispatch(setProductFilters({}));
-    }, []);
+    // useEffect(() => () => {
+    //     dispatch(setProductFilters({}));
+    // }, []);
 
     const handleValueChange = fieldName => e => {
         e.preventDefault();
@@ -20,8 +20,8 @@ export default () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(setProductFilters(filters));
-        dispatch(getProductsRequest({ page: products.page, filters }));
+        // dispatch(setProductFilters(filters));
+        dispatch(getProductsRequest({page: products.page, filters: filters}));
     }
     
     return (
@@ -33,7 +33,6 @@ export default () => {
             <Form.Field
                 type="name"
                 control={Input}
-                label="Product name"
                 placeholder="Product name"
                 onChange={handleValueChange("name")}
                 value={filters.name}

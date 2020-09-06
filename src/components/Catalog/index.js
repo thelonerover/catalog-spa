@@ -18,7 +18,7 @@ export default () => {
 
 
     const handlePaginationChange = (e, { activePage }) => {
-        dispatch(getProductsRequest(activePage));
+        dispatch(getProductsRequest({page: activePage}));
         dispatch(setProductsPage(activePage));
     };
 

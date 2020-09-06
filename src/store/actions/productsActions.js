@@ -1,7 +1,23 @@
 import actionTypes from "../actionTypes/productActionTypes";
 
-export const getProductsRequest = page => async dispatch => {
-    const url = page ? `http://localhost:3000/products/page/${page}` : "http://localhost:3000/products";
+export const getProductsRequest = params => async dispatch => {
+    let url = "http://localhost:3000/products";
+    if(params.page) {
+        url += `/page/${params.page}`;
+    }
+    if(params.filters) {
+        let filterParams = [];
+        for(let filter in params.filters) {
+            if(params.filters[filter] !== "") {
+                filterParams.push(`${filter}=${params.filters[filter]}`);
+            }
+        }
+        filterParams = filterParams.join("&");
+        if (filterParams.length > 0) {
+            url += `/?${filterParams}`;
+        }
+    }
+    console.log(url);
     dispatch({ type: actionTypes.getProductsRequest });
 
     let response;
