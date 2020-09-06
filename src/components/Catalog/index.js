@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid, Pagination } from "semantic-ui-react";
-import { getProductsRequest, getProductPagesNumber, setProductsPage, resetProducts } from "../../store/actions/productsActions";
+import { getProductsRequest, setProductsPage, resetProducts } from "../../store/actions/productsActions";
 import ProductCard from "../ProductCard";
 import ProductFilters from "../ProductFilters";
 import SortBy from "../SortBy";
@@ -12,13 +12,15 @@ export default () => {
 
     useEffect(() => {
         dispatch(getProductsRequest({page: 1}));
-        dispatch(getProductPagesNumber(8));
         return () => dispatch(resetProducts());
     }, []);
 
+    useEffect(() => {
+        dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
+    }, [products.page]);
+
 
     const handlePaginationChange = (e, { activePage }) => {
-        dispatch(getProductsRequest({page: activePage}));
         dispatch(setProductsPage(activePage));
     };
 
@@ -29,7 +31,7 @@ export default () => {
                     <ProductFilters />
                 </Grid.Column>
                 <Grid.Column width={12}>
-                    <SortBy />
+                    {/* <SortBy /> */}
                     <Grid relaxed>
                         {products.items.map(product => (
                             <Grid.Column width={4} key={product.id}>

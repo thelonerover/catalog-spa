@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Grid, Pagination, Item } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsRequest, getProductPagesNumber, setProductsPage, resetProducts } from "../../store/actions/productsActions";
+import { getProductsRequest, setProductsPage, resetProducts } from "../../store/actions/productsActions";
 import ProductItem from "../ProductItem";
  
 export default () => {
@@ -10,7 +10,6 @@ export default () => {
 
     useEffect(() => { 
         dispatch(getProductsRequest(1));
-        dispatch(getProductPagesNumber(8));
         return () => dispatch(resetProducts());
     }, []);
 

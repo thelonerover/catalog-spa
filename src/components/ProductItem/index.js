@@ -1,7 +1,7 @@
 import React from "react";
 import { Item, Button, Modal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsRequest, getProductPagesNumber, deleteProduct } from "../../store/actions/productsActions";
+import { getProductsRequest, deleteProduct } from "../../store/actions/productsActions";
 import ProductEditingModal from "../ProductEditingModal";
 
 
@@ -12,7 +12,6 @@ export default ({ product }) => {
   const handleDelete = id => e => {
     dispatch(deleteProduct(id));
     dispatch(getProductsRequest(products.page));
-    dispatch(getProductPagesNumber(8));
   }
 
   return (

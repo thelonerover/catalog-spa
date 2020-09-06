@@ -2,6 +2,7 @@ import actionTypes from "../actionTypes/productActionTypes";
 
 export const getProductsRequest = params => async dispatch => {
     let url = "http://localhost:3000/products";
+
     if(params.page) {
         url += `/page/${params.page}`;
     }
@@ -17,15 +18,17 @@ export const getProductsRequest = params => async dispatch => {
             url += `/?${queryParams}`;
         }
     }
+
     dispatch({ type: actionTypes.getProductsRequest });
 
     let response;
     try {
         response = await fetch(url);
         let body = await response.json();
-
+        
         if (response.ok) {
             dispatch(getProductSuccess());
+            dispatch(setProductPagesNumber(body.numberOfPages));
             dispatch(setProductsList(body.products));
         } else {
             dispatch(getProductFailure());
@@ -69,21 +72,20 @@ export const udpateProductSuccess = () => ({type: actionTypes.updateProductSucce
 
 export const udpateProductFailure = () => ({type: actionTypes.updateProductFailure});
 
-export const getProductPagesNumber = offset => async (dispatch) => {
-    dispatch({ type: actionTypes.getProductPagesNumber });
+// export const getProductPagesNumber = params => async (dispatch) => {
+//     dispatch({ type: actionTypes.getProductPagesNumber });
 
-    let response;
-    try {
-        response = await fetch("http://localhost:3000/products");
-        let body = await response.json();
-        if (response.ok) {
-            dispatch(setProductPagesNumber(Math.ceil(body.products.length / offset)));
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
-
+//     let response;
+//     try {
+//         response = await fetch("http://localhost:3000/products");
+//         let body = await response.json();
+//         if (response.ok) {
+//             dispatch(setProductPagesNumber(Math.ceil(body.products.length / params.offset)));
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
 export const setProductPagesNumber = pagesNumber => ({
     type: actionTypes.setProductPagesNumber,

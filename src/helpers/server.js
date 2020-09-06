@@ -63,12 +63,6 @@ export default function() {
         return new Response( 401, {}, { error: "Wrong username or password!" } );
       });
 
-
-      this.get("/products");
-      // this.get("/products", (schema, request) => {
-      //   const filter
-      // });
-
       this.get("/products/:id");
       this.post("/products", (schema, reguest) => {
         let attrs = JSON.parse(reguest.requestBody);
@@ -92,11 +86,77 @@ export default function() {
       });
       this.del("/products/:id");
 
+      this.get("/products", (schema, request) => {
+        let offset = 8;
+        let pageNumber = request.params.number;
+        let products = schema.products.all();
+        const params = request.queryParams;
+
+        for (let param in params) {
+          switch(param) {
+            case "name":
+              const regex = new RegExp(params[param],"gi");
+              products = products.filter(product => {
+                return !!product.attrs.name.match(regex);
+              });
+              break;
+            case "priceFrom":
+              products = products.filter(product => {
+                return +product.attrs.price >= +params[param];
+              });
+              break;
+              case "priceTo":
+                products = products.filter(product => {
+                return +product.attrs.price <= +params[param];
+              });
+              break;
+            default:
+              break;
+          }
+        }
+
+        const numberOfPages = Math.ceil(products.length / offset);
+        
+        return {
+          products: products.models.slice((numberOfPages - 1) * offset, numberOfPages * offset),
+          numberOfPages
+        };
+      });
       this.get("/products/page/:number", (schema, request) => {
         let offset = 8;
         let pageNumber = request.params.number;
+        let products = schema.products.all();
+        const params = request.queryParams;
+        
+        for (let param in params) {
+          switch(param) {
+            case "name":
+              const regex = new RegExp(params[param],"gi");
+              products = products.filter(product => {
+                return !!product.attrs.name.match(regex);
+              });
+              break;
+            case "priceFrom":
+              products = products.filter(product => {
+                return +product.attrs.price >= +params[param];
+              });
+              break;
+              case "priceTo":
+                products = products.filter(product => {
+                return +product.attrs.price <= +params[param];
+              });
+              break;
+            default:
+              break;
+          }
+        }
 
-        return schema.products.all().slice((pageNumber - 1) * offset, pageNumber * offset);
+        const numberOfPages = Math.ceil(products.length / offset);
+          
+        return {
+          products: products.models.slice((pageNumber - 1) * offset, pageNumber * offset),
+          numberOfPages
+        };
       });
     },
 
