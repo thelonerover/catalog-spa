@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Form, Button, Header } from "semantic-ui-react";
-import { setQueryParams, getProductsRequest } from "../../store/actions/productsActions";
+import { setQueryParams, getProductsRequest, setProductsPage } from "../../store/actions/productsActions";
 
 export default () => {
     const [filters, setFilters] = useState({name: "", priceFrom: "", priceTo: ""});
@@ -24,7 +24,8 @@ export default () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
+        dispatch(setProductsPage(1));
+        dispatch(getProductsRequest({page: 1, queryParams: products.queryParams}));
     }
     
     return (

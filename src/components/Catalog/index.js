@@ -11,7 +11,6 @@ export default () => {
     const products = useSelector(state => state.products);
 
     useEffect(() => {
-        dispatch(getProductsRequest({page: 1}));
         return () => dispatch(resetProducts());
     }, []);
 
