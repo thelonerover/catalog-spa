@@ -36,10 +36,10 @@ export default () => {
     <Menu text>
       <Menu.Item header>Sort By</Menu.Item>
       <Menu.Item
-        name="date"
-        active={sort.type === "date"}
+        name="name"
+        active={sort.type === "name"}
         onClick={handleItemClick}
-        content={`Date${sort.type === "date" ? sort.order ? " ▼" : " ▲" : ""}`}
+        content={`Name${sort.type === "name" ? sort.order ? " ▼" : " ▲" : ""}`}
       />
       <Menu.Item
         name="price"
@@ -48,10 +48,10 @@ export default () => {
         content={`Price${sort.type === "price" ? sort.order ? " ▼" : " ▲" : ""}`}
       />
       <Menu.Item
-        name="name"
-        active={sort.type === "name"}
+        name="date"
+        active={sort.type === "date"}
         onClick={handleItemClick}
-        content={`Name${sort.type === "name" ? sort.order ? " ▼" : " ▲" : ""}`}
+        content={`Date${sort.type === "date" ? sort.order ? " ▼" : " ▲" : ""}`}
       />
     </Menu>
   )

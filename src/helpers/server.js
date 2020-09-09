@@ -3,6 +3,34 @@ import { Server, Model, Factory, Response } from "miragejs";
 export default function() {  
   let session = {};
 
+  // const productFiltering = param => {
+  //   switch(param) {
+  //     case "name":
+  //       const regex = new RegExp(params[param],"gi");
+  //       products = products.filter(product => {
+  //         return !!product.attrs.name.match(regex);
+  //       });
+  //       break;
+  //     case "priceFrom":
+  //       products = products.filter(product => {
+  //         return +product.attrs.price >= +params[param];
+  //       });
+  //       break;
+  //     case "priceTo":
+  //         products = products.filter(product => {
+  //         return +product.attrs.price <= +params[param];
+  //       });
+  //       break;
+  //     case "priceTo":
+  //         products = products.filter(product => {
+  //         return +product.attrs.price <= +params[param];
+  //       });
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
+
   return new Server({
     models: {
       products: Model,
@@ -88,7 +116,6 @@ export default function() {
 
       this.get("/products", (schema, request) => {
         let offset = 8;
-        let pageNumber = request.params.number;
         let products = schema.products.all();
         const params = request.queryParams;
 
@@ -141,13 +168,23 @@ export default function() {
                 return +product.attrs.price >= +params[param];
               });
               break;
-              case "priceTo":
+            case "priceTo":
                 products = products.filter(product => {
                 return +product.attrs.price <= +params[param];
               });
               break;
-            default:
+            case "sort":
+              switch (params.sort) {
+                case "name-increase":
+                  products = products.sort((a, b) => a.attrs.name.localeCompare(b.attrs.name));
+                  break;
+                case "name-decrease":
+                  products = products.sort((a, b) => b.attrs.name.localeCompare(a.attrs.name));
+                  break;
+                default: break;
+              }
               break;
+            default: break;
           }
         }
 

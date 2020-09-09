@@ -66,18 +66,6 @@ export default function(state = initialState, action) {
                 status: action.status 
             };
 
-        // case actionTypes.setProductFilters:
-        //     return {
-        //         ...state,
-        //         filters: {...action.filters} 
-        //     };
-
-        // case actionTypes.setProductSortType:
-        //     return {
-        //         ...state,
-        //         sortType: action.sortType
-        //     };
-
         case actionTypes.setQueryParams:
             return {
                 ...state,
