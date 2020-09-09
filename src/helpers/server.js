@@ -181,6 +181,12 @@ export default function() {
                 case "name-decrease":
                   products = products.sort((a, b) => b.attrs.name.localeCompare(a.attrs.name));
                   break;
+                case "price-increase":
+                  products = products.sort((a, b) => a.attrs.price - b.attrs.price);
+                  break;
+                case "price-decrease":
+                  products = products.sort((a, b) => b.attrs.price - a.attrs.price);
+                  break;
                 default: break;
               }
               break;
