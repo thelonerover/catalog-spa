@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Form, Button, Header } from "semantic-ui-react";
 import { setQueryParams, getProductsRequest, setProductsPage } from "../../store/actions/productsActions";
@@ -8,15 +8,16 @@ export default () => {
     const [formState, setFormState] = useState({});
     const products = useSelector(state => state.products);
     const dispatch = useDispatch();
+    const isInitialMount = useRef(true);
 
     useEffect(() => () => {
         dispatch(setQueryParams({}));
     }, []);
 
     useEffect(() => {
-        dispatch(setQueryParams(filters));
+        isInitialMount.current ? isInitialMount.current = false : dispatch(setQueryParams(filters));
     }, [filters]);
-
+    
     const handleValueChange = fieldName => e => {
         e.preventDefault();
         setFilters({...filters, [fieldName]: e.target.value});
