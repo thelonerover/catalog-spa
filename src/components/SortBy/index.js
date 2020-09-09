@@ -5,6 +5,7 @@ import { Menu } from "semantic-ui-react";
 
 export default () => {
   const [sortType, setSortType] = useState("");
+  const [sortOrder, setSortOrder] = useState(true);
   const products = useSelector(state => state.products);
   const dispatch = useDispatch();
   const isInitialMount = useRef(true);
@@ -14,12 +15,20 @@ export default () => {
   }, []);
 
   useEffect(() => {
+    isInitialMount.current ? isInitialMount.current = false : dispatch(setQueryParams({sort: `${sortType}-${sortOrder ? "decrease" : "increase"}`}));
+  }, [sortType, sortOrder]);
+
+  useEffect(() => {
     isInitialMount.current ? isInitialMount.current = false : dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
-  }, [sortType]);
+  }, [products.queryParams]);
   
   const handleItemClick = (e, { name }) => {
-    setSortType(name);
-    dispatch(setQueryParams({sort: name}));
+    if (sortType === name) {
+      setSortOrder(!sortOrder);
+    } else {
+      setSortOrder(true);
+      setSortType(name);
+    }
   };
 
   return (
@@ -29,6 +38,7 @@ export default () => {
         name="date"
         active={sortType === "date"}
         onClick={handleItemClick}
+        content={`Date${sortType === "date" ? sortOrder ? " ▼" : " ▲" : ""}`}
       />
       <Menu.Item
         name="price"

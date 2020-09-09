@@ -7,7 +7,7 @@ const initialState = {
     page: 1,
     currentStatus: "",
     error: "",
-    queryParams: {}
+    queryParams: {},
 };
 
 export default function(state = initialState, action) {

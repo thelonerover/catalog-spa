@@ -30,7 +30,7 @@ export default () => {
                     <ProductFilters />
                 </Grid.Column>
                 <Grid.Column width={12}>
-                    {/* <SortBy /> */}
+                    <SortBy />
                     <Grid relaxed>
                         {products.items.map(product => (
                             <Grid.Column width={4} key={product.id}>
