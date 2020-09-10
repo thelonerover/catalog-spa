@@ -8,14 +8,14 @@ export default () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
 
-    useEffect(() => { 
-        dispatch(getProductsRequest(1));
-        return () => dispatch(resetProducts());
-    }, []);
+    useEffect(() => () => dispatch(resetProducts()), []);
+
+    useEffect(() => {
+        dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
+    }, [products.page]);
 
 
     const handlePaginationChange = (e, { activePage }) => {
-        dispatch(getProductsRequest(activePage));
         dispatch(setProductsPage(activePage));
     };
 

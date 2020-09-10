@@ -5,7 +5,8 @@ import { Switch, Route } from "react-router-dom";
 import ProductManaging from "../../components/ProductManaging";
 import MainMenu from "../../components/MainMenu";
 import NoMatch from "../../pages/NoMatchPage";
-import AdminSidebar from "../../components/AdminSIdebar";
+import ProductFilters from "../../components/ProductFilters";
+import SortBy from "../../components/SortBy";
 
 export default function AdminPanel() {
     const user = useSelector(state => state.user);
@@ -16,14 +17,14 @@ export default function AdminPanel() {
             <div>
                 <MainMenu />
                 <Grid divided='vertically'>
-                    <Grid.Row columns={3}>
-                        <Grid.Column width={3}>
-                            <AdminSidebar />
+                    <Grid.Row columns={2}>
+                        <Grid.Column width={4}>
+                            <ProductFilters />
                         </Grid.Column>
-                        <Grid.Column width={1} />
                         <Grid.Column width={8}>
                         <Switch>
                             <Route path="/admin-panel">
+                                <SortBy />
                                 <ProductManaging />
                             </Route>
                         </Switch> 

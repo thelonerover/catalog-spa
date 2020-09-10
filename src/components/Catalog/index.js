@@ -10,9 +10,7 @@ export default () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
 
-    useEffect(() => {
-        return () => dispatch(resetProducts());
-    }, []);
+    useEffect(() => () => dispatch(resetProducts()), []);
 
     useEffect(() => {
         dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
