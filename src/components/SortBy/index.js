@@ -15,7 +15,7 @@ export default () => {
 
   useEffect(() => {
     if (!isInitialMount.current) {
-      dispatch(setQueryParams({sort: `${sort.type}-${sort.order ? "decrease" : "increase"}`}));
+      dispatch(setQueryParams({sort: `${sort.type}-${sort.order ? "descend" : "ascend"}`}));
 
     }
   }, [sort]);
@@ -51,7 +51,7 @@ export default () => {
         name="date"
         active={sort.type === "date"}
         onClick={handleItemClick}
-        content={`Date${sort.type === "date" ? sort.order ? " ▼" : " ▲" : ""}`}
+        content={`Creation date${sort.type === "date" ? sort.order ? " ▼" : " ▲" : ""}`}
       />
     </Menu>
   )

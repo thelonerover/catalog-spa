@@ -1,13 +1,19 @@
 import React from "react";
 import { Card, Image } from "semantic-ui-react";
 
-export default (props) => (
-    <Card>
+export default (props) => {
+    const date = new Date(props.creationDate);
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    
+    return (<Card>
         <Image src="https://react.semantic-ui.com/images/wireframe/image.png" wrapped ui={false} />
         <Card.Content>
             <Card.Header>{props.name}</Card.Header>
+            <Card.Meta>
+                <span className='date'>Created on {formattedDate}</span>
+            </Card.Meta>
             <Card.Description>{props.description}</Card.Description>
-            <span>{props.price}</span>
+            <span>Price: {props.price}</span>
         </Card.Content>
-    </Card>
-);
+    </Card>);
+};

@@ -1,35 +1,7 @@
 import { Server, Model, Factory, Response } from "miragejs";
 
-export default function() {  
+export default () => {  
   let session = {};
-
-  // const productFiltering = param => {
-  //   switch(param) {
-  //     case "name":
-  //       const regex = new RegExp(params[param],"gi");
-  //       products = products.filter(product => {
-  //         return !!product.attrs.name.match(regex);
-  //       });
-  //       break;
-  //     case "priceFrom":
-  //       products = products.filter(product => {
-  //         return +product.attrs.price >= +params[param];
-  //       });
-  //       break;
-  //     case "priceTo":
-  //         products = products.filter(product => {
-  //         return +product.attrs.price <= +params[param];
-  //       });
-  //       break;
-  //     case "priceTo":
-  //         products = products.filter(product => {
-  //         return +product.attrs.price <= +params[param];
-  //       });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
 
   return new Server({
     models: {
@@ -41,7 +13,8 @@ export default function() {
       product: Factory.extend({
         name(i) { return `Product ${i}`; },
         description(i) { return `A product number ${i}`; },
-        price(i) { return `${i}00`; }
+        price(i) { return `${i}00`; },
+        creationDate() { return new Date }
       }),
 
       user: Factory.extend({
@@ -116,31 +89,7 @@ export default function() {
 
       this.get("/products", (schema, request) => {
         let offset = 8;
-        let products = schema.products.all();
-        const params = request.queryParams;
-
-        for (let param in params) {
-          switch(param) {
-            case "name":
-              const regex = new RegExp(params[param],"gi");
-              products = products.filter(product => {
-                return !!product.attrs.name.match(regex);
-              });
-              break;
-            case "priceFrom":
-              products = products.filter(product => {
-                return +product.attrs.price >= +params[param];
-              });
-              break;
-              case "priceTo":
-                products = products.filter(product => {
-                return +product.attrs.price <= +params[param];
-              });
-              break;
-            default:
-              break;
-          }
-        }
+        const products = processProducts(schema, request);
 
         const numberOfPages = Math.ceil(products.length / offset);
         
@@ -152,47 +101,7 @@ export default function() {
       this.get("/products/page/:number", (schema, request) => {
         let offset = 8;
         let pageNumber = request.params.number;
-        let products = schema.products.all();
-        const params = request.queryParams;
-        
-        for (let param in params) {
-          switch(param) {
-            case "name":
-              const regex = new RegExp(params[param],"gi");
-              products = products.filter(product => {
-                return !!product.attrs.name.match(regex);
-              });
-              break;
-            case "priceFrom":
-              products = products.filter(product => {
-                return +product.attrs.price >= +params[param];
-              });
-              break;
-            case "priceTo":
-                products = products.filter(product => {
-                return +product.attrs.price <= +params[param];
-              });
-              break;
-            case "sort":
-              switch (params.sort) {
-                case "name-increase":
-                  products = products.sort((a, b) => a.attrs.name.localeCompare(b.attrs.name));
-                  break;
-                case "name-decrease":
-                  products = products.sort((a, b) => b.attrs.name.localeCompare(a.attrs.name));
-                  break;
-                case "price-increase":
-                  products = products.sort((a, b) => a.attrs.price - b.attrs.price);
-                  break;
-                case "price-decrease":
-                  products = products.sort((a, b) => b.attrs.price - a.attrs.price);
-                  break;
-                default: break;
-              }
-              break;
-            default: break;
-          }
-        }
+        const products = processProducts(schema, request);
 
         const numberOfPages = Math.ceil(products.length / offset);
           
@@ -216,4 +125,55 @@ export default function() {
       }
     }
   })
+}
+
+const processProducts = (schema, request) => {
+  const params = request.queryParams;
+  let products = schema.products.all();
+
+  for (let param in params) {
+    switch(param) {
+      case "name":
+        const regex = new RegExp(params[param],"gi");
+        products = products.filter(product => {
+          return !!product.attrs.name.match(regex);
+        });
+        break;
+      case "priceFrom":
+        products = products.filter(product => {
+          return +product.attrs.price >= +params[param];
+        });
+        break;
+      case "priceTo":
+          products = products.filter(product => {
+          return +product.attrs.price <= +params[param];
+        });
+        break;
+      case "sort":
+        switch (params.sort) {
+          case "name-ascend":
+            products = products.sort((a, b) => a.attrs.name.localeCompare(b.attrs.name));
+            break;
+          case "name-descend":
+            products = products.sort((a, b) => b.attrs.name.localeCompare(a.attrs.name));
+            break;
+          case "price-ascend":
+            products = products.sort((a, b) => a.attrs.price - b.attrs.price);
+            break;
+          case "price-descend":
+            products = products.sort((a, b) => b.attrs.price - a.attrs.price);
+            break;
+          case "date-ascend":
+            products = products.sort((a, b) => a.attrs.creationDate - b.attrs.creationDate);
+            break;
+          case "date-descend":
+            products = products.sort((a, b) => b.attrs.creationDate - a.attrs.creationDate);
+            break;
+          default: break;
+        }
+        break;
+      default: break;
+    }
+  }
+  return products;
 }
