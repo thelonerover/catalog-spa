@@ -36,21 +36,18 @@ export default function(state = initialState, action) {
         case actionTypes.updateProductRequest:
             return {
                 ...state,
-                page: action.page,
                 currentStatus: productStatuses.updateProductRequest,
             };
 
         case actionTypes.updateProductSuccess:
             return {
                 ...state,
-                page: action.page,
                 currentStatus: productStatuses.updateProductSuccess,
             };
 
         case actionTypes.updateProductFailure:
             return {
                 ...state,
-                page: action.page,
                 currentStatus: productStatuses.updateProductFailure,
             };
 

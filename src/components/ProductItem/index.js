@@ -11,7 +11,7 @@ export default ({ product }) => {
 
   const handleDelete = id => e => {
     dispatch(deleteProduct(id));
-    dispatch(getProductsRequest(products.page));
+    dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
   }
 
   return (

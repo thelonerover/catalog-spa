@@ -67,25 +67,9 @@ export const updateProduct = productData => async dispatch => {
     }
 }
 
-
 export const udpateProductSuccess = () => ({type: actionTypes.updateProductSuccess});
 
 export const udpateProductFailure = () => ({type: actionTypes.updateProductFailure});
-
-// export const getProductPagesNumber = params => async (dispatch) => {
-//     dispatch({ type: actionTypes.getProductPagesNumber });
-
-//     let response;
-//     try {
-//         response = await fetch("http://localhost:3000/products");
-//         let body = await response.json();
-//         if (response.ok) {
-//             dispatch(setProductPagesNumber(Math.ceil(body.products.length / params.offset)));
-//         }
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
 
 export const setProductPagesNumber = pagesNumber => ({
     type: actionTypes.setProductPagesNumber,

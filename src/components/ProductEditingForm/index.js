@@ -44,7 +44,7 @@ export default ({ product }) => {
         setProductProperties({...productProperties, [fieldName]: e.target.value});
     }
 
-    const handleUpdate = e => {
+    const handleSubmit = e => {
         e.preventDefault();
         dispatch(setErrorMessage(""));
         setFormState({});
@@ -58,7 +58,7 @@ export default ({ product }) => {
         if(productProperties.name) {
             resetErrors();
             dispatch(updateProduct(productProperties));
-            dispatch(getProductsRequest(products.page));
+            dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
         }
       }
     
@@ -91,7 +91,7 @@ export default ({ product }) => {
                 onChange={handleChangeProductProperties("price")}
                 value={productProperties.price}
             />
-            <Button color="blue" name="update" onClick={handleUpdate}>Save changes</Button>
+            <Button color="blue" name="update" onClick={handleSubmit}>Save changes</Button>
             {formState.error && 
             <Message
                 compact
