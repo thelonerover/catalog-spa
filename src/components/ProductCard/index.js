@@ -6,7 +6,6 @@ export default (props) => {
     const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     
     return (<Card>
-        <Image src="https://react.semantic-ui.com/images/wireframe/image.png" wrapped ui={false} />
         <Card.Content>
             <Card.Header>{props.name}</Card.Header>
             <Card.Meta>

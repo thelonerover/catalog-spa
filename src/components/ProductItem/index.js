@@ -18,7 +18,6 @@ export default (props) => {
 
   return (
     <Item>
-      <Item.Image size="small" src="https://react.semantic-ui.com/images/wireframe/image.png" />
       <Item.Content> 
         <Item.Header as="a">{props.name}</Item.Header>
         <Item.Meta>

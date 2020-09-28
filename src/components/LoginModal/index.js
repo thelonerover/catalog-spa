@@ -12,6 +12,7 @@ export default () => {
 
     const handleLogout = e => {
         e.preventDefault();
+        setOpen(false);
         dispatch(logout());
     }
 

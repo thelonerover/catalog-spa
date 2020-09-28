@@ -21,9 +21,10 @@ export default () => {
                 <Menu.Item name="login">
                     <LoginModal />
                 </Menu.Item>
+                {!user.isLoggedIn && 
                 <Menu.Item name="registration">
                     <RegistrationModal />
-                </Menu.Item>
+                </Menu.Item>}
             </Menu.Menu>
         </Menu>
     );

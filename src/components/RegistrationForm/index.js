@@ -60,7 +60,6 @@ export default function RegistrationForm() {
                 dispatch(registration(credentials));
         } else {
             setFormState({error: true});
-            dispatch(setErrorMessage("Passwords do not match"));
         }
     }
 
@@ -101,11 +100,6 @@ export default function RegistrationForm() {
                 error={formErrors.passwordConfirmation}
             />
             <Button color="blue" name="register" onClick={handleSubmit}>Register</Button>
-            {formState.error && 
-            <Message
-                {...formState}
-                header={user.error}
-            />}
         </Form> :
         <Message
             {...formState}
