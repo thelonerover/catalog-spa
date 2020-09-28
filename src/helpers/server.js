@@ -14,7 +14,7 @@ export default () => {
         name(i) { return `Product ${i}`; },
         description(i) { return `A product number ${i}`; },
         price(i) { return `${i}00`; },
-        creationDate() { return new Date }
+        creationDate() { return new Date() }
       }),
 
       user: Factory.extend({
@@ -67,6 +67,7 @@ export default () => {
       this.get("/products/:id");
       this.post("/products", (schema, reguest) => {
         let attrs = JSON.parse(reguest.requestBody);
+        attrs.creationDate = new Date();
         const clientSid = +document.cookie.split("=")[1];
         
         //super temporary 

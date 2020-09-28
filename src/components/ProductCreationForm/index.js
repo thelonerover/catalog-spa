@@ -1,42 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Form, TextArea, Message, Button } from "semantic-ui-react";
-import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest } from "../../store/actions/productsActions";
-import productStatuses from "../../constants/productStatuses";
+import { addProduct, getProductsRequest } from "../../store/actions/productsActions";
 
-export default ({ product }) => {
+export default () => {
     const [formState, setFormState] = useState({});
-    const [productProperties, setProductProperties] = useState({id: product.id,  name: product.name, description: product.description, price: product.price });
+    const [productProperties, setProductProperties] = useState({name: "", description: "", price: 0 });
     const initialFormErrors = {name: false};
-    const [formErrors, setFormErrors] = useState({...initialFormErrors});
     const products = useSelector(state => state.products);
+    const [formErrors, setFormErrors] = useState({...initialFormErrors});
     const dispatch = useDispatch();
 
     useEffect(() => () => {
         resetErrors();
     }, []);
 
-    useEffect(() => {
-        switch(products.currentStatus) {
-            case productStatuses.updateRequest:
-                setFormState({loading: true});
-                break;
-            case productStatuses.updateSuccess:
-                setFormState({success: true});
-                break;
-            case productStatuses.updateFailure:
-                setFormState({error: true});
-                break;
-            default:
-                break;
-        }
-    }, [product.currentStatus]);
-
     const resetErrors = () => {
         setFormState({});
         setFormErrors({...initialFormErrors});
-        dispatch(setErrorMessage(""));
-        dispatch(setCurrentStatus(""));
     }
 
     const handleChangeProductProperties = fieldName => e => {
@@ -46,7 +27,6 @@ export default ({ product }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(setErrorMessage(""));
         setFormState({});
 
         let errors = {...initialFormErrors};
@@ -57,7 +37,7 @@ export default ({ product }) => {
 
         if(productProperties.name) {
             resetErrors();
-            dispatch(updateProduct(productProperties));
+            dispatch(addProduct(productProperties));
             dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
         }
       }
@@ -91,7 +71,7 @@ export default ({ product }) => {
                 onChange={handleChangeProductProperties("price")}
                 value={productProperties.price}
             />
-            <Button color="blue" name="update" onClick={handleSubmit}>Save changes</Button>
+            <Button color="blue" name="update" onClick={handleSubmit}>Add product</Button>
             {formState.error && 
             <Message
                 compact

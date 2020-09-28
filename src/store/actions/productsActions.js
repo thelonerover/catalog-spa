@@ -136,16 +136,6 @@ export const setCurrentStatus = status => ({
     status
 });
 
-// export const setProductFilters = filters => ({
-//     type: actionTypes.setProductFilters,
-//     filters
-// });
-
-// export const setProductSortType = sortType => ({
-//     type: actionTypes.setProductSortType,
-//     sortType
-// });
-
 export const setQueryParams = queryParams => ({
     type: actionTypes.setQueryParams,
     queryParams

@@ -25,7 +25,7 @@ export default () => {
                 <Grid.Column>
                     <Item.Group divided>
                         {products.items.map(product => (
-                            <ProductItem key={product.id} product={product} />
+                            <ProductItem key={product.id} {...product} />
                         ))}
                     </Item.Group>
                 </Grid.Column>
