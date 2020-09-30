@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Item, Button, Modal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsRequest, deleteProduct } from "../../store/actions/productsActions";
@@ -10,6 +10,36 @@ export default (props) => {
   const products = useSelector(state => state.products);
   const date = new Date(props.creationDate);
   const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  const [open, setOpen] = useState(false);
+
+  const confirmationModal = () => (
+    <Modal
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      open={open}
+      size='small'
+      trigger={<Button>Basic Modal</Button>}
+    >
+      <Header icon>
+        <Icon name='archive' />
+        Archive Old Messages
+      </Header>
+      <Modal.Content>
+        <p>
+          Your inbox is getting full, would you like us to enable automatic
+          archiving of old messages?
+        </p>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button basic color='red' inverted onClick={() => setOpen(false)}>
+          <Icon name='remove' /> No
+        </Button>
+        <Button color='green' inverted onClick={() => setOpen(false)}>
+          <Icon name='checkmark' /> Yes
+        </Button>
+      </Modal.Actions>
+    </Modal>
+  );
 
   const handleDelete = id => e => {
     dispatch(deleteProduct(id));

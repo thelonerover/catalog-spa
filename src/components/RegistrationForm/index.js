@@ -78,7 +78,7 @@ export default function RegistrationForm() {
                 label="E-mail"
                 placeholder="E-mail"
                 onChange={handleChangeCredentials("email")}
-                // value={credentials.email}
+                value={credentials.email}
                 error={formErrors.email}
             />
             <Form.Field

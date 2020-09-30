@@ -13,7 +13,7 @@ export default () => {
       product: Factory.extend({
         name(i) { return `Product ${i}`; },
         description(i) { return `A product number ${i}`; },
-        price(i) { return `${i}00`; },
+        price(i) { return +`${i}00`; },
         creationDate() { return new Date() }
       }),
 
