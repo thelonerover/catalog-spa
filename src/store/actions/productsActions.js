@@ -27,11 +27,11 @@ export const getProductsRequest = params => async dispatch => {
         let body = await response.json();
         
         if (response.ok) {
-            dispatch(getProductSuccess());
+            dispatch(getProductsSuccess());
             dispatch(setProductPagesNumber(body.numberOfPages));
             dispatch(setProductsList(body.products));
         } else {
-            dispatch(getProductFailure());
+            dispatch(getProductsFailure());
         }
     } catch (error) {
         console.error(error)
@@ -39,9 +39,9 @@ export const getProductsRequest = params => async dispatch => {
 }
 
 
-export const getProductSuccess = () => ({type: actionTypes.getProductSuccess});
+export const getProductsSuccess = () => ({type: actionTypes.getProductsSuccess});
 
-export const getProductFailure = () => ({type: actionTypes.getProductFailure});
+export const getProductsFailure = () => ({type: actionTypes.getProductsFailure});
 
 export const updateProduct = productData => async dispatch => {
     const url = `http://localhost:3000/products/${productData.id}`;

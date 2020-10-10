@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Item, Button, Modal } from "semantic-ui-react";
+import { Item, Button, Modal, Header,  } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsRequest, deleteProduct } from "../../store/actions/productsActions";
 import ProductEditingModal from "../ProductEditingModal";
@@ -14,31 +14,10 @@ export default (props) => {
 
   const confirmationModal = () => (
     <Modal
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      open={open}
-      size='small'
-      trigger={<Button>Basic Modal</Button>}
-    >
-      <Header icon>
-        <Icon name='archive' />
-        Archive Old Messages
-      </Header>
-      <Modal.Content>
-        <p>
-          Your inbox is getting full, would you like us to enable automatic
-          archiving of old messages?
-        </p>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button basic color='red' inverted onClick={() => setOpen(false)}>
-          <Icon name='remove' /> No
-        </Button>
-        <Button color='green' inverted onClick={() => setOpen(false)}>
-          <Icon name='checkmark' /> Yes
-        </Button>
-      </Modal.Actions>
-    </Modal>
+      trigger={<Button>Show Modal</Button>}
+      header="Are you sure?"
+      actions={["No", { key: "yes", content: "Yes", positive: true }]}
+    />
   );
 
   const handleDelete = id => e => {
@@ -51,7 +30,7 @@ export default (props) => {
       <Item.Content> 
         <Item.Header as="a">{props.name}</Item.Header>
         <Item.Meta>
-            <span className='date'>Created on {formattedDate}</span>
+            <span className="date">Created on {formattedDate}</span>
         </Item.Meta>
         <Item.Description>
             {props.description}

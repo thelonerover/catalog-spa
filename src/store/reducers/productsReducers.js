@@ -1,5 +1,6 @@
 import actionTypes from "../actionTypes/productActionTypes";
 import productStatuses from "../../constants/productStatuses";
+import productActionTypes from "../actionTypes/productActionTypes";
 
 const initialState = {
     items: [],
@@ -9,6 +10,8 @@ const initialState = {
     error: "",
     queryParams: {},
 };
+
+console.log(productStatuses);
 
 export default function(state = initialState, action) {
     switch(action.type) {
@@ -32,6 +35,24 @@ export default function(state = initialState, action) {
 
         case actionTypes.resetProducts: 
             return initialState;
+
+        case actionTypes.getProductsRequest:
+            return {
+                ...state,
+                currentStatus: productActionTypes.getProductsRequest,
+            };
+
+        case actionTypes.getProductsSuccess:
+            return {
+                ...state,
+                currentStatus: productActionTypes.getProductsSuccess,
+            };
+
+        case actionTypes.getProductsFailure:
+            return {
+                ...state,
+                currentStatus: productActionTypes.getProductsFailure,
+            };
 
         case actionTypes.updateProductRequest:
             return {

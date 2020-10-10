@@ -1,7 +1,7 @@
 export default {
     getProductsRequest: "GET_PRODUCTS_REQUEST",
-    getProductSuccess: "GET_PRODUCTS_SUCCESS",
-    getProductFailure: "GET_PRODUCTS_FAILURE",
+    getProductsSuccess: "GET_PRODUCTS_SUCCESS",
+    getProductsFailure: "GET_PRODUCTS_FAILURE",
     updateProductRequest: "UPDATE_PRODUCT_REQUEST",
     updateProductSuccess: "UPDATE_PRODUCT_SUCCESS",
     updateProductFailure: "UPDATE_PRODUCT_FAILURE",
