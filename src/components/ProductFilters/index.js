@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Form, Button, Header } from "semantic-ui-react";
 import { setQueryParams, getProductsRequest, setProductsPage } from "../../store/actions/productsActions";
+import productActionTypes from "../../store/actionTypes/productActionTypes";
 
 export default () => {
     const [filters, setFilters] = useState({name: "", priceFrom: "", priceTo: ""});
@@ -17,6 +18,19 @@ export default () => {
     useEffect(() => {
         isInitialMount.current ? isInitialMount.current = false : dispatch(setQueryParams(filters));
     }, [filters]);
+
+    useEffect(() => {
+        switch(products.currentStatus) {
+            case productActionTypes.getProductsRequest:
+                setFormState({loading: true});
+                break;
+            case productActionTypes.getProductsSuccess:
+                setFormState({loading: false});
+                break;
+            default:
+                break;
+        }
+    }, [products.currentStatus]);    
     
     const handleValueChange = fieldName => e => {
         e.preventDefault();
