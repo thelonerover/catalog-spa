@@ -46,7 +46,7 @@ export default () => {
                     <Grid relaxed>
                         {itemsLoading && 
                         <Dimmer active inverted>
-                            <Loader inverted content='Loading' />
+                            <Loader inverted content="Loading products" />
                         </Dimmer>}
                         {products.items.map(product => (
                             <Grid.Column width={4} key={product.id}>

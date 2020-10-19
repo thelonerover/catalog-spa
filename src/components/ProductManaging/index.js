@@ -36,12 +36,12 @@ export default () => {
     return (
         <Grid columns={1} relaxed padded="vertically">
             <Grid.Row>
+                {itemsLoading && 
+                <Dimmer active inverted>
+                    <Loader inverted content="Loading products" />
+                </Dimmer>}
                 <Grid.Column>
                     <Item.Group divided>
-                        {itemsLoading && 
-                        <Dimmer active inverted>
-                            <Loader inverted content='Loading' />
-                        </Dimmer>}
                         {products.items.map(product => (
                             <ProductItem key={product.id} {...product} />
                         ))}
