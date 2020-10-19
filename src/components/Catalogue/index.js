@@ -10,7 +10,7 @@ import SortBy from "../SortBy";
 export default () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
-    const [catalogueLoading, setCatalogueLoading] = useState(true);
+    const [itemsLoading, setItemsLoading] = useState(true);
 
     useEffect(() => () => dispatch(resetProducts()), []);
 
@@ -21,10 +21,10 @@ export default () => {
     useEffect(() => {
         switch(products.currentStatus) {
             case productActionTypes.getProductsRequest:
-                setCatalogueLoading(true);
+                setItemsLoading(true);
                 break;
             case productActionTypes.getProductsSuccess:
-                setCatalogueLoading(false);
+                setItemsLoading(false);
                 break;
             default:
                 break;
@@ -44,7 +44,7 @@ export default () => {
                 <Grid.Column width={12}>
                     <SortBy />
                     <Grid relaxed>
-                        {catalogueLoading && 
+                        {itemsLoading && 
                         <Dimmer active inverted>
                             <Loader inverted content='Loading' />
                         </Dimmer>}
