@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Form, Button, Header } from "semantic-ui-react";
 import { setQueryParams, getProductsRequest, setProductsPage } from "../../store/actions/productsActions";
+import productActionTypes from "../../store/actionTypes/productActionTypes";
 
 export default () => {
     const [filters, setFilters] = useState({name: "", priceFrom: "", priceTo: ""});
     const products = useSelector(state => state.products);
     const dispatch = useDispatch();
     const isInitialMount = useRef(true);
+    const [catalogueLoading, setCatalogueLoading] = useState(true);
 
     useEffect(() => () => {
         dispatch(setQueryParams({}));
@@ -16,6 +18,19 @@ export default () => {
     useEffect(() => {
         isInitialMount.current ? isInitialMount.current = false : dispatch(setQueryParams(filters));
     }, [filters]);  
+    
+    useEffect(() => {
+        switch(products.currentStatus) {
+            case productActionTypes.getProductsRequest:
+                setCatalogueLoading(true);
+                break;
+            case productActionTypes.getProductsSuccess:
+                setCatalogueLoading(false);
+                break;
+            default:
+                break;
+        }
+    }, [products.currentStatus]);
     
     const handleValueChange = fieldName => e => {
         e.preventDefault();
@@ -40,6 +55,7 @@ export default () => {
                 placeholder="Product name"
                 onChange={handleValueChange("name")}
                 value={filters.name}
+                disabled={catalogueLoading}
             />
             <Form.Group widths="equal">
                 <Form.Field
@@ -49,17 +65,19 @@ export default () => {
                     placeholder="Price from"
                     onChange={handleValueChange("priceFrom")}
                     value={filters.priceFrom}
+                    disabled={catalogueLoading}
                 />
                 <Form.Field
-                fluid
+                    fluid
                     type="number"
                     control={Input}
                     placeholder="to"
                     onChange={handleValueChange("priceTo")}
                     value={filters.priceTo}
+                    disabled={catalogueLoading}
                 />
             </Form.Group>
-            <Button type="submit" name="submit" onClick={handleSubmit}>Apply filter</Button>
+            <Button type="submit" secondary name="submit" onClick={handleSubmit} loading={catalogueLoading}>Show products</Button>
         </Form>
     );
 }
