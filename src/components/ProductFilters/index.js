@@ -2,11 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Form, Button, Header } from "semantic-ui-react";
 import { setQueryParams, getProductsRequest, setProductsPage } from "../../store/actions/productsActions";
-import productActionTypes from "../../store/actionTypes/productActionTypes";
 
 export default () => {
     const [filters, setFilters] = useState({name: "", priceFrom: "", priceTo: ""});
-    const [formState, setFormState] = useState({});
     const products = useSelector(state => state.products);
     const dispatch = useDispatch();
     const isInitialMount = useRef(true);
@@ -17,20 +15,7 @@ export default () => {
 
     useEffect(() => {
         isInitialMount.current ? isInitialMount.current = false : dispatch(setQueryParams(filters));
-    }, [filters]);
-
-    useEffect(() => {
-        switch(products.currentStatus) {
-            case productActionTypes.getProductsRequest:
-                setFormState({loading: true});
-                break;
-            case productActionTypes.getProductsSuccess:
-                setFormState({loading: false});
-                break;
-            default:
-                break;
-        }
-    }, [products.currentStatus]);    
+    }, [filters]);  
     
     const handleValueChange = fieldName => e => {
         e.preventDefault();
@@ -44,7 +29,7 @@ export default () => {
     }
     
     return (
-        <Form method="post" action="/login" {...formState} onSubmit={e => {e.preventDefault()}}> 
+        <Form method="post" action="/login" onSubmit={e => {e.preventDefault()}}> 
             <Header
                 as="h3"
                 content="Product filters"
