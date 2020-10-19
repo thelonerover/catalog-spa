@@ -1,5 +1,4 @@
 import actionTypes from "../actionTypes/productActionTypes";
-import productStatuses from "../../constants/productStatuses";
 import productActionTypes from "../actionTypes/productActionTypes";
 
 const initialState = {
@@ -10,8 +9,6 @@ const initialState = {
     error: "",
     queryParams: {},
 };
-
-console.log(productStatuses);
 
 export default function(state = initialState, action) {
     switch(action.type) {
@@ -57,19 +54,19 @@ export default function(state = initialState, action) {
         case actionTypes.updateProductRequest:
             return {
                 ...state,
-                currentStatus: productStatuses.updateProductRequest,
+                currentStatus: productActionTypes.updateProductRequest,
             };
 
         case actionTypes.updateProductSuccess:
             return {
                 ...state,
-                currentStatus: productStatuses.updateProductSuccess,
+                currentStatus: productActionTypes.updateProductSuccess,
             };
 
         case actionTypes.updateProductFailure:
             return {
                 ...state,
-                currentStatus: productStatuses.updateProductFailure,
+                currentStatus: productActionTypes.updateProductFailure,
             };
 
         case actionTypes.setErrorMessage:

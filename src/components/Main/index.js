@@ -3,7 +3,7 @@ import { Container } from "semantic-ui-react";
 import { Switch, Route } from "react-router-dom";
 
 import MainMenu from "../MainMenu";
-import CatalogPage from "../../pages/CatalogPage";
+import CataloguePage from "../../pages/CataloguePage";
 
 export default () => {
     return (
@@ -11,7 +11,7 @@ export default () => {
             <MainMenu />
             <Switch>
                 <Route exact path="/">
-                    <CatalogPage />
+                    <CataloguePage />
                 </Route>
             </Switch>
         </Container>

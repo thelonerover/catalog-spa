@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Form, TextArea, Message, Button } from "semantic-ui-react";
 import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest } from "../../store/actions/productsActions";
-import productStatuses from "../../constants/productStatuses";
 
 export default ({ product }) => {
     const [formState, setFormState] = useState({});
@@ -16,21 +15,21 @@ export default ({ product }) => {
         resetErrors();
     }, []);
 
-    useEffect(() => {
-        switch(products.currentStatus) {
-            case productStatuses.updateRequest:
-                setFormState({loading: true});
-                break;
-            case productStatuses.updateSuccess:
-                setFormState({success: true});
-                break;
-            case productStatuses.updateFailure:
-                setFormState({error: true});
-                break;
-            default:
-                break;
-        }
-    }, [product.currentStatus]);
+    // useEffect(() => {
+    //     switch(products.currentStatus) {
+    //         case productStatuses.updateRequest:
+    //             setFormState({loading: true});
+    //             break;
+    //         case productStatuses.updateSuccess:
+    //             setFormState({success: true});
+    //             break;
+    //         case productStatuses.updateFailure:
+    //             setFormState({error: true});
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }, [product.currentStatus]);
 
     const resetErrors = () => {
         setFormState({});

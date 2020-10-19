@@ -1,13 +1,13 @@
 
 import React from "react";
 import { Container, Header } from "semantic-ui-react";
-import Catalog from "../../components/Catalog";
+import Catalogue from "../../components/Catalogue";
 
-export default function CatalogPage() {
+export default () => {
     return (
         <Container>
             <Header as="h1">Catalog</Header>
-            <Catalog />
+            <Catalogue />
         </Container>
     );
 }
