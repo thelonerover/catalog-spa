@@ -57,6 +57,7 @@ export default () => {
                             <Grid.Column>
                                 <Pagination 
                                     defaultActivePage={1}
+                                    activePage={products.activePage}
                                     totalPages={products.pagesNumber} 
                                     onPageChange={handlePaginationChange} 
                                 />
@@ -65,7 +66,6 @@ export default () => {
                     </Grid>
                 </Grid.Column>
             </Grid>
-
         </Container>
     );
 }
