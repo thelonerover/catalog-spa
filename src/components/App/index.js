@@ -8,7 +8,7 @@ import NoMatch from "../../pages/NoMatchPage";
 
 export default () => (
   <Provider store={store}>
-    <Router>
+    <Router basename="/catalog-spa">
       <Switch>
           <Route exact path="/">
             <Main />
