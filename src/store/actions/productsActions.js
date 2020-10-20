@@ -1,7 +1,7 @@
 import actionTypes from "../actionTypes/productActionTypes";
 
 export const getProductsRequest = params => async dispatch => {
-    let url = "http://localhost:3000/products";
+    let url = "https://thelonerover.github.io/catalog-spa/products";
 
     if(params.page) {
         url += `/page/${params.page}`;
@@ -44,7 +44,7 @@ export const getProductsSuccess = () => ({type: actionTypes.getProductsSuccess})
 export const getProductsFailure = () => ({type: actionTypes.getProductsFailure});
 
 export const updateProduct = productData => async dispatch => {
-    const url = `http://localhost:3000/products/${productData.id}`;
+    const url = `https://thelonerover.github.io/catalog-spa/products/${productData.id}`;
     dispatch({ type: actionTypes.updateProductRequest });
 
     const requestOptions = {
@@ -98,7 +98,7 @@ export const addProduct = product => async dispatch => {
 
     let response;
     try {
-        response = await fetch("http://localhost:3000/products", requestOptions);
+        response = await fetch("https://thelonerover.github.io/catalog-spa/products", requestOptions);
 
         if (response.ok) {
             dispatch(addProductSuccess());
@@ -120,7 +120,7 @@ export const resetProducts = () => ({type: actionTypes.resetProducts});
 export const deleteProduct = id => async dispatch => {
     dispatch({type: actionTypes.deleteProduct});
     try {
-        await fetch(`http://localhost:3000/products/${id}`, { method: "DELETE" });
+        await fetch(`https://thelonerover.github.io/catalog-spa/products/${id}`, { method: "DELETE" });
     } catch (error) {
         console.log(error);
     }

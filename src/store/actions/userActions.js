@@ -14,7 +14,7 @@ export const login = credentials => async dispatch => {
 
     let response;
     try {
-        response = await fetch("http://localhost:3000/login", requestOptions);
+        response = await fetch("https://thelonerover.github.io/catalog-spa/login", requestOptions);
         let body = await response.json();
 
         if (response.ok) {
@@ -61,7 +61,7 @@ export const registration = credentials => async dispatch => {
 
     let response;
     try {
-        response = await fetch("http://localhost:3000/users", requestOptions);
+        response = await fetch("https://thelonerover.github.io/catalog-spa/users", requestOptions);
         let body = await response.json();
 
         if (response.ok) {
