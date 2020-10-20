@@ -1,6 +1,6 @@
 import actionTypes from "../actionTypes/userActionTypes";
 
-export const login = credentials => async (dispatch) => {
+export const login = credentials => async dispatch => {
     dispatch(loginRequest(credentials));
 
     const requestOptions = {
@@ -46,7 +46,7 @@ export const loginFailure = error => ({
     error
 });
 
-export const registration = credentials => async (dispatch) => {
+export const registration = credentials => async dispatch => {
     dispatch(registrationRequest(credentials));
 
     const requestOptions = {
