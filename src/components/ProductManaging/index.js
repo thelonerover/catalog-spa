@@ -34,30 +34,30 @@ export default () => {
     };
 
     return (
-        <Grid columns={1} relaxed padded="vertically">
-            <Grid.Row>
-                {itemsLoading && 
-                <Dimmer active inverted>
-                    <Loader inverted content="Loading products" />
-                </Dimmer>}
-                <Grid.Column>
-                    <Item.Group divided>
-                        {products.items.map(product => (
-                            <ProductItem key={product.id} {...product} />
-                        ))}
-                    </Item.Group>
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-                <Grid.Column>
-                    <Pagination 
-                        defaultActivePage={1}
-                        activePage={products.activePage}
-                        totalPages={products.pagesNumber} 
-                        onPageChange={handlePaginationChange} 
-                    />
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>
+            <Grid columns={1} relaxed padded="vertically">
+                <Grid.Row>
+                    {itemsLoading && 
+                    <Dimmer active inverted>
+                        <Loader inverted content="Loading products" />
+                    </Dimmer>}
+                    <Grid.Column>
+                        <Item.Group divided>
+                            {products.items.map(product => (
+                                <ProductItem key={product.id} {...product} />
+                            ))}
+                        </Item.Group>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column>
+                        <Pagination 
+                            defaultActivePage={1}
+                            activePage={products.activePage}
+                            totalPages={products.pagesNumber} 
+                            onPageChange={handlePaginationChange} 
+                        />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
     );
 }

@@ -1,28 +1,23 @@
-import React, { useState } from "react";
-import { Item, Button, Modal, Header,  } from "semantic-ui-react";
+import React from "react";
+import { Item, Button } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsRequest, deleteProduct } from "../../store/actions/productsActions";
-import ProductEditingModal from "../ProductEditingModal";
+import { getProductsRequest, deleteProduct, showEditingModal, setCurrentProduct } from "../../store/actions/productsActions";
 
 
-export default (props) => {
+export default props => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
   const date = new Date(props.creationDate);
   const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  const [open, setOpen] = useState(false);
 
-  const confirmationModal = () => (
-    <Modal
-      trigger={<Button>Show Modal</Button>}
-      header="Are you sure?"
-      actions={["No", { key: "yes", content: "Yes", positive: true }]}
-    />
-  );
-
-  const handleDelete = id => e => {
+  const handleDelete = id => () => {
     dispatch(deleteProduct(id));
     dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
+  }
+
+  const handleEditModal = productData => () => {
+    dispatch(showEditingModal());
+    dispatch(setCurrentProduct(productData));
   }
 
   return (
@@ -37,8 +32,8 @@ export default (props) => {
         </Item.Description>
         <span>{props.price}</span>
         <Item.Extra>
-          <Button basic color="red" floated="right" onClick={handleDelete(props.id)}>Delete</Button>
-          <ProductEditingModal product={props} />
+          <Button basic floated="right" color="red" onClick={handleDelete(props.id)}>Delete</Button>
+          <Button primary floated="right" onClick={handleEditModal(props)}>Edit</Button>
         </Item.Extra>
       </Item.Content>
     </Item>

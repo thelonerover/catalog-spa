@@ -8,6 +8,7 @@ import NoMatch from "../../pages/NoMatchPage";
 import ProductFilters from "../../components/ProductFilters";
 import SortBy from "../../components/SortBy";
 import ProductCreationForm from "../../components/ProductCreationForm";
+import ProductEditingModal from "../../components/ProductEditingModal";
 
 export default function AdminPanel() {
     const user = useSelector(state => state.user);
@@ -17,7 +18,8 @@ export default function AdminPanel() {
             {user.userType === "A" ? 
             <div>
                 <MainMenu />
-                <Grid divided='vertically'>
+                <ProductEditingModal />
+                <Grid divided="vertically">
                     <Grid.Row columns={3}>
                         <Grid.Column width={4}>
                             <ProductFilters />

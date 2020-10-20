@@ -1,21 +1,19 @@
 import React from "react";
-import { Modal, Button } from "semantic-ui-react";
+import { useSelector } from "react-redux";
+import { Modal } from "semantic-ui-react";
 import ProductEditingForm from "../ProductEditingForm";
 
-export default ({ product }) => {
-    const [open, setOpen] = React.useState(false);
+export default () => {
+    const products = useSelector(state => state.products);
 
     return (
         <Modal
             size="mini"
-            onClose={() => setOpen(false)}
-            onOpen={() => setOpen(true)}
-            open={open}
-            trigger={<Button color="blue" floated="right">Edit</Button>}
-            >
+            open={products.showEditingModal}
+        >
             <Modal.Header>Edit product</Modal.Header>
             <Modal.Content>
-                <ProductEditingForm product={product} />
+                <ProductEditingForm {...products.currentProduct} />
             </Modal.Content>
         </Modal>
     );

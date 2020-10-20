@@ -140,3 +140,16 @@ export const setQueryParams = queryParams => ({
     type: actionTypes.setQueryParams,
     queryParams
 });
+
+export const showEditingModal = () => ({
+    type: actionTypes.showEditingModal,
+});
+
+export const closeEditingModal = () => ({
+    type: actionTypes.closeEditingModal,
+});
+
+export const setCurrentProduct = product => ({
+    type: actionTypes.setCurrentProduct,
+    product
+});

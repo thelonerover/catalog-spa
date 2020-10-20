@@ -16,5 +16,8 @@ export default {
     deleteProduct: "DELETE_PRODUCT",
     setCurrentStatus: "SET_CURRENT_STATUS",
     setErrorMessage: "SET_ERROR_MESSAGE",
-    setQueryParams: "SET_QUERY_PARAMS"
+    setQueryParams: "SET_QUERY_PARAMS",
+    showEditingModal: "SHOW_EDITING_MODAL",
+    closeEditingModal: "CLOSE_EDITING_MODAL",
+    setCurrentProduct: "SET_CURRENT_PRODUCT"
 }

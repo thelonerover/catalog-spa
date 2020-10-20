@@ -8,6 +8,8 @@ const initialState = {
     currentStatus: "",
     error: "",
     queryParams: {},
+    showEditingModal: false,
+    currentProduct: null
 };
 
 export default function(state = initialState, action) {
@@ -86,6 +88,15 @@ export default function(state = initialState, action) {
                 ...state,
                 queryParams: {...state.queryParams, ...action.queryParams}
             };
+
+        case actionTypes.showEditingModal:
+            return {...state, showEditingModal: true};
+
+        case actionTypes.closeEditingModal:
+            return {...state, showEditingModal: false};
+
+        case actionTypes.setCurrentProduct:
+            return {...state, currentProduct: action.product};
             
         default: 
             return state;

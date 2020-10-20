@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Form, TextArea, Message, Button } from "semantic-ui-react";
-import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest } from "../../store/actions/productsActions";
+import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest, closeEditingModal } from "../../store/actions/productsActions";
 
-export default ({ product }) => {
+export default product => {
     const [formState, setFormState] = useState({});
     const [productProperties, setProductProperties] = useState({id: product.id,  name: product.name, description: product.description, price: product.price });
     const initialFormErrors = {name: false};
@@ -14,22 +14,6 @@ export default ({ product }) => {
     useEffect(() => () => {
         resetErrors();
     }, []);
-
-    // useEffect(() => {
-    //     switch(products.currentStatus) {
-    //         case productStatuses.updateRequest:
-    //             setFormState({loading: true});
-    //             break;
-    //         case productStatuses.updateSuccess:
-    //             setFormState({success: true});
-    //             break;
-    //         case productStatuses.updateFailure:
-    //             setFormState({error: true});
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }, [product.currentStatus]);
 
     const resetErrors = () => {
         setFormState({});
@@ -59,7 +43,13 @@ export default ({ product }) => {
             dispatch(updateProduct(productProperties));
             dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
         }
-      }
+
+        dispatch(closeEditingModal());
+    }
+
+    const handleClose = () => {
+        dispatch(closeEditingModal());
+    }
     
     return (
         <Form method="post" action="/products" {...formState} onSubmit={e => {e.preventDefault()}}>
@@ -90,7 +80,8 @@ export default ({ product }) => {
                 onChange={handleChangeProductProperties("price")}
                 value={productProperties.price}
             />
-            <Button color="blue" name="update" onClick={handleSubmit}>Save changes</Button>
+            <Button primary name="update" onClick={handleSubmit}>Save changes</Button>
+            <Button secondary onClick={handleClose}>Cancel</Button>
             {formState.error && 
             <Message
                 compact
