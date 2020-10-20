@@ -14,7 +14,7 @@ export default {
     addProductFailure: "CREATE_PRODUCT_FAILURE",
     resetProducts: "RESET_PRODUCTS",
     deleteProduct: "DELETE_PRODUCT",
-    setCurrentStatus: "SET_CURRENT_STATUS",
+    setCurrentAction: "SET_CURRENT_ACTION",
     setErrorMessage: "SET_ERROR_MESSAGE",
     setQueryParams: "SET_QUERY_PARAMS",
     showEditingModal: "SHOW_EDITING_MODAL",

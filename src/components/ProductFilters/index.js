@@ -20,7 +20,7 @@ export default () => {
     }, [filters]);  
     
     useEffect(() => {
-        switch(products.currentStatus) {
+        switch(products.currentAction) {
             case productActionTypes.getProductsRequest:
                 setCatalogueLoading(true);
                 break;
@@ -30,7 +30,7 @@ export default () => {
             default:
                 break;
         }
-    }, [products.currentStatus]);
+    }, [products.currentAction]);
     
     const handleValueChange = fieldName => e => {
         e.preventDefault();

@@ -42,14 +42,15 @@ export default function RegistrationForm() {
 
         let errors = {...initialFormErrors};
         if(!credentials.email) {
-            errors.email = { content: "Please enter a valid email address!", pointing: "below" };
+            errors.email = { content: "Please enter a login!", pointing: "below" };
         }
         if(!credentials.password) {
-            errors.password = { content: "Please enter a valid password!", pointing: "below" };
+            errors.password = { content: "Please enter a password!", pointing: "below" };
         }
-        if(!credentials.passwordConfirmation) {
-            errors.passwordConfirmation = { content: "Please enter a valid password confirmation!", pointing: "below" };
+        if(!(credentials.password === credentials.passwordConfirmation)) {
+            errors.passwordConfirmation = { content: "Passwords do not match!", pointing: "below" };
         }
+        console.log(credentials.password && !credentials.password === credentials.passwordConfirmation);
         setFormErrors(errors);
         
         if (credentials.email && 
@@ -99,7 +100,7 @@ export default function RegistrationForm() {
                 value={credentials.passwordConfirmation}
                 error={formErrors.passwordConfirmation}
             />
-            <Button color="blue" name="register" onClick={handleSubmit}>Register</Button>
+            <Button color="blue" name="register" onClick={handleSubmit}>Create an account</Button>
         </Form> :
         <Message
             {...formState}

@@ -5,7 +5,7 @@ const initialState = {
     items: [],
     pagesNumber: 1,
     page: 1,
-    currentStatus: "",
+    currentAction: "",
     error: "",
     queryParams: {},
     showEditingModal: false,
@@ -38,37 +38,37 @@ export default function(state = initialState, action) {
         case actionTypes.getProductsRequest:
             return {
                 ...state,
-                currentStatus: productActionTypes.getProductsRequest,
+                currentAction: productActionTypes.getProductsRequest,
             };
 
         case actionTypes.getProductsSuccess:
             return {
                 ...state,
-                currentStatus: productActionTypes.getProductsSuccess,
+                currentAction: productActionTypes.getProductsSuccess,
             };
 
         case actionTypes.getProductsFailure:
             return {
                 ...state,
-                currentStatus: productActionTypes.getProductsFailure,
+                currentAction: productActionTypes.getProductsFailure,
             };
 
         case actionTypes.updateProductRequest:
             return {
                 ...state,
-                currentStatus: productActionTypes.updateProductRequest,
+                currentAction: productActionTypes.updateProductRequest,
             };
 
         case actionTypes.updateProductSuccess:
             return {
                 ...state,
-                currentStatus: productActionTypes.updateProductSuccess,
+                currentAction: productActionTypes.updateProductSuccess,
             };
 
         case actionTypes.updateProductFailure:
             return {
                 ...state,
-                currentStatus: productActionTypes.updateProductFailure,
+                currentAction: productActionTypes.updateProductFailure,
             };
 
         case actionTypes.setErrorMessage:
@@ -77,10 +77,10 @@ export default function(state = initialState, action) {
                 error: action.error
             };
 
-        case actionTypes.setCurrentStatus:
+        case actionTypes.setcurrentAction:
             return {
                 ...state,
-                status: action.status 
+                status: action.currentAction
             };
 
         case actionTypes.setQueryParams:

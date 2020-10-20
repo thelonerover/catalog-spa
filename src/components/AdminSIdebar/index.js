@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu } from "semantic-ui-react";
 
-export default function() {
+export default () => {
     const [activeItem, setActiveItem] = useState("products");
 
     const handleItemClick = (e, { name }) => setActiveItem(name);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Form, TextArea, Message, Button } from "semantic-ui-react";
-import { updateProduct, setErrorMessage, setCurrentStatus, getProductsRequest, closeEditingModal } from "../../store/actions/productsActions";
+import { Input, Form, TextArea, Button } from "semantic-ui-react";
+import { updateProduct, setCurrentAction, getProductsRequest, closeEditingModal } from "../../store/actions/productsActions";
 
 export default product => {
     const [formState, setFormState] = useState({});
@@ -18,8 +18,7 @@ export default product => {
     const resetErrors = () => {
         setFormState({});
         setFormErrors({...initialFormErrors});
-        dispatch(setErrorMessage(""));
-        dispatch(setCurrentStatus(""));
+        dispatch(setCurrentAction(""));
     }
 
     const handleChangeProductProperties = fieldName => e => {
@@ -29,7 +28,6 @@ export default product => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(setErrorMessage(""));
         setFormState({});
 
         let errors = {...initialFormErrors};
@@ -39,7 +37,7 @@ export default product => {
         setFormErrors(errors);
 
         if(productProperties.name) {
-            resetErrors();
+            // resetErrors();
             dispatch(updateProduct(productProperties));
             dispatch(getProductsRequest({page: products.page, queryParams: products.queryParams}));
         }
@@ -82,12 +80,6 @@ export default product => {
             />
             <Button primary name="update" onClick={handleSubmit}>Save changes</Button>
             <Button secondary onClick={handleClose}>Cancel</Button>
-            {formState.error && 
-            <Message
-                compact
-                {...formState}
-                header={products.error}
-            />}
         </Form>
     );
 }

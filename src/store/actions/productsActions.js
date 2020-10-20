@@ -131,9 +131,9 @@ export const setErrorMessage = error => ({
     error
 });
 
-export const setCurrentStatus = status => ({
-    type: actionTypes.setCurrentStatus,
-    status
+export const setCurrentAction = currentAction => ({
+    type: actionTypes.setCurrentAction,
+    currentAction
 });
 
 export const setQueryParams = queryParams => ({

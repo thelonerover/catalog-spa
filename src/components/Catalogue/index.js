@@ -19,7 +19,7 @@ export default () => {
     }, [products.page]);
 
     useEffect(() => {
-        switch(products.currentStatus) {
+        switch(products.currentAction) {
             case productActionTypes.getProductsRequest:
                 setItemsLoading(true);
                 break;
@@ -29,7 +29,7 @@ export default () => {
             default:
                 break;
         }
-    }, [products.currentStatus]);   
+    }, [products.currentAction]);   
 
     const handlePaginationChange = (e, { activePage }) => {
         dispatch(setProductsPage(activePage));
