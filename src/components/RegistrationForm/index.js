@@ -50,7 +50,6 @@ export default function RegistrationForm() {
         if(!(credentials.password === credentials.passwordConfirmation)) {
             errors.passwordConfirmation = { content: "Passwords do not match!", pointing: "below" };
         }
-        console.log(credentials.password && !credentials.password === credentials.passwordConfirmation);
         setFormErrors(errors);
         
         if (credentials.email && 
