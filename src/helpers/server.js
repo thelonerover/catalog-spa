@@ -27,8 +27,6 @@ export default () => {
     },
 
     routes() {
-      this.namespace = "https://thelonerover.github.io/catalog-spa";
-
       this.get("/users");
       this.get("/users/:id");
       this.post("/users", (schema, reguest) => {
