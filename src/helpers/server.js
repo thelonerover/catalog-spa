@@ -58,7 +58,7 @@ export default () => {
 
           let now = new Date();
           let cookieExpiration = new Date(now.getTime() + 24 * 3600 * 1000);
-          document.cookie = `session=${sid}; domain=localhost; path=/; expires=${cookieExpiration.toUTCString()};`
+          document.cookie = `session=${sid}; domain=thelonerover.github.io; path=/; expires=${cookieExpiration.toUTCString()};`
 
           return new Response(201, {}, {email: user.attrs.email, type: user.attrs.type});
         }
